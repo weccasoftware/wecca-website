@@ -1,0 +1,40 @@
+.navbar {
+    height: 30px;
+    padding-top: 10px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    margin: 5px auto 15px auto;
+    padding-left: 0;
+}
+
+.navbar>li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+li > a {
+    padding: 12px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.active {
+    border-bottom: 2px solid rgb(67, 32, 148);
+    padding-bottom: 10px;
+}
+
+*:visited {
+    color: inherit;
+}
+
+.link:hover {
+    color: #646464;
+}
+
+.centre {
+    text-align: center;
+}
