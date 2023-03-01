@@ -3,9 +3,9 @@
     margin: 0 auto;
     text-align: center;
     margin-bottom: 50px;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
 }
 
 .calendar-list {
@@ -55,9 +55,18 @@
 }
 
 .cal-nav {
-    width: 100px;
+    width: 36px;
     display: inline-block;
-    border: 1px solid #4f29cd;
+    height: 30px;
+    background-size: 36px 30px;
+}
+
+.left-arrow {
+    background-image: url('../../../../assets/leftarrow.png');
+}
+
+.right-arrow {
+    background-image: url('../../../../assets/rightarrow.png');
 }
 
 .cal-nav:hover {
@@ -65,7 +74,7 @@
 }
 
 .cal-head {
-    width: 600px;
+    width: 400px;
     display: inline-block;
     font-size: 28px;
 }
@@ -73,6 +82,9 @@
 .calendar-header {
     margin-top: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cal-disabled {
@@ -93,6 +105,7 @@
     display: block;
     margin: 0 auto;
     margin-top: -1px;
+    background-color: #fafafa;
 }
 
 .hidden {
@@ -104,17 +117,10 @@
     font-size: 25px;
 }
 
-.date-items {
-    background-color: green;
-    height: 10px;
-    width: 10px;
-    float: right;
-}
-
 .expand-title {
     font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 7px;
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
 .event-container {
@@ -160,7 +166,6 @@
 .cal-divider {
     width: 2px;
     height: 70px;
-    background-color: green;
 }
 
 .event-container:last-child {
@@ -186,4 +191,9 @@
 .event-creator {
     font-size: 14px;
     font-style: italic;
+}
+
+.icon-area {
+    float: right;
+    width: 80px;
 }

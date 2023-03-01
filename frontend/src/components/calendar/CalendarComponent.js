@@ -1,8 +1,17 @@
 import './styles/Calendar.css'
+import './styles/TeamClasses.css'
 import React, { useEffect, useState } from "react";
 import {addMonths, format, subMonths, startOfMonth, startOfWeek, endOfMonth, endOfWeek, isSameMonth, isSameDay, addDays, parse, isSameWeek, subDays, addHours} from "date-fns";
 import EventContainer from './EventContainer';
 import CreateEvent from './CreateEvent';
+import { teamClassMap } from './teamClassMap'
+import { sampleEvents } from './testData';
+
+/**
+ * Notes for backend:
+ *  We will need to return all events in the last week of the previous month, all events in the current month, and all events in the first week of the next month
+ *  We can have an endpoint that returns events for the day, sorted by start time (or we can do this on the client side)
+ */
 
 const CalendarComponent = () => {
     const [state, setState] = useState({
@@ -16,23 +25,7 @@ const CalendarComponent = () => {
     useEffect(() => {
         setState({
             ...state,
-            sampleEvents: [
-            {
-                startTime: new Date(),
-                endTime: addHours(new Date(), 1),
-                team: 'Software',
-                title: "Test Event for Website Calendar",
-                description: 'This is a test event in order to see if the calendar works and looks good',
-                creator: 'Ethan Bodnar'
-            },
-            {
-                startTime: new Date(),
-                endTime: addHours(new Date(), 1),
-                team: 'Materials',
-                title: "Test Event for Website Calendar #2",
-                description: 'This is another test event in order to see if the calendar works and looks good'
-            }
-        ]});
+            sampleEvents: sampleEvents.sort((a, b) => {return a.startTime - b.startTime})});
     }, [])
 
     useEffect(() => {
@@ -44,13 +37,13 @@ const CalendarComponent = () => {
 
         return (
             <div className='calendar-header'>
-                <div onClick={() => decrementMonth()} className='cal-nav'>Prev</div>
+                <div onClick={() => decrementMonth()} className='cal-nav left-arrow'></div>
                 <div className='cal-head'>
                     <span>
                         {format(state.currentMonth, dateFormat)}
                     </span>
                 </div>
-                <div onClick={() => incrementMonth()} className='cal-nav'>Next</div>
+                <div onClick={() => incrementMonth()} className='cal-nav right-arrow'></div>
             </div>
         )
     }
@@ -80,6 +73,10 @@ const CalendarComponent = () => {
                         onClick={() => dayClick(cloneDay, !isSameMonth(cloneDay, monthStart))}
                     >
                         <span className="date-number">{formattedDate}</span>
+                        <span className='icon-area'>
+                            {state.sampleEvents.filter((event) => isSameDay(day, event.startTime) || isSameDay(day, event.endTime))
+                                .map((event) => {return (<span className={`date-items ${teamClassMap[event.team]}`} key={event.team} title={`${event.team} Event`}></span>)})}
+                        </span>
                     </li>
                 );
                 day = addDays(day, 1);
@@ -88,7 +85,8 @@ const CalendarComponent = () => {
                 <li className={`day-expand ${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
                     <div>
                         <div className='expand-title'>{format(state.selectedDate, "MMMM d, yyyy")}</div>
-                        {state.sampleEvents.map((event) => {return (<EventContainer event={event} key={event.title}/>)})}
+                        {state.sampleEvents.filter((event) => isSameDay(state.selectedDate, event.startTime) || isSameDay(state.selectedDate, event.endTime))
+                            .map((event) => {return (<EventContainer event={event} key={event.title}/>)})}
                     </div>
                     <br/>
                     <button onClick={() => toggleModal()} className='add-event-button'>Add Event</button>

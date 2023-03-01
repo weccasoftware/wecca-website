@@ -20,8 +20,8 @@ const CreateEvent = ({setIsOpen, date, addEvent}) => {
     const [state, setState] = useState({
         team: "General",
         title: '',
-        startTime: new Date(),
-        endTime: addHours(new Date(), 1),
+        startTime: date,
+        endTime: addHours(date, 1),
         description: '',
         titleError: ''
     })
