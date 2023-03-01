@@ -1,8 +1,11 @@
 .calendar-outline {
-    width: 90vw;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
     margin-bottom: 50px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .calendar-list {
@@ -33,10 +36,11 @@
     padding-left: 7px;
     padding-right: 7px;
     color: #333333;
+    margin-top: -1px;
 }
 
 .calendar-date, .calendar-day {
-    width: 13%;
+    width: 12%;
     margin: none;
     border-right: none;
     display: inline-block;
@@ -51,8 +55,9 @@
 }
 
 .cal-nav {
-    width: 200px;
+    width: 100px;
     display: inline-block;
+    border: 1px solid #4f29cd;
 }
 
 .cal-nav:hover {
@@ -76,16 +81,18 @@
 
 .cal-selected {
     background-color: #f3f3ff;
-    color: #4f29cd
+    color: #4f29cd;
+    border-top: 1px solid black;
 }
 
 .day-expand {
     border: 1px solid black;
     border-top: none;
     padding: 15px 20px;
-    width: calc(91% + 64px);
+    width: calc(83.9% + 64px);
     display: block;
     margin: 0 auto;
+    margin-top: -1px;
 }
 
 .hidden {
@@ -106,7 +113,7 @@
 
 .expand-title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 7px;
 }
 
@@ -126,7 +133,7 @@
 }
 
 .event-container .event-head {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -147,15 +154,36 @@
 }
 
 .event-container .event-body {
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .cal-divider {
     width: 2px;
-    height: 72px;
+    height: 70px;
     background-color: green;
 }
 
 .event-container:last-child {
     border-bottom: 1px solid #888888;
+}
+
+.add-event-button {
+    width: 130px;
+    height: 30px;
+    background-color: inherit;
+    outline: none;
+    border: 1px solid #3a2971;
+    color: #3a2971;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.add-event-button:hover { 
+    border-color: #4f29cd;
+    color: #4f29cd;
+}
+
+.event-creator {
+    font-size: 14px;
+    font-style: italic;
 }

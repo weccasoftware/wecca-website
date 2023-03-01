@@ -1,36 +1,43 @@
-import './Calendar.css'
+import './styles/Calendar.css'
 import React, { useEffect, useState } from "react";
 import {addMonths, format, subMonths, startOfMonth, startOfWeek, endOfMonth, endOfWeek, isSameMonth, isSameDay, addDays, parse, isSameWeek, subDays, addHours} from "date-fns";
 import EventContainer from './EventContainer';
+import CreateEvent from './CreateEvent';
 
 const CalendarComponent = () => {
     const [state, setState] = useState({
         currentMonth: new Date(),
-        selectedDate: new Date()
+        selectedDate: new Date(),
+        modalOpen: false,
+        sampleEvents: []
     })
+
+    //Just for testing
+    useEffect(() => {
+        setState({
+            ...state,
+            sampleEvents: [
+            {
+                startTime: new Date(),
+                endTime: addHours(new Date(), 1),
+                team: 'Software',
+                title: "Test Event for Website Calendar",
+                description: 'This is a test event in order to see if the calendar works and looks good',
+                creator: 'Ethan Bodnar'
+            },
+            {
+                startTime: new Date(),
+                endTime: addHours(new Date(), 1),
+                team: 'Materials',
+                title: "Test Event for Website Calendar #2",
+                description: 'This is another test event in order to see if the calendar works and looks good'
+            }
+        ]});
+    }, [])
 
     useEffect(() => {
         console.log(state)
     }, [state])
-
-    const sampleEvents = [
-        {
-            startTime: new Date(),
-            endTime: addHours(new Date(), 1),
-            team: 'Software',
-            title: "Test Event for Website Calendar",
-            comment: 'This is a test event in order to see if the calendar works and looks good',
-            allDay: false
-        },
-        {
-            startTime: new Date(),
-            endTime: addHours(new Date(), 1),
-            team: 'Materials',
-            title: "Test Event for Website Calendar #2",
-            comment: 'This is another test event in order to see if the calendar works and looks good',
-            allDay: false
-        }
-    ]
 
     const renderHeader = () => {
         const dateFormat = 'MMMM yyyy';
@@ -81,8 +88,11 @@ const CalendarComponent = () => {
                 <li className={`day-expand ${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
                     <div>
                         <div className='expand-title'>{format(state.selectedDate, "MMMM d, yyyy")}</div>
-                        {sampleEvents.map((event) => {return (<EventContainer event={event} key={event.title}/>)})}
+                        {state.sampleEvents.map((event) => {return (<EventContainer event={event} key={event.title}/>)})}
                     </div>
+                    <br/>
+                    <button onClick={() => toggleModal()} className='add-event-button'>Add Event</button>
+                    <CreateEvent isOpen={state.modalOpen}/>
                 </li>
             )
         }
@@ -131,8 +141,29 @@ const CalendarComponent = () => {
         }
     };
 
+    const toggleModal = (val) => {
+        setState((s) => ({
+            ...s,
+            modalOpen: !state.modalOpen
+        }))
+    }
+
+    const addEvent = (event) => {
+        const events = [...state.sampleEvents, event]
+        setState((s) => ({
+            ...s,
+            sampleEvents: events
+        }))
+        console.log(state.sampleEvents)
+        toggleModal(false)
+    }
+
     return (
         <div className="calendar-outline">
+            {state.modalOpen && <div className='modal-overlay'>
+                <div className='overlay-opacity' onClick={() => toggleModal(false)}/>
+                <CreateEvent setIsOpen={(val) => toggleModal(val)} date={state.selectedDate} addEvent={(ev) => addEvent(ev)}/>
+            </div>}
             {renderHeader()}
             {renderCells()}
         </div>

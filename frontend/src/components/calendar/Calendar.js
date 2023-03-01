@@ -1,4 +1,4 @@
-import './Calendar.css'
+import './styles/Calendar.css'
 import React from "react";
 import CalendarComponent from './CalendarComponent';
 
