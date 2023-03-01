@@ -11,6 +11,7 @@ import { sampleEvents } from './testData';
  * Notes for backend:
  *  We will need to return all events in the last week of the previous month, all events in the current month, and all events in the first week of the next month
  *  We can have an endpoint that returns events for the day, sorted by start time (or we can do this on the client side)
+ *  We will need an API endpoint for deleting events
  */
 
 const CalendarComponent = () => {
@@ -75,7 +76,7 @@ const CalendarComponent = () => {
                         <span className="date-number">{formattedDate}</span>
                         <span className='icon-area'>
                             {state.sampleEvents.filter((event) => isSameDay(day, event.startTime) || isSameDay(day, event.endTime))
-                                .map((event) => {return (<span className={`date-items ${teamClassMap[event.team]}`} key={event.team} title={`${event.team} Event`}></span>)})}
+                                .map((event) => {return (<span className={`date-items ${teamClassMap[event.team]}`} key={`${event.team}-${event.startTime}`} title={`${event.team} Event`}></span>)})}
                         </span>
                     </li>
                 );
@@ -85,12 +86,11 @@ const CalendarComponent = () => {
                 <li className={`day-expand ${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
                     <div>
                         <div className='expand-title'>{format(state.selectedDate, "MMMM d, yyyy")}</div>
-                        {state.sampleEvents.filter((event) => isSameDay(state.selectedDate, event.startTime) || isSameDay(state.selectedDate, event.endTime))
-                            .map((event) => {return (<EventContainer event={event} key={event.title}/>)})}
+                        {state.sampleEvents.filter((event) => isSameDay(state.selectedDate, event.startTime) || isSameDay(state.selectedDate, event.endTime)).sort((a, b) => {return a.startTime - b.startTime})
+                            .map((event) => {return (<EventContainer event={event} key={`${event.title}-${event.startTime}`} deleteEvent={(ti, te, st) => deleteEvent(ti, te, st)} addEvent={(e) => addEvent(e)}/>)})}
                     </div>
                     <br/>
-                    <button onClick={() => toggleModal()} className='add-event-button'>Add Event</button>
-                    <CreateEvent isOpen={state.modalOpen}/>
+                    <button onClick={() => toggleModal(true)} className='add-event-button'>Add Event</button>
                 </li>
             )
         }
@@ -142,11 +142,13 @@ const CalendarComponent = () => {
     const toggleModal = (val) => {
         setState((s) => ({
             ...s,
-            modalOpen: !state.modalOpen
+            modalOpen: val
         }))
     }
 
     const addEvent = (event) => {
+        console.log("Got event")
+        console.log(event)
         const events = [...state.sampleEvents, event]
         setState((s) => ({
             ...s,
@@ -154,6 +156,16 @@ const CalendarComponent = () => {
         }))
         console.log(state.sampleEvents)
         toggleModal(false)
+    }
+
+    const deleteEvent = (title, team, start) => {
+        const filteredEvents = state.sampleEvents.filter((ev) => {
+            return ev.title !== title && ev.team !== team && ev.startTime !== start
+        })
+        setState((s) => ({
+            ...s,
+            sampleEvents: filteredEvents
+        }))
     }
 
     return (
