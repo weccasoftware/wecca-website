@@ -1,4 +1,6 @@
+import './Calendar.css'
 import React from "react";
+import CalendarComponent from './CalendarComponent';
 
 const Calendar = () => {
     return (
@@ -20,6 +22,7 @@ const Calendar = () => {
                     <li>Maybe: allow for users to subscribe to the calendar (ie with google calendar)</li>
                 </ul>
             </div>
+            <CalendarComponent />
         </div>
     )
 }

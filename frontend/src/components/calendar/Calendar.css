@@ -1,0 +1,161 @@
+.calendar-outline {
+    width: 90vw;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.calendar-list {
+    list-style: none;
+    padding: 0;
+}
+
+.calendar-day {
+    height: fit-content;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 0px;
+    border: 1px solid white;
+    padding-left: 12px;
+    padding-right: 2px;
+}
+
+.calendar-day:first-child {
+    border-left: 1px solid black;
+}
+
+.calendar-date {
+    height: 150px;
+    text-align: left;
+    padding: 10px 0px;
+    border: 1px solid black;
+    border-top: none;
+    padding-left: 7px;
+    padding-right: 7px;
+    color: #333333;
+}
+
+.calendar-date, .calendar-day {
+    width: 13%;
+    margin: none;
+    border-right: none;
+    display: inline-block;
+}
+
+.calendar-list > li:nth-child(n+1):nth-child(-n+14) {
+    border-top: 1px solid black;
+}
+
+.calendar-list > li:nth-child(8n+14), .calendar-list > li:last-child, .calendar-list > li:nth-child(7)  {
+    border-right: 1px solid black;
+}
+
+.cal-nav {
+    width: 200px;
+    display: inline-block;
+}
+
+.cal-nav:hover {
+    cursor: pointer;
+}
+
+.cal-head {
+    width: 600px;
+    display: inline-block;
+    font-size: 28px;
+}
+
+.calendar-header {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cal-disabled {
+    color: #AAAAAA;
+}
+
+.cal-selected {
+    background-color: #f3f3ff;
+    color: #4f29cd
+}
+
+.day-expand {
+    border: 1px solid black;
+    border-top: none;
+    padding: 15px 20px;
+    width: calc(91% + 64px);
+    display: block;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.date-number {
+    color: inherit;
+    font-size: 25px;
+}
+
+.date-items {
+    background-color: green;
+    height: 10px;
+    width: 10px;
+    float: right;
+}
+
+.expand-title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.event-container {
+    border-top: 1px solid #888888;
+    width: 100%;
+    margin: 0 -10px;
+    padding: 7px 10px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+}
+
+.event-container > div {
+    display: inline-block;
+    text-align: left;
+}
+
+.event-container .event-head {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.event-container .event-team {
+    font-size: 19px;
+}
+
+.event-details {
+    max-width: calc(80% - 20px);
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.event-container > .event-time {
+    min-width: 20%;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.event-container .event-body {
+    font-size: 18px;
+}
+
+.cal-divider {
+    width: 2px;
+    height: 72px;
+    background-color: green;
+}
+
+.event-container:last-child {
+    border-bottom: 1px solid #888888;
+}
