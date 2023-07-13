@@ -1,3 +1,5 @@
+/* Clean up this CSS */
+
 .calendar-outline {
     width: 90%;
     margin: 0 auto;
@@ -62,11 +64,11 @@
 }
 
 .left-arrow {
-    background-image: url('../../../../assets/leftarrow.png');
+    background-image: url('../../../assets/leftarrow.png');
 }
 
 .right-arrow {
-    background-image: url('../../../../assets/rightarrow.png');
+    background-image: url('../../../assets/rightarrow.png');
 }
 
 .cal-nav:hover {
@@ -85,6 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .cal-disabled {
@@ -97,6 +100,11 @@
     border-top: 1px solid black;
 }
 
+.cal-today {
+    color: green;
+    display: inline-block;
+}
+
 .day-expand {
     border: 1px solid black;
     border-top: none;
@@ -105,6 +113,12 @@
     display: block;
     margin: 0 auto;
     margin-top: -1px;
+    background-color: #fafafa;
+}
+
+.info-row > td {
+    height: 100px;
+    padding: 15px 20px;
     background-color: #fafafa;
 }
 
@@ -208,7 +222,57 @@
     border-radius: 7px;
 }
 
+.event-container-button:hover {
+    color: white;
+    background-color: #6c6c6c;
+    border-color: #6c6c6c;
+}
+
 .event-edit-container {
     text-align: right;
     margin-left: auto;
+}
+
+.cal-table th {
+    width: calc(1 / 7 * 100%);
+}
+
+.cal-table {
+    border: 1px solid black;
+    width: 90vw;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.cal-table .date-row > td {
+    height: 150px;
+    vertical-align: top;
+}
+
+.date-row > td > .date-number {
+    color: inherit;
+    font-size: 25px;
+    padding-left: 4px;
+    width: fit-content;
+    display: inline;
+}
+
+.date-row > td > .icon-area {
+    float: right;
+    width: 80px;
+    display: inline;
+}
+
+.cal-table th, .cal-table .date-row > td {
+    border: 1px solid black;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: left;
+    padding: 10px 0px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.info-row > td {
+    height: 100px;
 }

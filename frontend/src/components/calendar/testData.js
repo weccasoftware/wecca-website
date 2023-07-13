@@ -77,6 +77,7 @@ module.exports = {
             endTime: dates[i++],
             team: 'Captain',
             title: "Captain Test",
+            creator: "Anthony De Rango"
         }
     ]
 }

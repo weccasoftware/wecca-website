@@ -14,6 +14,14 @@ import { sampleEvents } from './testData';
  *  We will need an API endpoint for deleting events
  */
 
+const TableRow = ({row, isDateRow}) => {
+    return (
+        <tr className={isDateRow ? 'date-row' : 'info-row'}>
+            {row.map((val) => {return val})}
+        </tr>
+    )
+}
+
 const CalendarComponent = () => {
     const [state, setState] = useState({
         currentMonth: new Date(),
@@ -49,7 +57,7 @@ const CalendarComponent = () => {
         )
     }
 
-    const renderCells = () => {
+    const renderTable = () => {
         const monthStart = startOfMonth(state.currentMonth);
         const monthEnd = endOfMonth(monthStart);
         const startDate = startOfWeek(monthStart);
@@ -61,11 +69,12 @@ const CalendarComponent = () => {
         let formattedDate = "";
         let rowCount = 0;
         while (day <= endDate) {
+            let week = [];
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                days.push(
-                    <li className={`calendar-date ${
+                week.push(
+                    <td className={`${
                         !isSameMonth(day, monthStart)
                             ? "cal-disabled"
                             : isSameDay(day, state.selectedDate) ? "cal-selected" : ""
@@ -73,17 +82,18 @@ const CalendarComponent = () => {
                         key={day}
                         onClick={() => dayClick(cloneDay, !isSameMonth(cloneDay, monthStart))}
                     >
-                        <span className="date-number">{formattedDate}</span>
+                        <span className={`date-number ${isSameDay(day, new Date()) ? "cal-today" : ""}`}>{formattedDate}</span>
                         <span className='icon-area'>
                             {state.sampleEvents.filter((event) => isSameDay(day, event.startTime) || isSameDay(day, event.endTime))
                                 .map((event) => {return (<span className={`date-items ${teamClassMap[event.team]}`} key={`${event.team}-${event.startTime}`} title={`${event.team} Event`}></span>)})}
                         </span>
-                    </li>
+                    </td>
                 );
                 day = addDays(day, 1);
             }
-            days.push(
-                <li className={`day-expand ${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
+            days.push(week)
+            days.push([
+                <td colSpan={7} className={`${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
                     <div>
                         <div className='expand-title'>{format(state.selectedDate, "MMMM d, yyyy")}</div>
                         {state.sampleEvents.filter((event) => isSameDay(state.selectedDate, event.startTime) || isSameDay(state.selectedDate, event.endTime)).sort((a, b) => {return a.startTime - b.startTime})
@@ -91,21 +101,27 @@ const CalendarComponent = () => {
                     </div>
                     <br/>
                     <button onClick={() => toggleModal(true)} className='add-event-button'>Add Event</button>
-                </li>
-            )
+                </td>
+            ])
         }
 
         return (
-            <ul className='calendar-list'>
-                <li className='calendar-day'>MON</li>
-                <li className='calendar-day'>TUE</li>
-                <li className='calendar-day'>WED</li>
-                <li className='calendar-day'>THU</li>
-                <li className='calendar-day'>FRI</li>
-                <li className='calendar-day'>SAT</li>
-                <li className='calendar-day'>SUN</li>
-                {days}
-            </ul>
+            <table className="cal-table">
+                <thead>
+                    <tr>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                        <th>SUN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {days.map((row, rowId) => <TableRow row={row} isDateRow={row.length > 1} key={rowId}/>)}
+                </tbody>
+            </table>
         )
     }
 
@@ -175,7 +191,7 @@ const CalendarComponent = () => {
                 <CreateEvent setIsOpen={(val) => toggleModal(val)} date={state.selectedDate} addEvent={(ev) => addEvent(ev)}/>
             </div>}
             {renderHeader()}
-            {renderCells()}
+            {renderTable()}
         </div>
     )
 }

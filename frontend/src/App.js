@@ -10,10 +10,6 @@ import Contact from './components/contact/Contact';
 function App({children}) {
   return (
     <div className="App">
-      {/** <header className="App-header">
-        Hi
-      </header> */}
-      <h1>WECCA Website</h1>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout/>}>

@@ -1,30 +1,77 @@
+.navbar-main {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    z-index: 100;
+}
+
+.navbar-main > .nav-section {
+    padding: 1rem 1rem;
+    display: inline-flex;
+    box-sizing: border-box;
+    align-items: center;
+    color: white;
+}
+
+#wecca-logo {
+    height: 99px;
+    width: 148px;
+    padding: 0;
+}
+
+.wecca-logo-image {
+    height: 96px;
+    width: 128px;
+    background-image: url('../../assets/WECCA-purple.png');
+    background-size: 128px 96px;
+    margin: 0px 10px;
+}
+
+#nav-main {
+    flex-grow: 1;
+}
+
+.nav-subsection {
+    margin: 0 30px;
+    margin-top: 20px;
+    height: fit-content;
+    font-size: 19px;
+}
+
 .navbar {
     height: 30px;
-    padding-top: 10px;
-    border: 1px solid #cccccc;
+    padding: 20px 0;
     text-align: center;
     margin: 5px auto 15px auto;
-    padding-left: 0;
+    box-sizing: border-box;
+    border: 1px solid red;
+    vertical-align: middle;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
 }
 
 .navbar>li {
+    display: flex;
+    gap: 1rem;
     list-style: none;
-    display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 li > a {
-    padding: 12px;
+    padding: 5px 10px;
 }
 
 .link {
     text-decoration: none;
+    padding: 5px 10px;
+    width: 100%;
 }
 
 .active {
-    border-bottom: 2px solid rgb(67, 32, 148);
-    padding-bottom: 10px;
+    background-color: rgba(67, 32, 148, 0.4);
+    border-radius: 10px;
 }
 
 *:visited {
@@ -32,7 +79,7 @@ li > a {
 }
 
 .link:hover {
-    color: #646464;
+    color: rgb(67, 32, 148);
 }
 
 .centre {

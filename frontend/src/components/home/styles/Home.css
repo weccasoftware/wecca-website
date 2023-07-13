@@ -1,0 +1,35 @@
+.home-page {
+    transform: translateY(-100px);
+    z-index: -1;
+    position: relative;
+}
+
+.header-image {
+    height: 80vh;
+    width: 100%;
+    background-image: url('../../../assets/homepage-header.jpg');
+    background-size: 100% auto;
+    margin: 0;
+}
+
+.home-content{
+    margin-top: 0;
+}
+
+.about-wecca-home {
+    justify-content: center;
+    align-items: center;
+}
+
+.about-wecca-home > .about-wecca-title {
+    width: 100%;
+    font-size: 30px;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.about-wecca-home > .about-wecca-body {
+    width: 100%;
+    font-size: 19px;
+    margin-top: 8px;
+}
