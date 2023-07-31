@@ -1,5 +1,6 @@
 import React from "react";
 import './styles/About.css'
+import image1 from '../../assets/ethan-exec.jpeg'
 
 const About = () => {
     return (
@@ -12,6 +13,28 @@ const About = () => {
                     <li>Potentially add descriptions and/or photos of each team</li>
                 </ul>
             </div>
+            <ul className="exec-list">
+                <li>
+                    <img src={image1} className="exec-photo" />
+                    <div className="exec-name">Name</div>
+                    <div className="exec-title">Title</div>
+                </li>
+                <li>
+                    <img src={image1} className="exec-photo" />
+                    <div className="exec-name">Name</div>
+                    <div className="exec-title">Title</div>
+                </li>
+                <li>
+                    <img src={image1} className="exec-photo" />
+                    <div className="exec-name">Name</div>
+                    <div className="exec-title">Title</div>
+                </li>
+                <li>
+                    <img src={image1} className="exec-photo" />
+                    <div className="exec-name">Name</div>
+                    <div className="exec-title">Title</div>
+                </li>
+            </ul>
         </div>
     )
 }

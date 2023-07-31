@@ -20,6 +20,7 @@ const Calendar = () => {
                     <li>Maybe: people can select if they are going or not going to events</li>
                     <li>Maybe: events can be filtered (ie only show all software events)</li>
                     <li>Maybe: allow for users to subscribe to the calendar (ie with google calendar)</li>
+                    <li><b>Calendar should not be allowed on mobile? Too hard otherwise? Or create a mobile version?</b></li>
                 </ul>
             </div>
             <CalendarComponent />

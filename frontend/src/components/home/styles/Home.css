@@ -2,13 +2,14 @@
     transform: translateY(-100px);
     z-index: -1;
     position: relative;
+    overflow: hidden;
 }
 
 .header-image {
-    height: 80vh;
-    width: 100%;
-    background-image: url('../../../assets/homepage-header.jpg');
-    background-size: 100% auto;
+    height: 40vw;
+    width: 100vw;
+    background-image: url('../../../assets/homepage-header-2.jpg');
+    background-size: 100% 100%;
     margin: 0;
 }
 
@@ -32,4 +33,15 @@
     width: 100%;
     font-size: 19px;
     margin-top: 8px;
+}
+
+.image-carousel {
+    margin: 20px auto;
+    width: 100vw;
+}
+
+.carousel-image {
+    height: 80vh;
+    width: 80vw;
+    padding: 0px 10px;
 }

@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import './styles/Home.css'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ImageCarousel from "./ImageCarousel";
 
 const Home = () => {
+    const IMAGE_SOURCE_LIST = [
+        'carousel-image-1', 'carousel-image-2'
+    ]
+    const [displayedImage, setDisplayedImage] = useState(IMAGE_SOURCE_LIST[0])
+
+    const handleCarouselLeftClick = () => {
+        console.log("LEFT")
+        const displayedImageComponents = displayedImage.split('-');
+        const currentIndex = parseInt(displayedImageComponents[displayedImageComponents.length - 1]);
+        setDisplayedImage((IMAGE_SOURCE_LIST.length + currentIndex - 1) % IMAGE_SOURCE_LIST.length)
+    }
+
+    const handleCarouselRightClick = () => {
+        console.log("RIGHT")
+        const displayedImageComponents = displayedImage.split('-');
+        const currentIndex = parseInt(displayedImageComponents[displayedImageComponents.length - 1]);
+        setDisplayedImage((currentIndex + 1) % IMAGE_SOURCE_LIST.length)
+    }
+
     return (
         <div className="home-page">
             <div className="header-image"/>
@@ -10,8 +32,8 @@ const Home = () => {
                 <div className="about-wecca-body">Description about WECCA...</div>
             </div>
             <hr/>
-            <div>
-                Image carousel goes here...
+            <div className="about-wecca-home">
+                <ImageCarousel/>
             </div>
             <hr/>
             <div>
