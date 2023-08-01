@@ -1,0 +1,133 @@
+.sponsors-tier {
+    font-size: 30px;
+    text-align: left;
+    margin-left: 40px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.sponsor-box {
+    width: calc(100% - 120px);
+    margin: 10px 40px;
+    padding: 20px;
+    background-color: rgb(204, 204, 204);
+    height: 80px;
+    border-radius: 10px;
+}
+
+.sponsors-page {
+    text-align: left;
+}
+
+.sponsorship-tiers-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 0;
+    width: 60%;
+}
+
+.sponsorship-tiers-list>li {
+    width: fit-content;
+    display: inline-block;
+    font-size: 25px;
+    padding: 2px;
+}
+
+.sponsorship-tiers-list>li:hover {
+    cursor: pointer;
+    color: rgb(142, 56, 153);
+}
+
+.selected-tier {
+    font-weight: 600;
+}
+
+.sponsor-tier-content {
+    width: 80%;
+    height: 30%;
+    background-color: rgb(189, 189, 189);
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.tier-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.tier-image-container {
+    display: inline-block;
+    width: 25%;
+    height: 25%;
+    padding: 0px;
+}
+
+.tier-description-container {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.tier-content {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.tier-list-item {
+    margin: 7px 0;
+}
+
+.tier-subtitle {
+    font-size: 27px;
+    font-weight: 600px;
+}
+
+.donate-button {
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    border: 1px solid rgb(6, 95, 142);
+    color: rgb(6, 95, 142);
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 15px;
+}
+
+.donate-button:hover {
+    border-color: rgb(79, 160, 203);
+    color: rgb(79, 160, 203);
+}
+
+.donate-form {
+    text-align: center;
+}
+
+.donate-form>h1 {
+    margin-bottom: 10px;
+}
+
+.donate-subtext {
+    font-size: 18px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+.donate-input {
+    width: 70%;
+    margin: 15px auto;
+}
+
+.sponsor-response-message {
+    font-style: italic;
+    margin-bottom: 15px;
+    text-align: center;
+}
