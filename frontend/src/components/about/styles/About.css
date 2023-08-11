@@ -12,17 +12,18 @@
 
 .exec-list>li {
     display: inline-block;
-    width: 30%;
-    height: 30%;
-    padding: 10px;
+    width: 28%;
+    height: 33%;
+    padding: 15px 25px;
 }
 
 .exec-name {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 500;
     margin-bottom: 5px;
+    padding-top: 10px;
 }
 
 .exec-title {
-
+    font-size: 20px;
 }

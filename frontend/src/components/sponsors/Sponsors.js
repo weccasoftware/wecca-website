@@ -1,28 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Sponsors.css";
-import image from "../../assets/ethan-exec.jpeg";
+import image from "../../assets/ethan-exec.jpg";
 import { TextField } from "@mui/material";
 import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE } from "../../config";
 import { sendMail } from "../../util/Mail";
 
 const Sponsors = () => {
-  const goldBenefits = [];
-  const silverBenefits = [];
-  const bronzeBenefits = [];
-  const purpleBenefits = [];
+  const platinumBenefits = [
+    "Company logo put on competition T-Shirts",
+    "Company shoutouts at weekly team meetings",
+    "Company logo on WECCA's website",
+  ];
+  const goldBenefits = [
+    "Company logo put on competition T-shirts",
+    "Company shoutouts on social media and at weekly team meetings",
+    "Company logo on WECCA's website",
+    'Custom "Thank You" plaque',
+  ];
+  const purpleBenefits = [
+    "Company logo put on competition T-shirts",
+    "Company shoutouts on social media and at weekly team meetings",
+    "Company logo decals on the team trailer",
+    'Custom "Thank You" package from WECCA',
+    "Company logo on WECCA's Website",
+  ];
   const SUCCESS_MESSAGE =
     "Thank you for reaching out, please allow some time for us to get back to you.";
-  const FAILURE_MESSAGE = 
-    `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
+  const FAILURE_MESSAGE = `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
 
   const renderedPackages = {
+    purple: (
+      <div className="tier-content">
+        <div className="tier-image-container">
+          <img src={image} className="tier-image" />
+        </div>
+        <div className="tier-description-container">
+          <div className="tier-subtitle">Purple Sponsors: $1,500+</div>
+          <ul>
+            {purpleBenefits.map((item) => {
+              return <li className="tier-list-item">{item}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    ),
     gold: (
       <div className="tier-content">
         <div className="tier-image-container">
           <img src={image} className="tier-image" />
         </div>
         <div className="tier-description-container">
-          <div className="tier-subtitle">Gold Sponsors: $1,750+</div>
+          <div className="tier-subtitle">Gold Sponsors: $1,000-$1,499</div>
           <ul>
             {goldBenefits.map((item) => {
               return <li className="tier-list-item">{item}</li>;
@@ -31,45 +59,15 @@ const Sponsors = () => {
         </div>
       </div>
     ),
-    silver: (
+    platinum: (
       <div className="tier-content">
         <div className="tier-image-container">
           <img src={image} className="tier-image" />
         </div>
         <div className="tier-description-container">
-          <div className="tier-subtitle">Silver Sponsors: $1,250-$1,749</div>
+          <div className="tier-subtitle">Platinum Sponsors: $500-$999</div>
           <ul>
-            {silverBenefits.map((item) => {
-              return <li className="tier-list-item">{item}</li>;
-            })}
-          </ul>
-        </div>
-      </div>
-    ),
-    bronze: (
-      <div className="tier-content">
-        <div className="tier-image-container">
-          <img src={image} className="tier-image" />
-        </div>
-        <div className="tier-description-container">
-          <div className="tier-subtitle">Bronze Sponsors: $750-$1,249</div>
-          <ul>
-            {bronzeBenefits.map((item) => {
-              return <li className="tier-list-item">{item}</li>;
-            })}
-          </ul>
-        </div>
-      </div>
-    ),
-    purple: (
-      <div className="tier-content">
-        <div className="tier-image-container">
-          <img src={image} className="tier-image" />
-        </div>
-        <div className="tier-description-container">
-          <div className="tier-subtitle">Purple Sponsors: $500-$749</div>
-          <ul>
-            {purpleBenefits.map((item) => {
+            {platinumBenefits.map((item) => {
               return <li className="tier-list-item">{item}</li>;
             })}
           </ul>
@@ -79,9 +77,9 @@ const Sponsors = () => {
   };
 
   const [renderedPackage, setRenderedPackage] = useState(renderedPackages.gold);
-  const [selectedTier, setSelectedTier] = useState("gold");
-  const [email, setEmail] = useState("");
-  const [question, setQuestion] = useState("");
+  const [selectedTier, setSelectedTier] = useState("purple");
+  const [email, setEmail] = useState(null);
+  const [question, setQuestion] = useState(null);
   const [submitMessage, setSubmitMessage] = useState("");
 
   useEffect(() => {
@@ -99,20 +97,32 @@ const Sponsors = () => {
     return heading + user + message;
   };
 
+  const handleContactSubmit = () => {
+    setEmail(email || "");
+    setQuestion(question || "");
+    if (email.length === 0 || question.length === 0) return;
+
+    sendMail(
+      FINANCE_CAPTAIN_EMAIL,
+      email,
+      generateEmailBody(),
+      setSubmitMessage,
+      SPONSORSHIP_FORM_TYPE,
+      SUCCESS_MESSAGE,
+      FAILURE_MESSAGE
+    );
+  };
+
   return (
     <div className="sponsors-page">
-      <h1 className="centre">Our Sponsors</h1>
-      <div className="sponsors-tier">Gold Tier</div>
-      <div className="sponsor-box">
-        <div>Hi</div>
-      </div>
-      <div className="sponsors-tier">Silver Tier</div>
-      <div className="sponsor-box">
-        <div>Hello</div>
-      </div>
-      <div className="sponsors-tier">...</div>
       <h1 className="centre">Sponsorship Packages</h1>
       <ul className="sponsorship-tiers-list">
+        <li
+          onClick={() => handleTierChange("purple")}
+          className={selectedTier === "purple" ? "selected-tier" : ""}
+        >
+          Purple
+        </li>
         <li
           onClick={() => handleTierChange("gold")}
           className={selectedTier === "gold" ? "selected-tier" : ""}
@@ -120,25 +130,43 @@ const Sponsors = () => {
           Gold
         </li>
         <li
-          onClick={() => handleTierChange("silver")}
-          className={selectedTier === "silver" ? "selected-tier" : ""}
+          onClick={() => handleTierChange("platinum")}
+          className={selectedTier === "platinum" ? "selected-tier" : ""}
         >
-          Silver
-        </li>
-        <li
-          onClick={() => handleTierChange("bronze")}
-          className={selectedTier === "bronze" ? "selected-tier" : ""}
-        >
-          Bronze
-        </li>
-        <li
-          onClick={() => handleTierChange("purple")}
-          className={selectedTier === "purple" ? "selected-tier" : ""}
-        >
-          Purple
+          Platinum
         </li>
       </ul>
       <div className="sponsor-tier-content">{renderedPackage}</div>
+      <hr className="sponsor-hr"/>
+      <h1 className="sponsorship-title">Our Sponsors</h1>
+      <div className="sponsorship-caption">
+        Thank you to our current sponsors for the 2023-24 year! 
+      </div>
+      <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Gold Tier</div>
+        <div className="sponsorship-tier-company-content">
+          Content goes here
+        </div>
+      </div>
+      <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Silver Tier</div>
+        <div className="sponsorship-tier-company-content">
+          Content goes here
+        </div>
+      </div>
+      <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Bronze Tier</div>
+        <div className="sponsorship-tier-company-content">
+          Content goes here
+        </div>
+      </div>
+      <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Purple Tier</div>
+        <div className="sponsorship-tier-company-content">
+          Content goes here
+        </div>
+      </div>
+      <hr className="sponsor-hr"/>
       <div className="donate-form">
         <h1 className="centre">Become a Sponsor</h1>
         <form
@@ -158,6 +186,8 @@ const Sponsors = () => {
             label="Email"
             fullWidth
             value={email}
+            required
+            error={email !== null && email.length === 0}
             onChange={(e) => setEmail(e.target.value)}
           ></TextField>
         </div>
@@ -168,23 +198,12 @@ const Sponsors = () => {
             multiline
             value={question}
             rows={4}
+            required
+            error={question !== null && question.length === 0}
             onChange={(q) => setQuestion(q.target.value)}
           ></TextField>
         </div>
-        <button
-          className="donate-button"
-          onClick={() =>
-            sendMail(
-              FINANCE_CAPTAIN_EMAIL,
-              email,
-              generateEmailBody(),
-              setSubmitMessage,
-              SPONSORSHIP_FORM_TYPE,
-              SUCCESS_MESSAGE, 
-              FAILURE_MESSAGE
-            )
-          }
-        >
+        <button className="donate-button" onClick={() => handleContactSubmit()}>
           Submit
         </button>
         {submitMessage && submitMessage.length > 0 && (

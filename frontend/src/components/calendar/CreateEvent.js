@@ -124,7 +124,7 @@ const CreateEvent = ({setIsOpen, date, addEvent, existingData = null}) => {
                 </FormControl>
                 <br/><br/>
                 <TextField label='Title' fullWidth 
-                    onChange={(title) => setTitle(title)}
+                    onChange={(title) => setTitle(title)}z
                     error={state.titleError} required
                     value={state.title}></TextField>
                 <br/><br/>

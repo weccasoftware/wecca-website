@@ -1,22 +1,6 @@
-.sponsors-tier {
-    font-size: 30px;
-    text-align: left;
-    margin-left: 40px;
-    display: inline-block;
-    width: fit-content;
-}
-
-.sponsor-box {
-    width: calc(100% - 120px);
-    margin: 10px 40px;
-    padding: 20px;
-    background-color: rgb(204, 204, 204);
-    height: 80px;
-    border-radius: 10px;
-}
-
 .sponsors-page {
     text-align: left;
+    height: 100%;
 }
 
 .sponsorship-tiers-list {
@@ -47,7 +31,6 @@
 .sponsor-tier-content {
     width: 80%;
     height: 30%;
-    background-color: rgb(189, 189, 189);
     margin: 0 auto;
     padding: 10px;
     border-radius: 10px;
@@ -62,14 +45,16 @@
 
 .tier-image-container {
     display: inline-block;
-    width: 25%;
-    height: 25%;
+    width: 22%;
+    height: 22%;
     padding: 0px;
+    margin: 0px 5%;
 }
 
 .tier-description-container {
     display: inline-block;
     font-size: 20px;
+    width: 50%;
 }
 
 .tier-content {
@@ -130,4 +115,45 @@
     font-style: italic;
     margin-bottom: 15px;
     text-align: center;
+}
+
+.sponsorship-tier-company-box {
+    text-align: left;
+    margin: 5px auto;
+    display: inline-block;
+    width: fit-content;
+    width: 100%;
+}
+
+.sponsorship-tier-company-header {
+    font-size: 30px;
+    width: calc(80% + 40px);
+    margin: 0 auto;
+}
+
+.sponsorship-tier-company-content {
+    background-color: rgb(204, 204, 204);
+    height: 80px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.sponsorship-title {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sponsorship-caption {
+    font-size: 22px;
+    text-align: center;
+}
+
+.sponsor-hr {
+    width: 90%;
+    border: 0.2px solid #522584;
+    border-radius: 2px;
+    margin: 2% auto;
 }
