@@ -9,22 +9,42 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { addHours, format } from "date-fns";
 
 const subTeams = [
+    "Software",
+    "Design and Analysis",
+    "Technical Communications",
+    "Materials",
+    "Mould",
+    "Training",
+    "Graphic Design",
     "General",
     "Executive",
-    "Software Development",
-    "Materials",
-    "Technical Communications"
+    "Captain",
 ]
 
-const CreateEvent = ({setIsOpen, date, addEvent}) => {
+const CreateEvent = ({setIsOpen, date, addEvent, existingData = null}) => {
     const [state, setState] = useState({
         team: "General",
-        title: '',
-        startTime: new Date(),
-        endTime: addHours(new Date(), 1),
+        title: "",
+        startTime: date,
+        endTime: addHours(date, 1),
         description: '',
-        titleError: ''
+        titleError: false
     })
+
+    useEffect(() => {
+        if(existingData){
+            console.log("Got Existing Data")
+            console.log(existingData)
+            setState((s) => ({
+                ...s,
+                team: existingData.team,
+                title: existingData.title,
+                startTime: existingData.startTime,
+                endTime: existingData.endTime,
+                description: existingData.description || '',
+            }))
+        }
+    }, [])
 
     useEffect(() => {
         console.log(state)
@@ -41,7 +61,7 @@ const CreateEvent = ({setIsOpen, date, addEvent}) => {
         setState({
             ...state,
             title: title.target.value,
-            titleError: ''
+            titleError: false
         })
     }
 
@@ -75,7 +95,7 @@ const CreateEvent = ({setIsOpen, date, addEvent}) => {
 
     const submitForm = () => {
         if(state.title.length === 0){
-            setError("Event must have a title")
+            setError(true)
             return;
         }
 
@@ -104,8 +124,9 @@ const CreateEvent = ({setIsOpen, date, addEvent}) => {
                 </FormControl>
                 <br/><br/>
                 <TextField label='Title' fullWidth 
-                    onChange={(title) => setTitle(title)}
-                    error={state.titleError} required></TextField>
+                    onChange={(title) => setTitle(title)}z
+                    error={state.titleError} required
+                    value={state.title}></TextField>
                 <br/><br/>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopTimePicker

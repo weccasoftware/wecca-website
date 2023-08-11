@@ -1,0 +1,47 @@
+.home-page {
+    transform: translateY(-100px);
+    z-index: -1;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-image {
+    height: 40vw;
+    width: 100vw;
+    background-image: url('../../../assets/homepage-header-2.jpg');
+    background-size: 100% 100%;
+    margin: 0;
+}
+
+.home-content{
+    margin-top: 0;
+}
+
+.about-wecca-home {
+    justify-content: center;
+    align-items: center;
+}
+
+.about-wecca-home > .about-wecca-title {
+    width: 100%;
+    font-size: 30px;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.about-wecca-home > .about-wecca-body {
+    width: 100%;
+    font-size: 19px;
+    margin-top: 8px;
+}
+
+.image-carousel {
+    margin: 20px auto;
+    width: 100vw;
+}
+
+.carousel-image {
+    height: 80vh;
+    width: 80vw;
+    padding: 0px 10px;
+}

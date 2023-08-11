@@ -1,0 +1,159 @@
+.sponsors-page {
+    text-align: left;
+    height: 100%;
+}
+
+.sponsorship-tiers-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 0;
+    width: 60%;
+}
+
+.sponsorship-tiers-list>li {
+    width: fit-content;
+    display: inline-block;
+    font-size: 25px;
+    padding: 2px;
+}
+
+.sponsorship-tiers-list>li:hover {
+    cursor: pointer;
+    color: rgb(142, 56, 153);
+}
+
+.selected-tier {
+    font-weight: 600;
+}
+
+.sponsor-tier-content {
+    width: 80%;
+    height: 30%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.tier-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.tier-image-container {
+    display: inline-block;
+    width: 22%;
+    height: 22%;
+    padding: 0px;
+    margin: 0px 5%;
+}
+
+.tier-description-container {
+    display: inline-block;
+    font-size: 20px;
+    width: 50%;
+}
+
+.tier-content {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.tier-list-item {
+    margin: 7px 0;
+}
+
+.tier-subtitle {
+    font-size: 27px;
+    font-weight: 600px;
+}
+
+.donate-button {
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    border: 1px solid rgb(6, 95, 142);
+    color: rgb(6, 95, 142);
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 15px;
+}
+
+.donate-button:hover {
+    border-color: rgb(79, 160, 203);
+    color: rgb(79, 160, 203);
+}
+
+.donate-form {
+    text-align: center;
+}
+
+.donate-form>h1 {
+    margin-bottom: 10px;
+}
+
+.donate-subtext {
+    font-size: 18px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+.donate-input {
+    width: 70%;
+    margin: 15px auto;
+}
+
+.sponsor-response-message {
+    font-style: italic;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sponsorship-tier-company-box {
+    text-align: left;
+    margin: 5px auto;
+    display: inline-block;
+    width: fit-content;
+    width: 100%;
+}
+
+.sponsorship-tier-company-header {
+    font-size: 30px;
+    width: calc(80% + 40px);
+    margin: 0 auto;
+}
+
+.sponsorship-tier-company-content {
+    background-color: rgb(204, 204, 204);
+    height: 80px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.sponsorship-title {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sponsorship-caption {
+    font-size: 22px;
+    text-align: center;
+}
+
+.sponsor-hr {
+    width: 90%;
+    border: 0.2px solid #522584;
+    border-radius: 2px;
+    margin: 2% auto;
+}

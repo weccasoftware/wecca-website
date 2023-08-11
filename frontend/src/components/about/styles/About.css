@@ -1,0 +1,29 @@
+.exec-photo {
+    width: 100%;
+    height: 100%;
+}
+
+.exec-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.exec-list>li {
+    display: inline-block;
+    width: 28%;
+    height: 33%;
+    padding: 15px 25px;
+}
+
+.exec-name {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    padding-top: 10px;
+}
+
+.exec-title {
+    font-size: 20px;
+}
