@@ -4,6 +4,11 @@ import image from "../../assets/ethan-exec.jpg";
 import { TextField } from "@mui/material";
 import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE } from "../../config";
 import { sendMail } from "../../util/Mail";
+import mte from '../../assets/sponsor-logos/MTE.png'
+import autotube from '../../assets/sponsor-logos/Autotube.png'
+import cornerstone from '../../assets/sponsor-logos/Cornerstone.png'
+import ellisdon from '../../assets/sponsor-logos/EllisDon.png'
+import dillon from '../../assets/sponsor-logos/Dillon.png'
 
 const Sponsors = () => {
   const platinumBenefits = [
@@ -27,6 +32,16 @@ const Sponsors = () => {
   const SUCCESS_MESSAGE =
     "Thank you for reaching out, please allow some time for us to get back to you.";
   const FAILURE_MESSAGE = `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
+
+  const silverLogos = [
+    dillon, mte, cornerstone
+  ]
+  const goldLogos = [
+    autotube, ellisdon
+  ]
+  const purpleLogos = [
+
+  ]
 
   const renderedPackages = {
     purple: (
@@ -115,6 +130,7 @@ const Sponsors = () => {
 
   return (
     <div className="sponsors-page">
+      <div className="sponsor-header-image"></div>
       <h1 className="centre">Sponsorship Packages</h1>
       <ul className="sponsorship-tiers-list">
         <li
@@ -142,30 +158,48 @@ const Sponsors = () => {
       <div className="sponsorship-caption">
         Thank you to our current sponsors for the 2023-24 year! 
       </div>
-      <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Gold Tier</div>
-        <div className="sponsorship-tier-company-content">
-          Content goes here
-        </div>
-      </div>
-      <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Silver Tier</div>
-        <div className="sponsorship-tier-company-content">
-          Content goes here
-        </div>
-      </div>
-      <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Bronze Tier</div>
-        <div className="sponsorship-tier-company-content">
-          Content goes here
-        </div>
-      </div>
-      <div className="sponsorship-tier-company-box">
+      {purpleLogos && purpleLogos.length > 0 && <div className="sponsorship-tier-company-box">
         <div className="sponsorship-tier-company-header">Purple Tier</div>
-        <div className="sponsorship-tier-company-content">
-          Content goes here
+        <div className="sponsorship-tier-company-content purple-tier">
+          {
+            purpleLogos.map((logo) => {
+              return (
+                <div className="sponsor-logo-container">
+                  <img src={logo} />
+                </div>
+              )
+            })
+          }
         </div>
-      </div>
+      </div>}
+      {goldLogos && goldLogos.length > 0 && <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Gold Tier</div>
+        <div className="sponsorship-tier-company-content gold-tier">
+        {
+            goldLogos.map((logo) => {
+              return (
+                <div className="sponsor-logo-container">
+                  <img src={logo} />
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>}
+      {silverLogos && silverLogos.length > 0 && <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Silver Tier</div>
+        <div className="sponsorship-tier-company-content silver-tier">
+        {
+            silverLogos.map((logo) => {
+              return (
+                <div className="sponsor-logo-container">
+                  <img src={logo} />
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>}
       <hr className="sponsor-hr"/>
       <div className="donate-form">
         <h1 className="centre">Become a Sponsor</h1>
