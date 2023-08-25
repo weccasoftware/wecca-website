@@ -145,12 +145,12 @@ const Contact = () => {
           <div className="sponsor-response-message">{displayMessage}</div>
         )}
       </div>
-      <h2>Contact</h2>
+      {/*<h2>Contact</h2>
       Will be a general contact form to get involved in the club <br />
       Collect first name, last name, email, and comment (with select for sponsor
       or other)
       <br />
-      Maybe like a "come find us" thing? Or address?
+      Maybe like a "come find us" thing? Or address?*/}
     </div>
   );
 };
