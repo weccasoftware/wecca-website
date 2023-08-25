@@ -5,8 +5,8 @@ export const LOGISTICS_CAPTAIN_NAME = "Samantha Goertz";
 export const CONSTRUCTION_CAPTAIN_NAME = "Anthony De Rango";
 export const CONCRETE_CAPTAIN_NAME = "Daniel Hanna";
 
-export const FINANCE_CAPTAIN_EMAIL = "wecca.software@gmail.com";
-export const LOGISTICS_CAPTAIN_EMAIL = "wecca.software@gmail.com";
+export const FINANCE_CAPTAIN_EMAIL = "lreeves8@uwo.ca";
+export const LOGISTICS_CAPTAIN_EMAIL = "sgoertz3@uwo.ca";
 export const CONSTRUCTION_CAPTAIN_EMAIL = "wecca.software@gmail.com";
 export const CONCRETE_CAPTAIN_EMAIL = "wecca.software@gmail.com";
 export const WECCA_SOFTWARE_EMAIL = "wecca.software@gmail.com";

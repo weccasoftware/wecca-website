@@ -3,6 +3,8 @@
     align-items: center;
     justify-content: space-between;
     padding: none;
+    position: relative;
+    z-index: 1;
 }
 
 .nav-menu {

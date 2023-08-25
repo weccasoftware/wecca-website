@@ -1,6 +1,5 @@
 .home-page {
-    transform: translateY(-100px);
-    z-index: -1;
+    margin-top: -100px;
     position: relative;
     overflow: hidden;
 }
@@ -24,24 +23,91 @@
 
 .about-wecca-home > .about-wecca-title {
     width: 100%;
-    font-size: 30px;
-    margin-top: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     font-weight: 600;
 }
 
 .about-wecca-home > .about-wecca-body {
     width: 100%;
-    font-size: 19px;
-    margin-top: 8px;
+    font-size: 20px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 80%;
 }
 
 .image-carousel {
+    /* Figure out whether to make this the full width or not */
     margin: 20px auto;
-    width: 100vw;
+    width: calc(80vw - 1%);
+    overflow: hidden;
+    height: auto;
+    position: relative;
+    z-index: -1;
+}
+
+.slick-slider {
+    line-height: 0;
 }
 
 .carousel-image {
     height: 80vh;
     width: 80vw;
+}
+
+.announcement-container {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 15px auto;
+    height: 150px;
+    background-color: rgb(229, 229, 229);
+    border-radius: 10px;
+}
+
+.announcement-title {
+    font-size: 20px;
+    margin: 5px 0px;
+}
+
+.announcement-text {
+    padding: 10px;
+}
+
+.announcement-content {
+    width: 70%;
+    display: inline-block;
+}
+
+.announcement-image-container {
+    width: 30%;
+    height: 120px;
+    display: inline-block;
+    margin: 15px 0px;
     padding: 0px 10px;
+}
+
+.announcement-image {
+    height: 100%;
+    width: 100%;
+}
+
+.social-icon {
+    color: #522584;
+    font-size: 60px;
+    margin: 5px 30px;
+}
+
+.social-icon:hover {
+    color: #9065c2;
+    cursor: pointer;
+}
+
+.social-icon-container {
+    margin: 0px;
+    margin-top: 30px;
+    padding: 6px;
 }

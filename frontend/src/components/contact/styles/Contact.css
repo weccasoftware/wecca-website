@@ -29,16 +29,16 @@
     font-size: 15px;
     border: none;
     background-color: inherit;
-    border: 1px solid rgb(6, 95, 142);
-    color: rgb(6, 95, 142);
+    border: 1px solid #522584;
+    color: #522584;
     display: inline-block;
     margin: 0 10px;
     margin-bottom: 15px;
 }
 
 .contact-button:hover {
-    border-color: rgb(79, 160, 203);
-    color: rgb(79, 160, 203);
+    border-color: #a170d8;
+    color: #a170d8;
 }
 
 .contact-button-container {

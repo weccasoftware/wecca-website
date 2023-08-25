@@ -1,18 +1,23 @@
 import React from "react";
 import Slider from "react-slick/lib/slider";
-import image1 from "../../assets/homepage-header.jpg";
-import image2 from "../../assets/homepage-header-2.jpg";
+import image1 from '../../assets/carousel/carousel_1.jpg'
+import image2 from '../../assets/carousel/carousel_2.jpg'
+import image3 from '../../assets/carousel/carousel_3.jpg'
+import image4 from '../../assets/carousel/carousel_4.jpg'
+import image5 from '../../assets/carousel/carousel_5.jpg'
 
 const ImageCarousel = () => {
   var settings = {
     infinite: true,
     speed: 750,
-    variableWidth: true,
     slidesToShow: 1,
-    centerMode: true,
     slidesToScroll: 1,
+    variableWidth: true,
+    centerMode: true,
     autoplay: true,
     autoplaySpeed: 5000,
+    draggable: false,
+    adaptiveHeight: true,
     responsive: [
         {
           breakpoint: 1024,
@@ -22,6 +27,7 @@ const ImageCarousel = () => {
             infinite: true,
             centerMode: true,
             variableWidth: true,
+            adaptiveHeight: true,
           }
         },
         {
@@ -32,6 +38,7 @@ const ImageCarousel = () => {
               infinite: true,
               centerMode: true,
               variableWidth: true,
+              adaptiveHeight: true,
             }
           }
     ]
@@ -39,23 +46,20 @@ const ImageCarousel = () => {
   return (
     <div className="image-carousel">
       <Slider {...settings}>
-        <div>
+        <div className="slider-image">
           <img src={image1} className="carousel-image" />
         </div>
-        <div>
+        <div className="slider-image">
           <img src={image2} className="carousel-image" />
         </div>
-        <div>
-          <img src={image1} className="carousel-image" />
+        <div className="slider-image">
+          <img src={image3} className="carousel-image" />
         </div>
-        <div>
-          <img src={image2} className="carousel-image" />
+        <div className="slider-image">
+          <img src={image4} className="carousel-image" />
         </div>
-        <div>
-          <img src={image1} className="carousel-image" />
-        </div>
-        <div>
-          <img src={image2} className="carousel-image" />
+        <div className="slider-image">
+          <img src={image5} className="carousel-image" />
         </div>
       </Slider>
     </div>
