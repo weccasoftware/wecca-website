@@ -16,7 +16,7 @@ function App({children}) {
             <Route index element={<Home/>}></Route>
             <Route path='about' element={<About/>}></Route>
             <Route path='sponsors' element={<Sponsors/>}></Route>
-            <Route path='calendar' element={<Calendar/>}></Route>
+            {/*<Route path='calendar' element={<Calendar/>}></Route>*/}
             <Route path='contact' element={<Contact/>}></Route>
           </Route>
         </Routes>

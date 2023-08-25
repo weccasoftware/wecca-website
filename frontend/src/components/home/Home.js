@@ -5,58 +5,34 @@ import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageCarousel from "./ImageCarousel";
 import AnnouncementContainer from "./AnnouncementContainer";
-import testImage from '../../assets/alt-sponsors-photo.jpg';
+import temp1 from '../../assets/homepage/temp-1.jpg';
+import temp2 from '../../assets/homepage/temp-2.jpg';
 import {faInstagram, faSlack, faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
 const upcomingEvents = [
     {
-        title: "Come to Our Introductory Meeting",
-        text: "WECCA will be having its first meeting of the year at [TIME] " + 
-                "in [LOCATION], where members will have the chance to meet " + 
+        title: "Come meet us at our introductory meeting",
+        text: "WECCA will be having its first meeting of the year at 4:30 pm " + 
+                "in ACEB 1220, where members will have the chance to meet " + 
                 "the executives and learn more about the club. If you have any " + 
                 "questions before then, feel free to contact us via our contact form.",
-        image: testImage
+        image: temp1
     },
     {
-        title: "Join us for WRECCA on [DATE]",
+        title: "Join us for WRECCA on September 16th",
         text: "WRECCA is an annual event where WECCA members have the chance to help " + 
                 "destroy our canoe from the previous year. This will be taking place on " + 
-                "[TIME] at [LOCATION]. [Write something else here].",
-        image: testImage
+                "Saturday, September 16th at 12:00 pm behind ACEB. Everyone is welcome to come " +
+                "out and help us destroy The Argo!",
+        image: temp2
     }
 ]
 
 const Home = () => {
-  const IMAGE_SOURCE_LIST = ["carousel-image-1", "carousel-image-2"];
-  const [displayedImage, setDisplayedImage] = useState(IMAGE_SOURCE_LIST[0]);
-
-  const handleCarouselLeftClick = () => {
-    console.log("LEFT");
-    const displayedImageComponents = displayedImage.split("-");
-    const currentIndex = parseInt(
-      displayedImageComponents[displayedImageComponents.length - 1]
-    );
-    setDisplayedImage(
-      (IMAGE_SOURCE_LIST.length + currentIndex - 1) % IMAGE_SOURCE_LIST.length
-    );
-  };
-
-  const handleCarouselRightClick = () => {
-    console.log("RIGHT");
-    const displayedImageComponents = displayedImage.split("-");
-    const currentIndex = parseInt(
-      displayedImageComponents[displayedImageComponents.length - 1]
-    );
-    setDisplayedImage((currentIndex + 1) % IMAGE_SOURCE_LIST.length);
-  };
-
   return (
     <div className="home-page">
       <div className="header-image" />
       <div className="about-wecca-home">
-        <h1 className="about-wecca-title">
-          Western Engineering Concrete Canoe Association
-        </h1>
         <div className="about-wecca-body">
           [SAMPLE] Western Engineering Concrete Canoe Association (WECCA) is group of very dedicated students who work to design, build, and race a concrete canoe. 
           Each year, WECCA competes at the Canadian National Concrete Canoe Competition (CNCCC) against both Canadian and International Schools.
@@ -67,7 +43,7 @@ const Home = () => {
         <ImageCarousel />
       </div>
       <hr className="sponsor-hr" />
-      <h2>Announcements</h2>
+      <h1>Announcements</h1>
       <div>
         {
             upcomingEvents.map((ev, index) => {

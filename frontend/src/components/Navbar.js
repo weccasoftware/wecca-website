@@ -91,14 +91,14 @@ const Navbar = () => {
               About
             </NavLink>
           </div>
-          <div className="nav-subsection" onClick={() => setExpandMenu(false)}>
+          {/*<div className="nav-subsection" onClick={() => setExpandMenu(false)}>
             <NavLink
               to="/calendar"
               className={({ isActive }) => "link" + (isActive ? " active" : "")}
             >
               Calendar
             </NavLink>
-          </div>
+          </div>*/}
           <div className="nav-subsection" onClick={() => setExpandMenu(false)}>
             <NavLink
               to="/sponsors"

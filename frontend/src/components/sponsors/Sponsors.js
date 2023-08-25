@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Sponsors.css";
-import image from "../../assets/ethan-exec.jpg";
 import { TextField } from "@mui/material";
 import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE } from "../../config";
 import { sendMail } from "../../util/Mail";
@@ -9,6 +8,9 @@ import autotube from '../../assets/sponsor-logos/Autotube.png'
 import cornerstone from '../../assets/sponsor-logos/Cornerstone.png'
 import ellisdon from '../../assets/sponsor-logos/EllisDon.png'
 import dillon from '../../assets/sponsor-logos/Dillon.png'
+import purpleImage from '../../assets/sponsors/sponsors-tier-photo-1.jpg'
+import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.jpg'
+import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.jpg'
 
 const Sponsors = () => {
   const platinumBenefits = [
@@ -33,7 +35,7 @@ const Sponsors = () => {
     "Thank you for reaching out, please allow some time for us to get back to you.";
   const FAILURE_MESSAGE = `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
 
-  const silverLogos = [
+  const platinumLogos = [
     dillon, mte, cornerstone
   ]
   const goldLogos = [
@@ -47,7 +49,7 @@ const Sponsors = () => {
     purple: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={image} className="tier-image" />
+          <img src={purpleImage} className="tier-image" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Purple Sponsors: $1,500+</div>
@@ -62,7 +64,7 @@ const Sponsors = () => {
     gold: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={image} className="tier-image" />
+          <img src={goldImage} className="tier-image" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Gold Sponsors: $1,000-$1,499</div>
@@ -77,7 +79,7 @@ const Sponsors = () => {
     platinum: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={image} className="tier-image" />
+          <img src={platinumImage} className="tier-image" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Platinum Sponsors: $500-$999</div>
@@ -186,11 +188,11 @@ const Sponsors = () => {
           }
         </div>
       </div>}
-      {silverLogos && silverLogos.length > 0 && <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Silver Tier</div>
+      {platinumLogos && platinumLogos.length > 0 && <div className="sponsorship-tier-company-box">
+        <div className="sponsorship-tier-company-header">Platinum Tier</div>
         <div className="sponsorship-tier-company-content silver-tier">
         {
-            silverLogos.map((logo) => {
+            platinumLogos.map((logo) => {
               return (
                 <div className="sponsor-logo-container">
                   <img src={logo} />
@@ -244,8 +246,7 @@ const Sponsors = () => {
           <div className="sponsor-response-message">{submitMessage}</div>
         )}
       </div>
-      <hr />
-      <h2>Sponsors</h2>
+      {/*<h2>Sponsors</h2>
       This page can show the club's sponsor information, including:
       <ul>
         <li>Current sponsors</li>
@@ -255,7 +256,7 @@ const Sponsors = () => {
         <li>Link to donate</li>
         <li>Finance captain's contact info</li>
         <li>Maybe: interest form?</li>
-      </ul>
+        </ul>*/}
     </div>
   );
 };

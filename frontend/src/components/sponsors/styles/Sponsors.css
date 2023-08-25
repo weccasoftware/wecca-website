@@ -1,7 +1,7 @@
 .sponsors-page {
     text-align: left;
     height: 100%;
-    transform: translateY(-100px);
+    margin-top: -100px;
     position: relative;
     overflow: hidden;
 }
@@ -169,7 +169,7 @@
 .sponsor-header-image {
     height: 50vw;
     width: 100vw;
-    background-image: url('../../../assets/alt-sponsors-photo.jpg');
+    background-image: url('../../../assets/sponsors/alt-sponsors-photo.jpg');
     background-size: 100% 100%;
     margin: 0;
 }
@@ -178,7 +178,7 @@
     width: 30%;
     height: auto;
     display: inline-block;
-    margin: 10px;
+    margin: 20px;
 }
 
 .sponsor-logo-container>img {

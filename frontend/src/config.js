@@ -1,4 +1,4 @@
-import testImage from './assets/ethan-exec-nobg.png'
+import testImage from './assets/headshots/ethan-exec-nobg.png'
 
 export const FINANCE_CAPTAIN_NAME = "Liam Reeves";
 export const LOGISTICS_CAPTAIN_NAME = "Samantha Goertz";
