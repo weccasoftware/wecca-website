@@ -1,10 +1,10 @@
 import React from "react";
 import Slider from "react-slick/lib/slider";
-import image1 from '../../assets/carousel/carousel_1.jpg'
-import image2 from '../../assets/carousel/carousel_2.jpg'
-import image3 from '../../assets/carousel/carousel_3.jpg'
-import image4 from '../../assets/carousel/carousel_4.jpg'
-import image5 from '../../assets/carousel/carousel_5.jpg'
+import image1 from '../../assets/carousel/carousel_1.png'
+import image2 from '../../assets/carousel/carousel_2.png'
+import image3 from '../../assets/carousel/carousel_3.png'
+import image4 from '../../assets/carousel/carousel_4.png'
+import image5 from '../../assets/carousel/carousel_5.png'
 
 const ImageCarousel = () => {
   var settings = {

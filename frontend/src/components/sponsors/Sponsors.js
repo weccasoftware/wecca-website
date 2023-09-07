@@ -8,9 +8,9 @@ import autotube from '../../assets/sponsor-logos/Autotube.png'
 import cornerstone from '../../assets/sponsor-logos/Cornerstone.png'
 import ellisdon from '../../assets/sponsor-logos/EllisDon.png'
 import dillon from '../../assets/sponsor-logos/Dillon.png'
-import purpleImage from '../../assets/sponsors/sponsors-tier-photo-1.jpg'
-import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.jpg'
-import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.jpg'
+import purpleImage from '../../assets/sponsors/sponsors-tier-photo-1.png'
+import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.png'
+import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.png'
 
 const Sponsors = () => {
   const platinumBenefits = [

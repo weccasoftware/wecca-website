@@ -34,7 +34,7 @@ const Home = () => {
       <div className="header-image" />
       <div className="about-wecca-home">
         <div className="about-wecca-body">
-          [SAMPLE] Western Engineering Concrete Canoe Association (WECCA) is group of very dedicated students who work to design, build, and race a concrete canoe. 
+          Western Engineering Concrete Canoe Association (WECCA) is group of very dedicated students who work to design, build, and race a concrete canoe. 
           Each year, WECCA competes at the Canadian National Concrete Canoe Competition (CNCCC) against both Canadian and International Schools.
         </div>
       </div>
