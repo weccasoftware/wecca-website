@@ -1,13 +1,16 @@
-import sam from "./assets/headshots/Sam.png";
-import anthony from "./assets/headshots/Anthony.png";
-import liam from "./assets/headshots/Liam.png";
-import daniel from "./assets/headshots/Daniel.png";
-import louie from "./assets/headshots/Louie.png";
-import michael from "./assets/headshots/Michael.png";
-import cole from "./assets/headshots/Cole.png";
-import ethan from "./assets/headshots/Ethan.png";
-import lama from "./assets/headshots/Lama.png";
-import placeholder from "./assets/headshots/Placeholder.png"
+import sam from "./assets/headshots/bg-Sam.png";
+import anthony from "./assets/headshots/bg-Anthony.png";
+import liam from "./assets/headshots/bg-Liam.png";
+import daniel from "./assets/headshots/bg-Daniel.png";
+import louie from "./assets/headshots/bg-Louie.png";
+import michael from "./assets/headshots/bg-Michael.png";
+import cole from "./assets/headshots/bg-Cole.png";
+import ethan from "./assets/headshots/bg-Ethan.png";
+import dylan from "./assets/headshots/bg-Dylan.png"
+import lama from "./assets/headshots/bg-Lama.png";
+import placeholder from "./assets/headshots/bg-Placeholder.png"
+
+export const WINDOW_SIZE_THRESHOLD_PX = 768;
 
 export const FINANCE_CAPTAIN_NAME = "Liam Reeves";
 export const LOGISTICS_CAPTAIN_NAME = "Samantha Goertz";
@@ -101,7 +104,7 @@ export const EXECUTIVES_LIST = [
   {
     title: roles.SOFTWARE_EXEC,
     name: "Dylan MacPhail",
-    image: placeholder,
+    image: dylan,
   },
   {
     title: roles.DESIGN_AND_ANALYSIS_EXEC,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Sponsors.css";
 import { TextField } from "@mui/material";
-import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE } from "../../config";
+import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE, WINDOW_SIZE_THRESHOLD_PX } from "../../config";
 import { sendMail } from "../../util/Mail";
 import mte from '../../assets/sponsor-logos/MTE.png'
 import autotube from '../../assets/sponsor-logos/Autotube.png'
@@ -13,6 +13,23 @@ import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.png'
 import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.png'
 
 const Sponsors = () => {
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   const platinumBenefits = [
     "Company logo put on competition T-Shirts",
     "Company shoutouts at weekly team meetings",
@@ -93,6 +110,54 @@ const Sponsors = () => {
     ),
   };
 
+  const mobilePackages = {
+    purple: (
+      <div className="tier-content-mobile">
+        <div className="tier-image-container-mobile">
+          <img src={purpleImage} className="tier-image-mobile purple-tier" />
+        </div>
+        <div className="tier-description-container-mobile">
+          <div className="tier-subtitle-mobile">Purple Sponsors: $1,500+</div>
+          <ul>
+            {purpleBenefits.map((item) => {
+              return <li className="tier-list-item">{item}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    ),
+    gold: (
+      <div className="tier-content-mobile">
+        <div className="tier-image-container-mobile">
+          <img src={goldImage} className="tier-image-mobile gold-tier" />
+        </div>
+        <div className="tier-description-container-mobile">
+        <div className="tier-subtitle-mobile">Gold Sponsors: $1,000-$1,499</div>
+          <ul>
+            {goldBenefits.map((item) => {
+              return <li className="tier-list-item">{item}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    ),
+    platinum: (
+      <div className="tier-content-mobile">
+        <div className="tier-image-container-mobile">
+          <img src={platinumImage} className="tier-image-mobile platinum-tier" />
+        </div>
+        <div className="tier-description-container-mobile">
+        <div className="tier-subtitle-mobile">Platinum Sponsors: $500-$999</div>
+          <ul>
+            {platinumBenefits.map((item) => {
+              return <li className="tier-list-item">{item}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
   const [renderedPackage, setRenderedPackage] = useState(renderedPackages.gold);
   const [selectedTier, setSelectedTier] = useState("purple");
   const [email, setEmail] = useState(null);
@@ -100,8 +165,12 @@ const Sponsors = () => {
   const [submitMessage, setSubmitMessage] = useState("");
 
   useEffect(() => {
-    setRenderedPackage(renderedPackages[selectedTier]);
-  }, [selectedTier]);
+    if (windowSize[0] > WINDOW_SIZE_THRESHOLD_PX) {
+      setRenderedPackage(renderedPackages[selectedTier]);
+    } else {
+      setRenderedPackage(mobilePackages[selectedTier]);
+    }
+  }, [selectedTier, windowSize]);
 
   const handleTierChange = (val) => {
     setSelectedTier(val);

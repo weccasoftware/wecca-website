@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Home.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,14 +8,14 @@ import AnnouncementContainer from "./AnnouncementContainer";
 import temp1 from '../../assets/homepage/temp-1.jpg';
 import temp2 from '../../assets/homepage/temp-2.jpg';
 import {faInstagram, faSlack, faLinkedin} from '@fortawesome/free-brands-svg-icons'
+import { WINDOW_SIZE_THRESHOLD_PX } from "../../config";
 
 const upcomingEvents = [
     {
         title: "Come meet us at our introductory meeting",
-        text: "WECCA will be having its first meeting of the year at 4:30 pm " + 
-                "in ACEB 1220, where members will have the chance to meet " + 
-                "the executives and learn more about the club. If you have any " + 
-                "questions before then, feel free to contact us via our contact form.",
+        text: "WECCA will be having its first meeting of the year at 4:30 pm on Tuesday, September 12th (room TBD)." + 
+                " Everyone is welcome, and you will have the chance to meet the executives and learn more about the club." + 
+                " If you have any questions before then, feel free to contact us via our contact form.",
         image: temp1
     },
     {
@@ -29,6 +29,23 @@ const upcomingEvents = [
 ]
 
 const Home = () => {
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <div className="home-page">
       <div className="header-image" />
@@ -38,11 +55,13 @@ const Home = () => {
           Each year, WECCA competes at the Canadian National Concrete Canoe Competition (CNCCC) against both Canadian and International Schools.
         </div>
       </div>
-      <hr className="sponsor-hr" />
-      <div className="carousel-container">
-        <ImageCarousel />
-      </div>
-      <hr className="sponsor-hr" />
+      {windowSize[0] > WINDOW_SIZE_THRESHOLD_PX && <div>
+        <hr className="sponsor-hr" />
+        <div className="carousel-container">
+          <ImageCarousel />
+        </div>
+        <hr className="sponsor-hr" />
+      </div>}
       <h1>Announcements</h1>
       <div>
         {

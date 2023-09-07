@@ -16,10 +16,16 @@
 }
 
 .sponsorship-tiers-list>li {
-    width: fit-content;
+    width: 100%;
     display: inline-block;
     font-size: 25px;
     padding: 2px;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.sponsorship-tiers-list>li:last-child {
+    border: none;
 }
 
 .sponsorship-tiers-list>li:hover {
@@ -28,7 +34,8 @@
 }
 
 .selected-tier {
-    font-weight: 600;
+    font-weight: 500;
+    color: #522584;
 }
 
 .sponsor-tier-content {
@@ -47,12 +54,27 @@
     border: 2px solid;
 }
 
+.tier-image-mobile {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px solid;
+}
+
 .tier-image-container {
     display: inline-block;
     width: 23.8%;
     height: 23.8%;
     padding: 0px;
     margin: 0px 5%;
+}
+
+.tier-image-container-mobile {
+    display: block;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    margin-bottom: 5%;
 }
 
 .tier-description-container {
@@ -73,7 +95,13 @@
 
 .tier-subtitle {
     font-size: 27px;
-    font-weight: 600px;
+    font-weight: 600;
+}
+
+.tier-subtitle-mobile {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .donate-button {

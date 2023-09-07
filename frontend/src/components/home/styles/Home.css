@@ -49,7 +49,7 @@
 }
 
 .carousel-image {
-    height: 80vh;
+    height: max(80vh, 600px);
     width: 80vw;
 }
 
@@ -67,12 +67,13 @@
 }
 
 .announcement-title {
-    font-size: 20px;
+    font-size: min(20px, 2.5vw);
     margin: 5px 0px;
 }
 
 .announcement-text {
-    padding: 10px;
+    font-size: min(17px, 2vw);
+    padding: min(10px, 1vw);
 }
 
 .announcement-content {

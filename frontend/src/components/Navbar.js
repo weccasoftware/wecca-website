@@ -1,10 +1,9 @@
 import "./styles/Navbar.css";
 import { NavLink } from "react-router-dom";
-import React, { useEffect, useRef, useState } from "react";
-import logo from "../assets/WECCA-purple.png";
+import React, { useEffect, useState } from "react";
+import { WINDOW_SIZE_THRESHOLD_PX } from "../config";
 
 const Navbar = () => {
-  const WINDOW_SIZE_THRESHOLD_PX = 768;
   const NAVBAR_CLASS_HORIZONTAL = "nav-menu";
   const NAVBAR_CLASS_VERTICAL_HIDDEN = "nav-menu-hidden";
   const NAVBAR_CLASS_VERTICAL_SHOWN = "nav-menu-vert";
@@ -36,11 +35,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    console.log(`Class is now ${navbarClass}`);
-  }, [navbarClass]);
-
-  useEffect(() => {
-    console.log(HAMBURGER_MAPPING[enableMenu]);
     if (windowSize[0] <= WINDOW_SIZE_THRESHOLD_PX && !enableMenu) {
       setEnableMenu(true);
     } else if (windowSize[0] >= WINDOW_SIZE_THRESHOLD_PX && enableMenu) {
