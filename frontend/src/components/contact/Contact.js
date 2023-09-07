@@ -70,10 +70,11 @@ const Contact = () => {
 
   return (
     <div>
-      <h1>Contact Us</h1>
+      <h1 className="header-no-margin">Contact Us</h1>
       <div className="contact-form">
         <div className="contact-description centre">
-          Contact our Logistics Captain, {LOGISTICS_CAPTAIN_NAME}
+          Feel free to reach out for any reason, whether you are interested in joining the club, want to learn more about us, or are a sponsor looking to donate.
+          Your response will be automatically directed to the appropriate captain. 
         </div>
         <div className="contact-input-sm">
           <TextField

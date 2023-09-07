@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/About.css";
 import { EXECUTIVES_LIST } from "../../config";
 
 const About = () => {
+  const [execsList, setExecsList] = useState(EXECUTIVES_LIST);
+
   return (
     <div>
       <h1>Meet the Executives</h1>
       <ul className="exec-list">
-        {EXECUTIVES_LIST.map((exec) => {
+        {execsList.map((exec) => {
           return (
             <li>
               <img src={exec.image} className="exec-photo" />

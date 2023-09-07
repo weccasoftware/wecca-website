@@ -49,7 +49,7 @@ const Sponsors = () => {
     purple: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={purpleImage} className="tier-image" />
+          <img src={purpleImage} className="tier-image purple-tier" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Purple Sponsors: $1,500+</div>
@@ -64,7 +64,7 @@ const Sponsors = () => {
     gold: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={goldImage} className="tier-image" />
+          <img src={goldImage} className="tier-image gold-tier" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Gold Sponsors: $1,000-$1,499</div>
@@ -79,7 +79,7 @@ const Sponsors = () => {
     platinum: (
       <div className="tier-content">
         <div className="tier-image-container">
-          <img src={platinumImage} className="tier-image" />
+          <img src={platinumImage} className="tier-image platinum-tier" />
         </div>
         <div className="tier-description-container">
           <div className="tier-subtitle">Platinum Sponsors: $500-$999</div>
@@ -190,7 +190,7 @@ const Sponsors = () => {
       </div>}
       {platinumLogos && platinumLogos.length > 0 && <div className="sponsorship-tier-company-box">
         <div className="sponsorship-tier-company-header">Platinum Tier</div>
-        <div className="sponsorship-tier-company-content silver-tier">
+        <div className="sponsorship-tier-company-content platinum-tier">
         {
             platinumLogos.map((logo) => {
               return (

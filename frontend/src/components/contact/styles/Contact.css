@@ -1,3 +1,7 @@
+.header-no-margin {
+    margin-bottom: 15px;
+}
+
 .contact-form {
     width: 60%;
     margin: 0 auto;
@@ -18,8 +22,10 @@
 }
 
 .contact-description {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 15px;
+    font-style: italic;
+    padding: 0px 20px;
 }
 
 .contact-button {
