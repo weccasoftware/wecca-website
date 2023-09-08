@@ -2,6 +2,7 @@
     margin-top: -100px;
     position: relative;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .header-image {
@@ -30,8 +31,15 @@
 
 .about-wecca-home > .about-wecca-body {
     width: 80%;
-    font-size: 20px;
+    font-size: min(20px, 3vw);
     margin: 20px auto;
+    text-align: left;
+}
+
+.about-wecca-body > span {
+    margin-bottom: 15px;
+    display: block;
+    line-height: 26px;
 }
 
 .image-carousel {
@@ -67,12 +75,12 @@
 }
 
 .announcement-title {
-    font-size: min(20px, 2.5vw);
+    font-size: min(20px, 3vw);
     margin: 5px 0px;
 }
 
 .announcement-text {
-    font-size: min(17px, 2vw);
+    font-size: min(17px, 2.5vw);
     padding: min(10px, 1vw);
 }
 

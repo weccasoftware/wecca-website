@@ -6,7 +6,7 @@ const About = () => {
   const [execsList, setExecsList] = useState(EXECUTIVES_LIST);
 
   return (
-    <div>
+    <div className="about-page">
       <h1>Meet the Executives</h1>
       <ul className="exec-list">
         {execsList.map((exec) => {

@@ -8,10 +8,11 @@ import {
   TextField,
 } from "@mui/material";
 import {
-    CONTACT_FORM_TYPE,
+  CONTACT_FORM_TYPE,
   FINANCE_CAPTAIN_EMAIL,
   LOGISTICS_CAPTAIN_EMAIL,
   LOGISTICS_CAPTAIN_NAME,
+  SLACK_LINK,
 } from "../../config";
 import { sendMail } from "../../util/Mail";
 
@@ -73,8 +74,10 @@ const Contact = () => {
       <h1 className="header-no-margin">Contact Us</h1>
       <div className="contact-form">
         <div className="contact-description centre">
-          Feel free to reach out for any reason, whether you are interested in joining the club, want to learn more about us, or are a sponsor looking to donate.
-          Your response will be automatically directed to the appropriate captain. 
+          Feel free to reach out for any reason, whether you are interested in
+          joining the club, want to learn more about us, or are a sponsor
+          looking to donate. Your response will be automatically directed to the
+          appropriate captain.
         </div>
         <div className="contact-input-sm">
           <TextField
@@ -145,6 +148,15 @@ const Contact = () => {
         {displayMessage && displayMessage.length > 0 && (
           <div className="sponsor-response-message">{displayMessage}</div>
         )}
+      </div>
+      <div className="contact-footer">
+        <div>
+          Want to stay in the loop? Join our slack{" "}
+          <a href={SLACK_LINK} target="_blank" className="slack-link">
+            here
+          </a>
+          .
+        </div>
       </div>
       {/*<h2>Contact</h2>
       Will be a general contact form to get involved in the club <br />

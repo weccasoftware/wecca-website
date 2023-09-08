@@ -11,6 +11,9 @@ import lama from "./assets/headshots/bg-Lama.png";
 import placeholder from "./assets/headshots/bg-Placeholder.png"
 
 export const WINDOW_SIZE_THRESHOLD_PX = 768;
+export const SLACK_LINK = "https://join.slack.com/t/wecca2023-24/shared_invite/zt-21o0f5jn9-al9lZLzSOjTrxhflOeR3eQ";
+export const INSTAGRAM_LINK = "https://www.instagram.com/wecca.uwo/";
+export const LINKEDIN_LINK = "https://www.linkedin.com/company/western-engineering-concrete-canoe-association/";
 
 export const FINANCE_CAPTAIN_NAME = "Liam Reeves";
 export const LOGISTICS_CAPTAIN_NAME = "Samantha Goertz";
