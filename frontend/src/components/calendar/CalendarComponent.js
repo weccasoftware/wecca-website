@@ -1,11 +1,23 @@
-import './styles/Calendar.css'
-import './styles/TeamClasses.css'
+import "./styles/Calendar.css";
+import "./styles/TeamClasses.css";
 import React, { useEffect, useState } from "react";
-import {addMonths, format, subMonths, startOfMonth, startOfWeek, endOfMonth, endOfWeek, isSameMonth, isSameDay, addDays, parse, isSameWeek, subDays, addHours} from "date-fns";
-import EventContainer from './EventContainer';
-import CreateEvent from './CreateEvent';
-import { teamClassMap } from './teamClassMap'
-import { sampleEvents } from './testData';
+import {
+  addMonths,
+  format,
+  subMonths,
+  startOfMonth,
+  startOfWeek,
+  endOfMonth,
+  endOfWeek,
+  isSameMonth,
+  isSameDay,
+  addDays,
+  isSameWeek,
+  subDays,
+} from "date-fns";
+import EventContainer from "./EventContainer";
+import CreateEvent from "./CreateEvent";
+import { teamClassMap } from "./teamClassMap";
 
 /**
  * Notes for backend:
@@ -14,186 +26,297 @@ import { sampleEvents } from './testData';
  *  We will need an API endpoint for deleting events
  */
 
-const TableRow = ({row, isDateRow}) => {
-    return (
-        <tr className={isDateRow ? 'date-row' : 'info-row'}>
-            {row.map((val) => {return val})}
-        </tr>
-    )
-}
+const TableRow = ({ row, isDateRow }) => {
+  return (
+    <tr className={isDateRow ? "date-row" : "info-row"}>
+      {row.map((val) => {
+        return val;
+      })}
+    </tr>
+  );
+};
 
 const CalendarComponent = () => {
-    const [state, setState] = useState({
-        currentMonth: new Date(),
-        selectedDate: new Date(),
-        modalOpen: false,
-        sampleEvents: []
-    })
+  const [state, setState] = useState({
+    currentMonth: new Date(),
+    selectedDate: new Date(),
+    modalOpen: false,
+    sampleEvents: [],
+    loadError: false,
+  });
 
-    //Just for testing
-    useEffect(() => {
-        setState({
-            ...state,
-            sampleEvents: sampleEvents.sort((a, b) => {return a.startTime - b.startTime})});
-    }, [])
+  useEffect(() => {
+    loadAllEvents();
+  }, [state.currentMonth]);
 
-    useEffect(() => {
-        console.log(state)
-    }, [state])
+  const setLoadError = (val) => {
+    setState((s) => ({
+      ...s,
+      loadError: val,
+    }));
+  };
 
-    const renderHeader = () => {
-        const dateFormat = 'MMMM yyyy';
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
-        return (
-            <div className='calendar-header'>
-                <div onClick={() => decrementMonth()} className='cal-nav left-arrow'></div>
-                <div className='cal-head'>
-                    <span>
-                        {format(state.currentMonth, dateFormat)}
-                    </span>
-                </div>
-                <div onClick={() => incrementMonth()} className='cal-nav right-arrow'></div>
-            </div>
-        )
-    }
+  const loadAllEvents = () => {
+    fetch(
+      `http://localhost:3001/api/calendar/events/${3}/${state.currentMonth.getMonth()}`
+    )
+      .then((a) => {
+        if (a.status !== 200) {
+          throw new Error(a.statusText);
+        }
 
-    const renderTable = () => {
-        const monthStart = startOfMonth(state.currentMonth);
-        const monthEnd = endOfMonth(monthStart);
-        const startDate = startOfWeek(monthStart);
-        const endDate = endOfWeek(monthEnd);
+        return a.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setState((s) => ({
+          ...s,
+          sampleEvents: result.map((e) => {
+            return {
+              ...e,
+              startTime: new Date(e.startTime),
+              endTime: new Date(e.endTime),
+            };
+          }),
+        }));
+      })
+      .catch((err) => {
+        setLoadError(true);
+        console.log(err);
+      });
+  };
 
-        const dateFormat = "d";
-        let days = [];
-        let day = startDate;
-        let formattedDate = "";
-        let rowCount = 0;
-        while (day <= endDate) {
-            let week = [];
-            for (let i = 0; i < 7; i++) {
-                formattedDate = format(day, dateFormat);
-                const cloneDay = day;
-                week.push(
-                    <td className={`${
-                        !isSameMonth(day, monthStart)
-                            ? "cal-disabled"
-                            : isSameDay(day, state.selectedDate) ? "cal-selected" : ""
-                        }`}
-                        key={day}
-                        onClick={() => dayClick(cloneDay, !isSameMonth(cloneDay, monthStart))}
-                    >
-                        <span className={`date-number ${isSameDay(day, new Date()) ? "cal-today" : ""}`}>{formattedDate}</span>
-                        <span className='icon-area'>
-                            {state.sampleEvents.filter((event) => isSameDay(day, event.startTime) || isSameDay(day, event.endTime))
-                                .map((event) => {return (<span className={`date-items ${teamClassMap[event.team]}`} key={`${event.team}-${event.startTime}`} title={`${event.team} Event`}></span>)})}
-                        </span>
-                    </td>
-                );
-                day = addDays(day, 1);
+  const renderHeader = () => {
+    const dateFormat = "MMMM yyyy";
+
+    return (
+      <div className="calendar-header">
+        <div
+          onClick={() => decrementMonth()}
+          className="cal-nav left-arrow"
+        ></div>
+        <div className="cal-head">
+          <span>{format(state.currentMonth, dateFormat)}</span>
+        </div>
+        <div
+          onClick={() => incrementMonth()}
+          className="cal-nav right-arrow"
+        ></div>
+      </div>
+    );
+  };
+
+  const renderTable = () => {
+    const monthStart = startOfMonth(state.currentMonth);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
+
+    const dateFormat = "d";
+    let days = [];
+    let day = startDate;
+    let formattedDate = "";
+    let rowCount = 0;
+    while (day <= endDate) {
+      let week = [];
+      for (let i = 0; i < 7; i++) {
+        formattedDate = format(day, dateFormat);
+        const cloneDay = day;
+        week.push(
+          <td
+            className={`${
+              !isSameMonth(day, monthStart)
+                ? "cal-disabled"
+                : isSameDay(day, state.selectedDate)
+                ? "cal-selected"
+                : ""
+            }`}
+            key={day}
+            onClick={() =>
+              dayClick(cloneDay, !isSameMonth(cloneDay, monthStart))
             }
-            days.push(week)
-            days.push([
-                <td colSpan={7} className={`${isSameWeek(subDays(day, 1), state.selectedDate) ? '' : 'hidden'}`} key={++rowCount}>
-                    <div>
-                        <div className='expand-title'>{format(state.selectedDate, "MMMM d, yyyy")}</div>
-                        {state.sampleEvents.filter((event) => isSameDay(state.selectedDate, event.startTime) || isSameDay(state.selectedDate, event.endTime)).sort((a, b) => {return a.startTime - b.startTime})
-                            .map((event) => {return (<EventContainer event={event} key={`${event.title}-${event.startTime}`} deleteEvent={(ti, te, st) => deleteEvent(ti, te, st)} addEvent={(e) => addEvent(e)}/>)})}
-                    </div>
-                    <br/>
-                    <button onClick={() => toggleModal(true)} className='add-event-button'>Add Event</button>
-                </td>
-            ])
-        }
-
-        return (
-            <table className="cal-table">
-                <thead>
-                    <tr>
-                        <th>MON</th>
-                        <th>TUE</th>
-                        <th>WED</th>
-                        <th>THU</th>
-                        <th>FRI</th>
-                        <th>SAT</th>
-                        <th>SUN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {days.map((row, rowId) => <TableRow row={row} isDateRow={row.length > 1} key={rowId}/>)}
-                </tbody>
-            </table>
-        )
-    }
-
-    const incrementMonth = () => {
-        setState({
-            ...state,
-            currentMonth: addMonths(state.currentMonth, 1)
-        })
-    }
-
-    const decrementMonth = () => {
-        setState({
-            ...state,
-            currentMonth: subMonths(state.currentMonth, 1)
-        })
-    }
-
-    const dayClick = (day, disabled) => {
-        if(disabled) return;
-        if(isSameDay(day, state.selectedDate)){
-            setState({
-                ...state,
-                selectedDate: subDays(day, 10000) //kind of a hack but it works
-            });
-        }
-        else {
-            setState({
-                ...state,
-                selectedDate: day
-            });
-        }
-    };
-
-    const toggleModal = (val) => {
-        setState((s) => ({
-            ...s,
-            modalOpen: val
-        }))
-    }
-
-    const addEvent = (event) => {
-        console.log("Got event")
-        console.log(event)
-        const events = [...state.sampleEvents, event]
-        setState((s) => ({
-            ...s,
-            sampleEvents: events
-        }))
-        console.log(state.sampleEvents)
-        toggleModal(false)
-    }
-
-    const deleteEvent = (title, team, start) => {
-        const filteredEvents = state.sampleEvents.filter((ev) => {
-            return ev.title !== title && ev.team !== team && ev.startTime !== start
-        })
-        setState((s) => ({
-            ...s,
-            sampleEvents: filteredEvents
-        }))
+          >
+            <span
+              className={`date-number ${
+                isSameDay(day, new Date()) ? "cal-today" : ""
+              }`}
+            >
+              {formattedDate}
+            </span>
+            <span className="icon-area">
+              {state.sampleEvents
+                .filter(
+                  (event) =>
+                    isSameDay(day, event.startTime) ||
+                    isSameDay(day, event.endTime)
+                )
+                .map((event) => {
+                  return (
+                    <span
+                      className={`date-items ${teamClassMap[event.team]}`}
+                      key={`${event.team}-${event.startTime}`}
+                      title={`${event.team} Event`}
+                    ></span>
+                  );
+                })}
+            </span>
+          </td>
+        );
+        day = addDays(day, 1);
+      }
+      days.push(week);
+      days.push([
+        <td
+          colSpan={7}
+          className={`${
+            isSameWeek(subDays(day, 1), state.selectedDate) ? "" : "hidden"
+          }`}
+          key={++rowCount}
+        >
+          <div>
+            <div className="expand-title">
+              {format(state.selectedDate, "MMMM d, yyyy")}
+            </div>
+            {state.sampleEvents
+              .filter(
+                (event) =>
+                  isSameDay(state.selectedDate, event.startTime) ||
+                  isSameDay(state.selectedDate, event.endTime)
+              )
+              .sort((a, b) => {
+                return a.startTime - b.startTime;
+              })
+              .map((event) => {
+                return (
+                  <EventContainer
+                    event={event}
+                    key={`${event.title}-${event.startTime}`}
+                    deleteEvent={(ti, te, st) => deleteEvent(ti, te, st)}
+                    addEvent={(e) => addEvent(e)}
+                    triggerRefresh={() => loadAllEvents()}
+                  />
+                );
+              })}
+          </div>
+          <br />
+          <button
+            onClick={() => toggleModal(true)}
+            className="add-event-button"
+          >
+            Add Event
+          </button>
+        </td>,
+      ]);
     }
 
     return (
-        <div className="calendar-outline">
-            {state.modalOpen && <div className='modal-overlay'>
-                <div className='overlay-opacity' onClick={() => toggleModal(false)}/>
-                <CreateEvent setIsOpen={(val) => toggleModal(val)} date={state.selectedDate} addEvent={(ev) => addEvent(ev)}/>
-            </div>}
-            {renderHeader()}
-            {renderTable()}
+      <table className="cal-table">
+        <thead>
+          <tr>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+            <th>SAT</th>
+            <th>SUN</th>
+          </tr>
+        </thead>
+        <tbody>
+          {days.map((row, rowId) => (
+            <TableRow row={row} isDateRow={row.length > 1} key={rowId} />
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
+  const incrementMonth = () => {
+    setState({
+      ...state,
+      currentMonth: addMonths(state.currentMonth, 1),
+    });
+  };
+
+  const decrementMonth = () => {
+    setState({
+      ...state,
+      currentMonth: subMonths(state.currentMonth, 1),
+    });
+  };
+
+  const dayClick = (day, disabled) => {
+    if (disabled) return;
+    if (isSameDay(day, state.selectedDate)) {
+      setState({
+        ...state,
+        selectedDate: subDays(day, 10000), //kind of a hack but it works
+      });
+    } else {
+      setState({
+        ...state,
+        selectedDate: day,
+      });
+    }
+  };
+
+  const toggleModal = (val) => {
+    setState((s) => ({
+      ...s,
+      modalOpen: val,
+    }));
+  };
+
+  const addEvent = (event) => {
+    console.log("Got event");
+    console.log(event);
+    const events = [...state.sampleEvents, event];
+    setState((s) => ({
+      ...s,
+      sampleEvents: events,
+    }));
+    console.log(state.sampleEvents);
+    toggleModal(false);
+  };
+
+  const deleteEvent = (title, team, start) => {
+    const filteredEvents = state.sampleEvents.filter((ev) => {
+      return ev.title !== title && ev.team !== team && ev.startTime !== start;
+    });
+    setState((s) => ({
+      ...s,
+      sampleEvents: filteredEvents,
+    }));
+  };
+
+  if (state.loadError) {
+    return (
+      <div className="load-events-error">
+        Unable to load calendar... Please try again later
+      </div>
+    );
+  }
+  return (
+    <div className="calendar-outline">
+      {state.modalOpen && (
+        <div className="modal-overlay">
+          <div className="overlay-opacity" onClick={() => toggleModal(false)} />
+          <CreateEvent
+            setIsOpen={(val) => toggleModal(val)}
+            date={state.selectedDate}
+            addEvent={addEvent}
+            triggerRefresh={() => loadAllEvents()}
+          />
         </div>
-    )
-}
+      )}
+      {renderHeader()}
+      {renderTable()}
+    </div>
+  );
+};
 
 export default CalendarComponent;

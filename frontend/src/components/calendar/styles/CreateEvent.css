@@ -67,3 +67,7 @@
     opacity: 0.7;
     backdrop-filter: blue(5px);
 }
+
+.no-click {
+    pointer-events: none;
+}

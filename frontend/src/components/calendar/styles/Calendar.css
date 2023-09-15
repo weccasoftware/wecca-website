@@ -168,7 +168,7 @@
 }
 
 .event-container > .event-time {
-    min-width: 20%;
+    min-width: 21%;
     padding-left: 10px;
     padding-right: 20px;
 }
@@ -275,4 +275,9 @@
 
 .info-row > td {
     height: 100px;
+}
+
+.load-events-error {
+    font-size: 20px;
+    color: rgb(206, 96, 96);
 }
