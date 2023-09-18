@@ -5,8 +5,37 @@ import TextField from "@mui/material/TextField";
 import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { addHours, format } from "date-fns";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import {
+  addDays,
+  addHours,
+  addMilliseconds,
+  addMinutes,
+  addMonths,
+  addSeconds,
+  addWeeks,
+  differenceInDays,
+  differenceInHours,
+  format,
+  isSameWeek,
+  setHours,
+  setMilliseconds,
+  setMinutes,
+  setSeconds,
+  subDays,
+  subHours,
+  subMilliseconds,
+  subMinutes,
+  subSeconds,
+} from "date-fns";
 import { MoonLoader } from "react-spinners";
 
 const subTeams = [
@@ -21,6 +50,28 @@ const subTeams = [
   "Executive",
   "Captain",
 ];
+
+const repeatIntervals = ["Week", "Two Weeks", "Month", "Two Months"];
+
+const repeatIntervalsEnd = [
+  "Fall Reading Week (Oct 28 - Nov 5)",
+  "End of Fall Classes (Dec 8)",
+  "Winter Reading Week (Feb 17 - Feb 25)",
+  "End of Winter Classes (March 5)",
+];
+
+let startFallReadingWeek = new Date("October 30, 2023");
+let startWinterReadingWeek = new Date("February 19, 2024");
+let endOfFallClasses = new Date("December 9, 2023 00:00:01");
+let startOfWinterClasses = new Date("January 8, 2024 00:00:01");
+let endOfWinterClasses = new Date("March 6, 2024 00:00:01");
+
+const repeatIntervalMapping = {
+  "Fall Reading Week (Oct 28 - Nov 5)": startFallReadingWeek,
+  "End of Fall Classes (Dec 8)": endOfFallClasses,
+  "Winter Reading Week (Feb 17 - Feb 25)": startWinterReadingWeek,
+  "End of Winter Classes (March 5)": endOfWinterClasses,
+};
 
 const CreateEvent = ({
   setIsOpen,
@@ -38,6 +89,9 @@ const CreateEvent = ({
     titleError: false,
     submitError: "",
     isLoading: false,
+    isRecurring: false,
+    repeatInterval: null,
+    repeatUntil: null,
   });
 
   useEffect(() => {
@@ -103,6 +157,86 @@ const CreateEvent = ({
     }));
   };
 
+  const toggleIsRecurring = () => {
+    setState((s) => ({
+      ...s,
+      isRecurring: !state.isRecurring,
+    }));
+  };
+
+  const setRepeatInterval = (val) => {
+    setState((s) => ({
+      ...s,
+      repeatInterval: val.target.value,
+    }));
+  };
+
+  const setRepeatUntil = (val) => {
+    setState((s) => ({
+      ...s,
+      repeatUntil: val.target.value,
+    }));
+  };
+
+  const getRecurringEvents = () => {
+    let day = state.startTime;
+    let mappedEvents = [];
+
+    let startDate = state.startTime;
+    let endDate = state.endTime;
+
+    while (day < repeatIntervalMapping[state.repeatUntil]) {
+      while (dayIsInvalid(day)) {
+        day = addWeeks(day, 1);
+        startDate = addWeeks(startDate, 1);
+        endDate = addWeeks(endDate, 1);
+        if (day >= repeatIntervalMapping[state.repeatUntil]) break;
+      }
+
+      let event = {
+        team: state.team,
+        title: state.title,
+        startTime: startDate,
+        endTime: endDate,
+        description: state.description,
+        creator: "Test recurring",
+        month: startDate.getMonth(),
+        recurring: true
+      };
+      mappedEvents.push(event);
+
+      day = incrementDay(day);
+      startDate = incrementDay(startDate);
+      endDate = incrementDay(endDate);
+    }
+
+    return mappedEvents;
+  };
+
+  const incrementDay = (day) => {
+    let d = day;
+    if (state.repeatInterval === repeatIntervals[0]) {
+      return addWeeks(d, 1);
+    } else if (state.repeatInterval === repeatIntervals[1]) {
+      return addWeeks(d, 2);
+    } else if (state.repeatInterval === repeatIntervals[2]) {
+      return addMonths(d, 1);
+    } else if (state.repeatInterval === repeatIntervals[3]) {
+      return addMonths(d, 2);
+    }
+  };
+
+  const dayIsInvalid = (day) => {
+    if (
+      isSameWeek(day, startFallReadingWeek) ||
+      isSameWeek(day, startWinterReadingWeek) ||
+      (day >= endOfFallClasses && day < startOfWinterClasses)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   const setSubmitError = (err) => {
     setState((s) => ({
       ...s,
@@ -116,6 +250,16 @@ const CreateEvent = ({
       }));
     }, 3000);
   };
+
+  const delegateSubmission = () => {
+    if (!existingData && state.isRecurring) {
+      submitRecurringEvents()
+    } else if (!existingData) {
+      submitCreate()
+    } else if (existingData) {
+      submitEdit()
+    }
+  }
 
   const submitCreate = () => {
     if (state.title.length === 0) {
@@ -157,6 +301,42 @@ const CreateEvent = ({
         setIsLoading(false);
       });
   };
+
+  const submitRecurringEvents = () => {
+    if (!state.isRecurring) return;
+    if (state.title.length === 0) {
+      setError(true);
+      return;
+    }
+
+    const recurringEvents = getRecurringEvents();
+
+    setIsLoading(true);
+    fetch("http://localhost:3001/api/calendar/events", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(recurringEvents),
+    })
+      .then((a) => {
+        if (a.status !== 200) {
+          throw new Error(a.statusText);
+        }
+
+        return a.json();
+      })
+      .then((result) => {
+        setIsOpen(false);
+        triggerRefresh();
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setSubmitError(err.message);
+        setIsLoading(false);
+      });
+  }
 
   const submitEdit = () => {
     if (state.title.length === 0) {
@@ -226,7 +406,13 @@ const CreateEvent = ({
   if (state.isLoading) {
     return (
       <div className="centered no-click">
-        <MoonLoader color="#ae83de" loading={state.isLoading} size={150} speedMultiplier={1.2}/>;
+        <MoonLoader
+          color="#ae83de"
+          loading={state.isLoading}
+          size={150}
+          speedMultiplier={1.2}
+        />
+        ;
       </div>
     );
   }
@@ -290,7 +476,58 @@ const CreateEvent = ({
               )}
             />
           </LocalizationProvider>
-          <br />
+          {existingData && <br/>}
+          {!existingData && <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.isRecurring}
+                  onChange={toggleIsRecurring}
+                />
+              }
+              label={"Recurring"}
+            />
+          </FormGroup>}
+          {state.isRecurring && (
+            <div>
+              <hr className="sponsor-hr" />
+              <FormControl fullWidth>
+                <InputLabel required>Repeat Every...</InputLabel>
+                <Select
+                  label="Repeat Every..."
+                  value={state.repeatInterval}
+                  onChange={(int) => setRepeatInterval(int)}
+                >
+                  {repeatIntervals.map((int) => {
+                    return (
+                      <MenuItem value={int} key={int}>
+                        {int}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <br />
+              <br />
+              <FormControl fullWidth>
+                <InputLabel required>Repeat Until...</InputLabel>
+                <Select
+                  label="Repeat Until..."
+                  value={state.repeatUntil}
+                  onChange={(end) => setRepeatUntil(end)}
+                >
+                  {repeatIntervalsEnd.map((end) => {
+                    return (
+                      <MenuItem value={end} key={end}>
+                        {end}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <hr className="sponsor-hr" />
+            </div>
+          )}
           <br />
           <TextField
             label="Description"
@@ -300,13 +537,21 @@ const CreateEvent = ({
             value={state.description}
             onChange={(desc) => setDescription(desc)}
           ></TextField>
+          {state.isRecurring && (
+            <div className="modal-info">
+              Note that recurring events will skip reading weeks and exam weeks
+            </div>
+          )}
           <div className="buttons-container">
-            <button className="modal-button" onClick={() => setIsOpen(false)}>
+            <button
+              className="modal-button"
+              onClick={() => setIsOpen(false)}
+            >
               Cancel
             </button>
             <button
               className="modal-button"
-              onClick={() => (existingData ? submitEdit() : submitCreate())}
+              onClick={() => delegateSubmission()}
             >
               Submit
             </button>

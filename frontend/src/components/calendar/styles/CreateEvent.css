@@ -1,20 +1,29 @@
 .centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 0.5px), calc(-50% + 0.5px));
-    -webkit-font-smoothing: subpixel-antialiased;
+
 }
 
 .modal {
     width: 800px;
+    max-height: 90vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
     background: white;
-    color: white;
+    color: black;
     z-index: 10;
     border-radius: 5px;
     padding: 20px 50px;
     text-align: left;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
 }
+
+.modal::-webkit-scrollbar {
+    display: none;
+  }
 
 .modal-head {
     margin: 0;
@@ -70,4 +79,11 @@
 
 .no-click {
     pointer-events: none;
+}
+
+.modal-info {
+    color: black;
+    font-style: italic;
+    margin-top: 5px;
+    text-align: center;
 }

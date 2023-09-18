@@ -16,29 +16,25 @@ const USERS_COLLECTION_NAME = "Users";
 const EVENTS_COLLECTION_NAME = "Events";
 
 const level1Access = [
-    "Software",
-    "Design and Analysis",
-    "Technical Communications",
-    "Materials",
-    "Mould",
-    "Training",
-    "Graphic Design",
-    "General"
-]
+  "Software",
+  "Design and Analysis",
+  "Technical Communications",
+  "Materials",
+  "Mould",
+  "Training",
+  "Graphic Design",
+  "General",
+];
 
-const level2Access = [
-    "Executive"
-]
+const level2Access = ["Executive"];
 
-const level3Access = [
-    "Captain"
-]
+const level3Access = ["Captain"];
 
 const levelMapping = {
-    1: level1Access,
-    2: level1Access.concat(level2Access),
-    3: level1Access.concat(level2Access).concat(level3Access)
-}
+  1: level1Access,
+  2: level1Access.concat(level2Access),
+  3: level1Access.concat(level2Access).concat(level3Access),
+};
 
 app.get("/api/test", async (req, res) => {
   console.log("Called GET into test");
@@ -58,21 +54,26 @@ app.get("/api/test", async (req, res) => {
 });
 
 app.get("/api/calendar/events/:accessLevel/:month", (req, res) => {
-    console.log("Called into GET events with access level of " + req.params.accessLevel + " and month " + req.params.month);
-    const level = req.params.accessLevel;
-    const month = parseInt(req.params.month);
+  console.log(
+    "Called into GET events with access level of " +
+      req.params.accessLevel +
+      " and month " +
+      req.params.month
+  );
+  const level = req.params.accessLevel;
+  const month = parseInt(req.params.month);
 
-    let foundEvents = [];
-    let query = {
-        team: {
-            $in: levelMapping[level]
-        },
-        month: {
-            $in: [month <= 0 ? 11 : month - 1, month, (month + 1) % 12]
-        }
-    }
+  let foundEvents = [];
+  let query = {
+    team: {
+      $in: levelMapping[level],
+    },
+    month: {
+      $in: [month <= 0 ? 11 : month - 1, month, (month + 1) % 12],
+    },
+  };
 
-    getAllFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, query)
+  getAllFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, query)
     .then((results) => {
       foundEvents = results;
     })
@@ -83,18 +84,18 @@ app.get("/api/calendar/events/:accessLevel/:month", (req, res) => {
       res.statusMessage = e;
       return res.status(500).send();
     });
-})
+});
 
 app.get("/api/calendar/teamEvents/:team", (req, res) => {
-    console.log("Called into GET teamEvents for team " + req.params.team);
-    const team = req.params.team;
+  console.log("Called into GET teamEvents for team " + req.params.team);
+  const team = req.params.team;
 
-    let foundEvents = [];
-    const query = {
-        team: team
-    };
+  let foundEvents = [];
+  const query = {
+    team: team,
+  };
 
-    getAllFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, query)
+  getAllFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, query)
     .then((results) => {
       foundEvents = results;
     })
@@ -105,46 +106,66 @@ app.get("/api/calendar/teamEvents/:team", (req, res) => {
       res.statusMessage = e;
       return res.status(500).send();
     });
-})
+});
 
 app.put("/api/calendar/event", (req, res) => {
-    console.log("Called into PUT event");
+  console.log("Called into PUT event");
 
-    insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body)
+  insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body)
     .then((results) => {
-        console.log(results)
-        res.status(200).send(results);
-    })
-    .catch((e) => {
-      res.statusMessage = e;
-      return res.status(500).send();
-    });
-})
-
-app.post("/api/calendar/event", (req, res) => {
-    console.log("Called into POST event");
-
-    deleteOneFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body.deleted)
-    .then((r) => {
-        console.log(r)
-        if(r.deletedCount !== 1) throw new Error("Failed to delete from database")
-    }).then(() => insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body.added))
-    .then((results) => {
-        console.log(results)
+      console.log(results);
       res.status(200).send(results);
     })
     .catch((e) => {
       res.statusMessage = e;
       return res.status(500).send();
     });
-})
+});
+
+app.post("/api/calendar/event", (req, res) => {
+  console.log("Called into POST event");
+
+  deleteOneFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body.deleted)
+    .then((r) => {
+      console.log(r);
+      if (r.deletedCount !== 1)
+        throw new Error("Failed to delete from database");
+    })
+    .then(() =>
+      insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body.added)
+    )
+    .then((results) => {
+      console.log(results);
+      res.status(200).send(results);
+    })
+    .catch((e) => {
+      res.statusMessage = e;
+      return res.status(500).send();
+    });
+});
+
+app.post("/api/calendar/events", (req, res) => {
+  console.log("Called into POST events");
+
+  const events = req.body;
+  insertMany(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, events)
+    .then((results) => {
+      console.log(results);
+      res.status(200).send(results);
+    })
+    .catch((e) => {
+      res.statusMessage = e;
+      return res.status(500).send();
+    });
+});
 
 app.post("/api/calendar/deleteEvent", (req, res) => {
-    console.log("Called into POST deleteEvent");
+  console.log("Called into POST deleteEvent");
 
-    deleteOneFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body)
+  deleteOneFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body)
     .then((r) => {
-        if(r.deletedCount !== 1) throw new Error("Failed to delete from database")
+      if (r.deletedCount !== 1)
+        throw new Error("Failed to delete from database");
     })
     .then(() => {
       res.status(200).send();
@@ -153,7 +174,25 @@ app.post("/api/calendar/deleteEvent", (req, res) => {
       res.statusMessage = e;
       return res.status(500).send();
     });
-})
+});
+
+/**
+ * Helper function: query the MongoDB collection according to the entered query (with optional options) to insert many documents
+ * @param {string} dbName: name of DB to connect to (we use "music")
+ * @param {string} collectionName: name of the collection in the DB to query
+ * @param {object} docs: documents to insert into the database
+ * @returns an object with information about the insertion (success, etc.)
+ */
+const insertMany = async (dbName, collectionName, docs) => {
+  const database = client.db(dbName);
+  const collection = database.collection(collectionName);
+
+  const result = collection.insertMany(docs).catch((e) => {
+    throw new Error(e.message);
+  });
+
+  return result;
+};
 
 /**
  * Helper function: query the MongoDB collection according to the entered query (with optional options) to get a single result
@@ -202,15 +241,16 @@ const getAllFrom = async (dbName, collectionName, query, options = {}) => {
  * @returns an object with information about the insertion (success, etc.)
  */
 const insertOne = async (dbName, collectionName, doc) => {
-    await client.connect();
-    const database = client.db(dbName);
-    const collection = database.collection(collectionName);
-    
-    const result = collection.insertOne(doc)
-    .catch((e) => {throw new Error(e.message)})
+  await client.connect();
+  const database = client.db(dbName);
+  const collection = database.collection(collectionName);
 
-    return result;
-}
+  const result = collection.insertOne(doc).catch((e) => {
+    throw new Error(e.message);
+  });
+
+  return result;
+};
 
 /**
  * Helper function: query the MongoDB collection according to the entered query (with optional options) to delete a single document
@@ -220,17 +260,16 @@ const insertOne = async (dbName, collectionName, doc) => {
  * @returns an object with infromation about the deletion
  */
 const deleteOneFrom = async (dbName, collectionName, query) => {
-    await client.connect()
-    try {
-        const database = client.db(dbName);
-        const collection = database.collection(collectionName);
-        const result = await collection.deleteOne(query);
-        return result;
-    } 
-    finally {
-        await client.close();
-    }
-}
+  await client.connect();
+  try {
+    const database = client.db(dbName);
+    const collection = database.collection(collectionName);
+    const result = await collection.deleteOne(query);
+    return result;
+  } finally {
+    await client.close();
+  }
+};
 
 /**
  * Helper function: query the MongoDB collection according to the entered query (with optional options) to update a single document
@@ -242,14 +281,23 @@ const deleteOneFrom = async (dbName, collectionName, query) => {
  * @returns a complex DB response object
  * I think findOneAndUpdate (with options) was wrongly deprecated
  */
-const updateOneFrom = async (dbName, collectionName, key, query, additional={}) => {
-    const database = client.db(dbName);
-    const collection = database.collection(collectionName);
-    
-    const result = collection.findOneAndUpdate(key, query, additional)
-    .catch((e) => {throw new Error(e.message)})
+const updateOneFrom = async (
+  dbName,
+  collectionName,
+  key,
+  query,
+  additional = {}
+) => {
+  const database = client.db(dbName);
+  const collection = database.collection(collectionName);
 
-    return result;
-}
+  const result = collection
+    .findOneAndUpdate(key, query, additional)
+    .catch((e) => {
+      throw new Error(e.message);
+    });
+
+  return result;
+};
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
