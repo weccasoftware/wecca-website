@@ -24,10 +24,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # custom
-/frontend/src/secrets.js
+# /frontend/src/secrets.js
 .firebase/
 .firebaserc
 firebase.json
 frontend/build/
 public/
-backend/secret.js
+# backend/secret.js
