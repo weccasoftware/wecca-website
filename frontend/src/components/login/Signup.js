@@ -7,9 +7,12 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { SIGNUP_ROLES } from "../../config";
+import { BASE_URL, SIGNUP_ROLES } from "../../config";
+import { useNavigate } from "react-router-dom";
+import { sendConfirmationEmail, sendMail, sendSignupEmail } from "../../util/Mail";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     team: SIGNUP_ROLES[0],
     email: "",
@@ -18,6 +21,7 @@ const Signup = () => {
     comparePassword: "",
     signupError: "",
     isLoading: false,
+    signupSuccess: false
   });
 
   useEffect(() => {
@@ -35,6 +39,13 @@ const Signup = () => {
     setState((s) => ({
       ...s,
       email: e,
+    }));
+  };
+
+  const setSignupSuccess = (s) => {
+    setState((s) => ({
+      ...s,
+      signupSuccess: s,
     }));
   };
 
@@ -116,7 +127,7 @@ const Signup = () => {
 
     setIsLoading(true);
 
-    fetch("http://localhost:3001/api/users/signup", {
+    fetch(`${BASE_URL}/api/users/signup`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -137,12 +148,14 @@ const Signup = () => {
         return a.json();
       })
       .then((result) => {
-        console.log(result);
-        setIsLoading(false)
+        setIsLoading(false);
+        sendConfirmationEmail(result.email, result.name, result.verificationUrl)
+        sendSignupEmail(result.email, result.name, result.validationUrl)
+        setSignupSuccess(true)
       })
       .catch((err) => {
         setSignupError(err.message);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   };
 
@@ -236,6 +249,14 @@ const Signup = () => {
         {state.signupError && (
           <div className="delete-event-error centre">
             <i>Error signing up: {state.signupError}</i>
+          </div>
+        )}
+        {state.signupSuccess && (
+          <div className="verify-event-success centre">
+            <i>
+              Thank you for signing up. Please check your junk mail for verification instructions. If you encounter any issues, 
+              reach out to Ethan or Dylan on slack.
+            </i>
           </div>
         )}
       </div>

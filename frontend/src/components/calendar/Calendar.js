@@ -5,7 +5,7 @@ import CalendarComponent from './CalendarComponent';
 const Calendar = () => {
     return (
         <div>
-            <h2>Calendar</h2>
+            <h1>Calendar</h1>
             <CalendarComponent />
         </div>
     )

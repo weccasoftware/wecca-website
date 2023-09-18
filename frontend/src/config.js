@@ -10,6 +10,8 @@ import dylan from "./assets/headshots/bg-Dylan.png"
 import lama from "./assets/headshots/bg-Lama.png";
 import placeholder from "./assets/headshots/bg-Placeholder.png"
 
+export const BASE_URL = "https://wecca.org"
+
 export const WINDOW_SIZE_THRESHOLD_PX = 768;
 export const SLACK_LINK = "https://join.slack.com/t/wecca2023-24/shared_invite/zt-21o0f5jn9-al9lZLzSOjTrxhflOeR3eQ";
 export const INSTAGRAM_LINK = "https://www.instagram.com/wecca.uwo/";
@@ -28,6 +30,11 @@ export const WECCA_SOFTWARE_EMAIL = "wecca.software@gmail.com";
 
 export const SPONSORSHIP_FORM_TYPE = "sponsorship";
 export const CONTACT_FORM_TYPE = "contact";
+
+export const TEAM_KEY = "team";
+export const NAME_KEY = "name";
+export const EMAIL_KEY = "email";
+export const CAPTAIN_ROLE = "Captain"
 
 const ROLES = {
   LOGISTICS_CAPTAIN: "Logistics Captain",

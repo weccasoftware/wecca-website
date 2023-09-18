@@ -11,8 +11,13 @@ const { URI, SECRET_TOKEN } = require("./secret");
 const client = new MongoClient(URI);
 client.connect();
 
-const CryptoJS = require("crypto-js")
+const path = require('path')
+express.static('/')
+app.use(express.static(path.join(__dirname, '../', 'frontend', 'build')))
 
+const CryptoJS = require("crypto-js");
+
+const BASE_URL = "http://localhost:3001"
 const WECCA_DB_NAME = "WECCA";
 const USERS_COLLECTION_NAME = "Users";
 const EVENTS_COLLECTION_NAME = "Events";
@@ -234,7 +239,13 @@ app.put("/api/users/signup", (req, res) => {
     ...req.body,
     password: encryptedPassword,
     verified: false,
+    validated: false,
   };
+
+  if (!("name" in payload) || !("email" in payload) || !("team" in payload)) {
+    res.statusMessage = "You are missing a required field!";
+    return res.status(500).send(err);
+  }
 
   getOneFrom(WECCA_DB_NAME, USERS_COLLECTION_NAME, { email: req.body.email })
     .then((foundUser) => {
@@ -250,13 +261,162 @@ app.put("/api/users/signup", (req, res) => {
         );
       }
 
-      return res.status(200).send(ins);
+      return res.status(200).send({
+        email: req.body.email,
+        name: req.body.name,
+        verificationUrl: generateVerificationUrl(req.body.name),
+        validationUrl: generateValidationUrl(req.body.name),
+      });
     })
     .catch((err) => {
       res.statusMessage = err.message;
       return res.status(500).send(err);
     });
 });
+
+app.post("/api/users/login", (req, res) => {
+  console.log("Called into POST login");
+
+  if (!("email" in req.body) || !("password" in req.body)) {
+    res.statusMessage = "You are missing a required field!";
+    return res.status(500).send(err);
+  }
+
+  getOneFrom(WECCA_DB_NAME, USERS_COLLECTION_NAME, { email: req.body.email })
+    .then((foundUser) => {
+      if (!foundUser) {
+        throw new Error("Account does not exist");
+      }
+      if (req.body.password !== decodeString(foundUser.password)) {
+        throw new Error("Incorrect password");
+      }
+      if (!foundUser.verified) {
+        throw new Error("Please verify your account.");
+      }
+      if (!foundUser.validated) {
+        throw new Error(
+          "We have not yet verified your account. To expedite this process, reach out to Ethan or Dylan on slack."
+        );
+      }
+
+      return {
+        team: foundUser.team,
+        name: foundUser.name,
+        email: foundUser.email,
+      };
+    })
+    .then((user) => {
+      return res.status(200).send(user);
+    })
+    .catch((err) => {
+      res.statusMessage = err.message;
+      return res.status(500).send();
+    });
+});
+
+app.post("/verify", (req, res) => {
+  console.log(`Verifying user with key = ${req.body.key}`);
+  const key = req.body.key;
+  const decoded = decodeString(key);
+
+  let storedUser = {};
+  getOneFrom(WECCA_DB_NAME, USERS_COLLECTION_NAME, { email: req.body.email })
+    .then((foundUser) => {
+      if (!foundUser) {
+        throw new Error("Account does not exist");
+      }
+      if (req.body.password !== decodeString(foundUser.password)) {
+        throw new Error("Incorrect password");
+      }
+      if (decoded !== foundUser.name) {
+        throw new Error(
+          "Verification failed. Please reach out to Ethan on slack."
+        );
+      }
+
+      storedUser = foundUser;
+      return foundUser.email;
+    })
+    .then((email) =>
+      updateOneFrom(
+        WECCA_DB_NAME,
+        USERS_COLLECTION_NAME,
+        { email: email },
+        { $set: { verified: true } }
+      )
+    )
+    .then(() => {
+      return res.status(200).send({
+        success: true,
+      });
+    })
+    .catch((err) => {
+      res.statusMessage = err.message;
+      return res.status(500).send();
+    });
+});
+
+app.post("/validate", (req, res) => {
+  console.log(`Validating user with key = ${req.body.key}`);
+  const key = req.body.key;
+  const decoded = decodeString(key);
+
+  let storedUser = {};
+  getOneFrom(WECCA_DB_NAME, USERS_COLLECTION_NAME, {
+    email: req.body.email,
+  })
+    .then((foundUser) => {
+      if (!foundUser) {
+        throw new Error("Account does not exist");
+      }
+      if (req.body.password !== decodeString(foundUser.password)) {
+        throw new Error("Incorrect password");
+      }
+      if (foundUser.team !== "Software") {
+        throw new Error("Only the software team is allowed to validate users");
+      }
+    })
+    .then(() =>
+      getOneFrom(WECCA_DB_NAME, USERS_COLLECTION_NAME, { name: decoded })
+    )
+    .then((foundUser) => {
+      if (!foundUser) {
+        throw new Error("Account does not exist");
+      }
+
+      storedUser = foundUser;
+      return foundUser.email;
+    })
+    .then((email) =>
+      updateOneFrom(
+        WECCA_DB_NAME,
+        USERS_COLLECTION_NAME,
+        { email: email },
+        { $set: { validated: true } }
+      )
+    )
+    .then(() => {
+      return res.status(200).send({
+        email: storedUser.email,
+        name: storedUser.name,
+        team: storedUser.team,
+      });
+    })
+    .catch((err) => {
+      res.statusMessage = err.message;
+      return res.status(500).send({ success: false });
+    });
+});
+
+const generateVerificationUrl = (name) => {
+  encodedName = encodeString(name);
+  return `${BASE_URL}/verify?token=${encodedName}`;
+};
+
+const generateValidationUrl = (name) => {
+  encodedName = encodeString(name);
+  return `${BASE_URL}/validate?token=${encodedName}`;
+};
 
 /**
  * Helper function: query the MongoDB collection according to the entered query (with optional options) to insert many documents

@@ -281,3 +281,20 @@
     font-size: 20px;
     color: rgb(206, 96, 96);
 }
+
+.calendar-today-button {
+    width: 85px;
+    height: 25px;
+    padding: 0 10px;
+    text-align: center;
+    background: none;
+    border: 1px solid #4f29cd;
+    color: #4f29cd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.calendar-today-button:hover {
+    background-color: #9c88df;
+    color: white
+}

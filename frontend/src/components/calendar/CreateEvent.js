@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { addHours, addMonths, addWeeks, format, isSameWeek } from "date-fns";
 import { MoonLoader } from "react-spinners";
+import { BASE_URL, CAPTAIN_ROLE, NAME_KEY, TEAM_KEY } from "../../config";
 
 const subTeams = [
   "Software",
@@ -43,7 +44,7 @@ let startFallReadingWeek = new Date("October 30, 2023");
 let startWinterReadingWeek = new Date("February 19, 2024");
 let endOfFallClasses = new Date("December 9, 2023 00:00:01");
 let startOfWinterClasses = new Date("January 8, 2024 00:00:01");
-let endOfWinterClasses = new Date("March 6, 2024 00:00:01");
+let endOfWinterClasses = new Date("April 6, 2024 00:00:01");
 
 const repeatIntervalMapping = {
   "Fall Reading Week (Oct 28 - Nov 5)": startFallReadingWeek,
@@ -71,6 +72,8 @@ const CreateEvent = ({
     isRecurring: false,
     repeatInterval: null,
     repeatUntil: null,
+    validSubteams: [],
+    user: null,
   });
 
   useEffect(() => {
@@ -84,7 +87,32 @@ const CreateEvent = ({
         description: existingData.description || "",
       }));
     }
+
+    const role = sessionStorage.getItem(TEAM_KEY);
+    const user = sessionStorage.getItem(NAME_KEY);
+    if (role === CAPTAIN_ROLE) {
+      setValidSubteams(subTeams);
+    } else {
+      setValidSubteams(subTeams.filter((s) => s === role || s === "General"));
+    }
+    if (user) {
+      setUser(user);
+    }
   }, []);
+
+  const setValidSubteams = (list) => {
+    setState((s) => ({
+      ...s,
+      validSubteams: list,
+    }));
+  };
+
+  const setUser = (user) => {
+    setState((s) => ({
+      ...s,
+      user: user,
+    }));
+  };
 
   const setTeam = (team) => {
     setState({
@@ -166,9 +194,9 @@ const CreateEvent = ({
 
     while (day < repeatIntervalMapping[state.repeatUntil]) {
       while (dayIsInvalid(day)) {
-        day = addWeeks(day, 1);
-        startDate = addWeeks(startDate, 1);
-        endDate = addWeeks(endDate, 1);
+        day = findRolloverDay(day);
+        startDate = findRolloverDay(startDate);
+        endDate = findRolloverDay(endDate);
         if (day >= repeatIntervalMapping[state.repeatUntil]) break;
       }
 
@@ -178,7 +206,7 @@ const CreateEvent = ({
         startTime: startDate,
         endTime: endDate,
         description: state.description,
-        creator: "Test recurring",
+        creator: state.user,
         month: startDate.getMonth(),
         recurring: true,
       };
@@ -204,6 +232,15 @@ const CreateEvent = ({
       return addMonths(d, 2);
     }
   };
+
+  const findRolloverDay = (day) => {
+    let d = day;
+    if (state.repeatInterval === repeatIntervals[0] || state.repeatInterval === repeatIntervals[1]) {
+      return addWeeks(d, 1);
+    } else if (state.repeatInterval === repeatIntervals[2] || state.repeatInterval === repeatIntervals[3]) {
+      return addMonths(d, 1);
+    } 
+  }
 
   const dayIsInvalid = (day) => {
     if (
@@ -247,7 +284,7 @@ const CreateEvent = ({
     }
 
     setIsLoading(true);
-    fetch("http://localhost:3001/api/calendar/event", {
+    fetch(`${BASE_URL}:3001/api/calendar/event`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -255,7 +292,7 @@ const CreateEvent = ({
       },
       body: JSON.stringify({
         team: state.team,
-        creator: "Test for edit",
+        creator: state.user,
         title: state.title,
         description: state.description,
         startTime: state.startTime,
@@ -291,7 +328,7 @@ const CreateEvent = ({
     const recurringEvents = getRecurringEvents();
 
     setIsLoading(true);
-    fetch("http://localhost:3001/api/calendar/events", {
+    fetch(`${BASE_URL}/api/calendar/events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -324,7 +361,7 @@ const CreateEvent = ({
     }
 
     setIsLoading(true);
-    fetch("http://localhost:3001/api/calendar/event", {
+    fetch(`${BASE_URL}/api/calendar/event`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -333,14 +370,13 @@ const CreateEvent = ({
       body: JSON.stringify({
         deleted: {
           team: existingData.team,
-          creator: existingData.creator,
           title: existingData.title,
           startTime: existingData.startTime,
           endTime: existingData.endTime,
         },
         added: {
           team: state.team,
-          creator: "Test for edit",
+          creator: state.user,
           title: state.title,
           description: state.description,
           startTime: state.startTime,
@@ -411,7 +447,7 @@ const CreateEvent = ({
               value={state.team}
               onChange={(team) => setTeam(team)}
             >
-              {subTeams.map((team) => {
+              {state.validSubteams.map((team) => {
                 return (
                   <MenuItem value={team} key={team}>
                     {team}

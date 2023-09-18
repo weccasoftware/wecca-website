@@ -1,15 +1,38 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateEvent from "./CreateEvent";
 import "./styles/Calendar.css";
 import { teamClassMap } from "./teamClassMap";
 import DeleteModal from "./DeleteModal";
+import { BASE_URL, CAPTAIN_ROLE, NAME_KEY, TEAM_KEY } from "../../config";
 
 const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
   const [state, setState] = useState({
     modalOpen: false,
     deleteConfirmationOpen: false,
+    userCanEdit: false
   });
+
+  useEffect(() => {
+    const role = sessionStorage.getItem(TEAM_KEY)
+    const name = sessionStorage.getItem(NAME_KEY)
+    /*
+      You can only edit an event if:
+      - You are a captain
+      - Your team owns the event
+      - It is a general event that you created
+    */
+    if (role === CAPTAIN_ROLE || event.team === role || name && role && event.team === "General" && event.creator === name) {
+      setCanEdit(true)
+    }
+  }, [])
+  
+  const setCanEdit = (v) => {
+    setState((s) => ({
+      ...s,
+      userCanEdit: v
+    }))
+  }
 
   const start = format(event.startTime, "h:mm aaa");
   const end = format(event.endTime, "h:mm aaa");
@@ -31,7 +54,7 @@ const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
   const deleteClick = () => {
     deleteEvent(event.title, event.startTime, event.team);
 
-    fetch("http://localhost:3001/api/calendar/deleteEvent", {
+    fetch(`${BASE_URL}/api/calendar/deleteEvent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +107,7 @@ const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
             setIsOpen={() => toggleDeleteConfirmation()}
             event={event}
             deleteClick={deleteClick}
-            triggerRefresh={triggerRefresh}
+            triggerRefresh={() => triggerRefresh()}
           />
         </div>
       )}
@@ -101,12 +124,12 @@ const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
         <div className="event-body">{event.description || ""}</div>
       </div>
       <div className="event-edit-container">
-        <button className="event-container-button" onClick={toggleModal}>
+        {state.userCanEdit && <button className="event-container-button" onClick={toggleModal}>
           Edit
-        </button>
-        <button className="event-container-button" onClick={event.recurring ? toggleDeleteConfirmation : deleteClick}>
+        </button>}
+        {state.userCanEdit && <button className="event-container-button" onClick={event.recurring ? toggleDeleteConfirmation : deleteClick}>
           Delete
-        </button>
+        </button>}
       </div>
     </div>
   );

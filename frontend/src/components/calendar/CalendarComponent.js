@@ -18,6 +18,7 @@ import {
 import EventContainer from "./EventContainer";
 import CreateEvent from "./CreateEvent";
 import { teamClassMap } from "./teamClassMap";
+import { BASE_URL, CAPTAIN_ROLE, EMAIL_KEY, NAME_KEY, TEAM_KEY } from "../../config";
 
 /**
  * Notes for backend:
@@ -43,7 +44,17 @@ const CalendarComponent = () => {
     modalOpen: false,
     sampleEvents: [],
     loadError: false,
+    user: null,
   });
+
+  useEffect(() => {
+    const userName = sessionStorage.getItem(NAME_KEY);
+    if (!userName) return;
+    setState((s) => ({
+      ...s,
+      user: userName,
+    }));
+  }, []);
 
   useEffect(() => {
     loadAllEvents();
@@ -61,8 +72,13 @@ const CalendarComponent = () => {
   }, [state]);
 
   const loadAllEvents = () => {
+    const viewLevel = sessionStorage.getItem(EMAIL_KEY)
+      ? sessionStorage.getItem(TEAM_KEY) === CAPTAIN_ROLE
+        ? 3
+        : 2
+      : 1;
     fetch(
-      `http://localhost:3001/api/calendar/events/${3}/${state.currentMonth.getMonth()}`
+      `${BASE_URL}/api/calendar/events/${viewLevel}/${state.currentMonth.getMonth()}`
     )
       .then((a) => {
         if (a.status !== 200) {
@@ -89,6 +105,14 @@ const CalendarComponent = () => {
         console.log(err);
       });
   };
+
+  const goToToday = () => {
+    setState((s) => ({
+      ...s,
+      currentMonth: new Date(),
+      selectedDate: new Date()
+    }))
+  }
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
@@ -202,13 +226,17 @@ const CalendarComponent = () => {
                 );
               })}
           </div>
-          <br />
-          <button
-            onClick={() => toggleModal(true)}
-            className="add-event-button"
-          >
-            Add Event
-          </button>
+          {state.user && (
+            <div>
+              <br />
+              <button
+                onClick={() => toggleModal(true)}
+                className="add-event-button"
+              >
+                Add Event
+              </button>
+            </div>
+          )}
         </td>,
       ]);
     }
@@ -314,6 +342,11 @@ const CalendarComponent = () => {
         </div>
       )}
       {renderHeader()}
+      <div>
+        <button className="calendar-today-button" onClick={goToToday}>
+          Go to Today
+        </button>
+      </div>
       {renderTable()}
     </div>
   );

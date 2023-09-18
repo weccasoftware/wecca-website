@@ -1,5 +1,6 @@
 import { subDays } from "date-fns";
 import React, { useEffect, useState } from "react";
+import { BASE_URL } from "../../config";
 
 const DeleteModal = ({ setIsOpen, event, deleteClick, triggerRefresh }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,7 +19,7 @@ const DeleteModal = ({ setIsOpen, event, deleteClick, triggerRefresh }) => {
   };
 
   const deleteFuture = () => {
-    fetch("http://localhost:3001/api/calendar/deleteRecurringEvents", {
+    fetch(`${BASE_URL}/api/calendar/deleteRecurringEvents`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

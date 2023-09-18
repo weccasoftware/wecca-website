@@ -2,6 +2,7 @@ import "./styles/Navbar.css";
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { WINDOW_SIZE_THRESHOLD_PX } from "../config";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const NAVBAR_CLASS_HORIZONTAL = "nav-menu";
@@ -14,6 +15,8 @@ const Navbar = () => {
     true: HAMBURGER_DISPLAY_ON,
   };
 
+  const navigate = useNavigate();
+  
   const [enableMenu, setEnableMenu] = useState(false);
   const [expandMenu, setExpandMenu] = useState(false);
   const [windowSize, setWindowSize] = useState([
@@ -60,7 +63,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar-main">
-      <div className="wecca-logo-image"/>
+      <div className="wecca-logo-image" onClick={() => navigate('/login')}></div>
       <div className="nav-section" id="nav-main">
         <div
           class={HAMBURGER_MAPPING[enableMenu]}

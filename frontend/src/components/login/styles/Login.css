@@ -30,3 +30,12 @@
 .signup-button:hover {
     background-color: rgb(238, 238, 238);
 }
+
+.login-info {
+    font-size: 25px;
+}
+
+.verify-event-success {
+    color: rgb(31, 85, 42);
+    margin-top: 10px;
+}
