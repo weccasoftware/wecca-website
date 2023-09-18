@@ -29,7 +29,7 @@ export const WECCA_SOFTWARE_EMAIL = "wecca.software@gmail.com";
 export const SPONSORSHIP_FORM_TYPE = "sponsorship";
 export const CONTACT_FORM_TYPE = "contact";
 
-const roles = {
+const ROLES = {
   LOGISTICS_CAPTAIN: "Logistics Captain",
   CONSTRUCTION_CAPTAIN: "Construction Captain",
   FINANCE_CAPTAIN: "Finance Captain",
@@ -43,84 +43,95 @@ const roles = {
   TRAINING_EXEC: "Head of Training",
 };
 
+export const SIGNUP_ROLES = [
+  "Captain",
+  "Mould",
+  "Materials",
+  "Technical Communications and Presentation",
+  "Software",
+  "Graphic Design",
+  "Design and Analysis",
+  "Training",
+]
+
 export const EXECUTIVES_LIST = [
   {
-    title: roles.LOGISTICS_CAPTAIN,
+    title: ROLES.LOGISTICS_CAPTAIN,
     name: LOGISTICS_CAPTAIN_NAME,
     image: sam,
   },
   {
-    title: roles.CONSTRUCTION_CAPTAIN,
+    title: ROLES.CONSTRUCTION_CAPTAIN,
     name: CONSTRUCTION_CAPTAIN_NAME,
     image: anthony,
   },
   {
-    title: roles.FINANCE_CAPTAIN,
+    title: ROLES.FINANCE_CAPTAIN,
     name: FINANCE_CAPTAIN_NAME,
     image: liam,
   },
   {
-    title: roles.CONCRETE_CAPTAIN,
+    title: ROLES.CONCRETE_CAPTAIN,
     name: CONCRETE_CAPTAIN_NAME,
     image: daniel,
   },
   {
-    title: roles.MOULD_EXEC,
+    title: ROLES.MOULD_EXEC,
     name: "Keston Anderson",
     image: placeholder,
   },
   {
-    title: roles.MOULD_EXEC,
+    title: ROLES.MOULD_EXEC,
     name: "Louis Struzik",
     image: louie,
   },
   {
-    title: roles.MATERIALS_EXEC,
+    title: ROLES.MATERIALS_EXEC,
     name: "Hirad Tahmaseb Pour",
     image: placeholder,
   },
   {
-    title: roles.MATERIALS_EXEC,
+    title: ROLES.MATERIALS_EXEC,
     name: "Gaby Guisandes Bueno",
     image: placeholder,
   },
   {
-    title: roles.MATERIALS_EXEC,
+    title: ROLES.MATERIALS_EXEC,
     name: "Michael Prtenjaca",
     image: michael,
   },
   {
-    title: roles.TECH_COMMS_PRES_EXEC,
+    title: ROLES.TECH_COMMS_PRES_EXEC,
     name: "Tyler Liquornik",
     image: placeholder,
   },
   {
-    title: roles.TECH_COMMS_PRES_EXEC,
+    title: ROLES.TECH_COMMS_PRES_EXEC,
     name: "Cole Polewski",
     image: cole,
   },
   {
-    title: roles.SOFTWARE_EXEC,
+    title: ROLES.SOFTWARE_EXEC,
     name: "Ethan Bodnar",
     image: ethan,
   },
   {
-    title: roles.SOFTWARE_EXEC,
+    title: ROLES.SOFTWARE_EXEC,
     name: "Dylan MacPhail",
     image: dylan,
   },
   {
-    title: roles.DESIGN_AND_ANALYSIS_EXEC,
+    title: ROLES.DESIGN_AND_ANALYSIS_EXEC,
     name: "Lama Abdulal",
     image: lama,
   },
   {
-    title: roles.GRAPHIC_DESIGN_EXEC,
+    title: ROLES.GRAPHIC_DESIGN_EXEC,
     name: "Sarah Johnston",
     image: placeholder,
   },
   {
-    title: roles.TRAINING_EXEC,
+    title: ROLES.TRAINING_EXEC,
     name: "David Gibb",
     image: placeholder,
   },

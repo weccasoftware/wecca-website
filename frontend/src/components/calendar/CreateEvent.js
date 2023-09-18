@@ -14,28 +14,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import {
-  addDays,
-  addHours,
-  addMilliseconds,
-  addMinutes,
-  addMonths,
-  addSeconds,
-  addWeeks,
-  differenceInDays,
-  differenceInHours,
-  format,
-  isSameWeek,
-  setHours,
-  setMilliseconds,
-  setMinutes,
-  setSeconds,
-  subDays,
-  subHours,
-  subMilliseconds,
-  subMinutes,
-  subSeconds,
-} from "date-fns";
+import { addHours, addMonths, addWeeks, format, isSameWeek } from "date-fns";
 import { MoonLoader } from "react-spinners";
 
 const subTeams = [
@@ -201,7 +180,7 @@ const CreateEvent = ({
         description: state.description,
         creator: "Test recurring",
         month: startDate.getMonth(),
-        recurring: true
+        recurring: true,
       };
       mappedEvents.push(event);
 
@@ -253,13 +232,13 @@ const CreateEvent = ({
 
   const delegateSubmission = () => {
     if (!existingData && state.isRecurring) {
-      submitRecurringEvents()
+      submitRecurringEvents();
     } else if (!existingData) {
-      submitCreate()
+      submitCreate();
     } else if (existingData) {
-      submitEdit()
+      submitEdit();
     }
-  }
+  };
 
   const submitCreate = () => {
     if (state.title.length === 0) {
@@ -327,7 +306,7 @@ const CreateEvent = ({
 
         return a.json();
       })
-      .then((result) => {
+      .then(() => {
         setIsOpen(false);
         triggerRefresh();
         setIsLoading(false);
@@ -336,7 +315,7 @@ const CreateEvent = ({
         setSubmitError(err.message);
         setIsLoading(false);
       });
-  }
+  };
 
   const submitEdit = () => {
     if (state.title.length === 0) {
@@ -405,14 +384,14 @@ const CreateEvent = ({
   }
   if (state.isLoading) {
     return (
-      <div className="centered no-click">
+      <div className="centered-spinner no-click">
         <MoonLoader
           color="#ae83de"
           loading={state.isLoading}
           size={150}
           speedMultiplier={1.2}
         />
-        ;
+        Hi
       </div>
     );
   }
@@ -447,7 +426,6 @@ const CreateEvent = ({
             label="Title"
             fullWidth
             onChange={(title) => setTitle(title)}
-            z
             error={state.titleError}
             required
             value={state.title}
@@ -476,18 +454,20 @@ const CreateEvent = ({
               )}
             />
           </LocalizationProvider>
-          {existingData && <br/>}
-          {!existingData && <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.isRecurring}
-                  onChange={toggleIsRecurring}
-                />
-              }
-              label={"Recurring"}
-            />
-          </FormGroup>}
+          {existingData && <br />}
+          {!existingData && (
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.isRecurring}
+                    onChange={toggleIsRecurring}
+                  />
+                }
+                label={"Recurring"}
+              />
+            </FormGroup>
+          )}
           {state.isRecurring && (
             <div>
               <hr className="sponsor-hr" />
@@ -543,10 +523,7 @@ const CreateEvent = ({
             </div>
           )}
           <div className="buttons-container">
-            <button
-              className="modal-button"
-              onClick={() => setIsOpen(false)}
-            >
+            <button className="modal-button" onClick={() => setIsOpen()}>
               Cancel
             </button>
             <button

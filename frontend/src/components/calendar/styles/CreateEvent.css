@@ -87,3 +87,55 @@
     margin-top: 5px;
     text-align: center;
 }
+
+.delete-modal {
+    width: 500px;
+    max-height: 90vh;
+    background: white;
+    color: black;
+    z-index: 10;
+    border-radius: 5px;
+    padding: 20px 50px;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+.buttons-center {
+    text-align: center;
+}
+
+.delete-container-button {
+    width: 170px;
+    font-size: 14px;
+    height: 25px;
+    background: none;
+    border: 1px solid rgb(137, 27, 27);
+    color: rgb(137, 27, 27);
+    margin-left: 5px;
+    border-radius: 7px;
+}
+
+.delete-container-button:hover {
+    color: white;
+    background-color: rgb(137, 27, 27);
+    border-color: rgb(137, 27, 27);
+}
+
+.delete-event-error {
+    color: rgb(137, 27, 27);
+    margin-top: 10px;
+}
+
+.centered-spinner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 45%;
+    margin-right: auto;
+    margin-top: 20%;
+}

@@ -3,20 +3,28 @@ import React, { useState } from "react";
 import CreateEvent from "./CreateEvent";
 import "./styles/Calendar.css";
 import { teamClassMap } from "./teamClassMap";
+import DeleteModal from "./DeleteModal";
 
 const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
   const [state, setState] = useState({
     modalOpen: false,
+    deleteConfirmationOpen: false,
   });
 
   const start = format(event.startTime, "h:mm aaa");
   const end = format(event.endTime, "h:mm aaa");
 
   const toggleModal = () => {
-    console.log(`Setting state to ${!state.modalOpen}`);
     setState((s) => ({
       ...s,
       modalOpen: !state.modalOpen,
+    }));
+  };
+
+  const toggleDeleteConfirmation = () => {
+    setState((s) => ({
+      ...s,
+      deleteConfirmationOpen: !state.deleteConfirmationOpen,
     }));
   };
 
@@ -57,12 +65,26 @@ const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
     <div className="event-container">
       {state.modalOpen && (
         <div className="modal-overlay">
-          <div className="overlay-opacity" onClick={() => toggleModal(false)} />
+          <div className="overlay-opacity" onClick={() => toggleModal()} />
           <CreateEvent
-            setIsOpen={(val) => toggleModal(val)}
+            setIsOpen={() => toggleModal()}
             date={event.startTime}
             existingData={event}
             triggerRefresh={() => triggerRefresh()}
+          />
+        </div>
+      )}
+      {state.deleteConfirmationOpen && (
+        <div className="modal-overlay">
+          <div
+            className="overlay-opacity"
+            onClick={() => toggleDeleteConfirmation()}
+          />
+          <DeleteModal
+            setIsOpen={() => toggleDeleteConfirmation()}
+            event={event}
+            deleteClick={deleteClick}
+            triggerRefresh={triggerRefresh}
           />
         </div>
       )}
@@ -82,7 +104,7 @@ const EventContainer = ({ event, deleteEvent, triggerRefresh }) => {
         <button className="event-container-button" onClick={toggleModal}>
           Edit
         </button>
-        <button className="event-container-button" onClick={deleteClick}>
+        <button className="event-container-button" onClick={event.recurring ? toggleDeleteConfirmation : deleteClick}>
           Delete
         </button>
       </div>

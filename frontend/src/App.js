@@ -6,6 +6,7 @@ import About from './components/about/About';
 import Sponsors from './components/sponsors/Sponsors';
 import Contact from './components/contact/Contact';
 import Calendar from './components/calendar/Calendar';
+import Signup from './components/login/Signup';
 
 function App({children}) {
   return (
@@ -18,6 +19,7 @@ function App({children}) {
             <Route path='calendar' element={<Calendar/>}></Route>
             <Route path='sponsors' element={<Sponsors/>}></Route>
             <Route path='contact' element={<Contact/>}></Route>
+            <Route path='signup' element={<Signup/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
