@@ -11,21 +11,13 @@ import {faInstagram, faSlack, faLinkedin} from '@fortawesome/free-brands-svg-ico
 import { INSTAGRAM_LINK, LINKEDIN_LINK, SLACK_LINK, WINDOW_SIZE_THRESHOLD_PX } from "../../config";
 
 const upcomingEvents = [
-    {
+    /*{
         title: "Come to our first meeting!",
         text: "WECCA will be having its first meeting of the year at 4:30 pm on Tuesday, September 12th (room TBD)." + 
                 " Everyone is welcome, and you will have the chance to meet the executives and learn more about the club." + 
                 " If you have any questions before then, feel free to contact us via our contact form.",
         image: temp1
-    },
-    {
-        title: "Help us destroy our canoe!",
-        text: "WRECCA is an annual event where WECCA members have the chance to help " + 
-                "destroy our canoe from the previous year. This will be taking place on " + 
-                "Saturday, September 16th at 12:00 pm behind ACEB. Everyone is welcome to come " +
-                "out and help us destroy The Argo!",
-        image: temp2
-    }
+    },*/
 ]
 
 const Home = () => {
