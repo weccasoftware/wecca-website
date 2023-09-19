@@ -12,8 +12,7 @@ const client = new MongoClient(URI);
 client.connect();
 
 const path = require('path')
-express.static('/')
-app.use(express.static(path.join(__dirname, '../', 'frontend', 'build')))
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')))
 
 const CryptoJS = require("crypto-js");
 
@@ -562,7 +561,7 @@ const updateOneFrom = async (
 };
 
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../', 'frontend', 'build'))
 })
 
