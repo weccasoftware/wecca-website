@@ -561,4 +561,9 @@ const updateOneFrom = async (
   return result;
 };
 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'frontend', 'build'))
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}...`));
