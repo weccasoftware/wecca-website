@@ -3,6 +3,7 @@ import "./styles/CreateEvent.css";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
+import { TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
@@ -14,9 +15,18 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { addHours, addMonths, addWeeks, format, isSameWeek } from "date-fns";
-import { MoonLoader } from "react-spinners";
+import {
+  addDays,
+  addHours,
+  addMonths,
+  addWeeks,
+  format,
+  isSameWeek,
+  subDays,
+} from "date-fns";
+import { BounceLoader, ClipLoader, MoonLoader } from "react-spinners";
 import { BASE_URL, CAPTAIN_ROLE, NAME_KEY, TEAM_KEY } from "../../config";
+import ActionModal from "./ActionModal";
 
 const subTeams = [
   "Software",
@@ -57,7 +67,6 @@ const CreateEvent = ({
   setIsOpen,
   triggerRefresh,
   date,
-  addEvent,
   existingData = null,
 }) => {
   const [state, setState] = useState({
@@ -235,12 +244,18 @@ const CreateEvent = ({
 
   const findRolloverDay = (day) => {
     let d = day;
-    if (state.repeatInterval === repeatIntervals[0] || state.repeatInterval === repeatIntervals[1]) {
+    if (
+      state.repeatInterval === repeatIntervals[0] ||
+      state.repeatInterval === repeatIntervals[1]
+    ) {
       return addWeeks(d, 1);
-    } else if (state.repeatInterval === repeatIntervals[2] || state.repeatInterval === repeatIntervals[3]) {
+    } else if (
+      state.repeatInterval === repeatIntervals[2] ||
+      state.repeatInterval === repeatIntervals[3]
+    ) {
       return addMonths(d, 1);
-    } 
-  }
+    }
+  };
 
   const dayIsInvalid = (day) => {
     if (
@@ -284,7 +299,7 @@ const CreateEvent = ({
     }
 
     setIsLoading(true);
-    fetch(`${BASE_URL}:3001/api/calendar/event`, {
+    fetch(`${BASE_URL}/api/calendar/event`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -327,6 +342,7 @@ const CreateEvent = ({
 
     const recurringEvents = getRecurringEvents();
 
+    console.log("Hi");
     setIsLoading(true);
     fetch(`${BASE_URL}/api/calendar/events`, {
       method: "POST",
@@ -382,6 +398,7 @@ const CreateEvent = ({
           startTime: state.startTime,
           endTime: state.endTime,
           month: state.startTime.getMonth(),
+          recurring: existingData.recurring,
         },
       }),
     })
@@ -421,7 +438,7 @@ const CreateEvent = ({
   if (state.isLoading) {
     return (
       <div className="centered-spinner no-click">
-        <MoonLoader
+        <ClipLoader
           color="#ae83de"
           loading={state.isLoading}
           size={150}
@@ -467,33 +484,41 @@ const CreateEvent = ({
             value={state.title}
           ></TextField>
           <br />
-          <br />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopTimePicker
-              label="Start Time"
-              value={state.startTime}
-              onChange={(time) => setStartTime(time)}
-              renderInput={(params) => (
-                <TextField {...params} fullWidth required />
-              )}
+          {/*<FormGroup>
+            <FormControlLabel
+              className="pad-left-10"
+              control={
+                <Checkbox checked={state.isAllDay} onChange={toggleIsAllDay} />
+              }
+              label={"All Day"}
             />
-            <br />
-            <br />
-            <DesktopTimePicker
-              label="End Time"
-              value={state.endTime}
-              onChange={(time) => {
-                setEndTime(time);
-              }}
-              renderInput={(params) => (
-                <TextField {...params} fullWidth required />
-              )}
-            />
-          </LocalizationProvider>
+            </FormGroup>*/}
+          {!state.isAllDay && (
+            <div>
+              <br />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  label="Start Time"
+                  value={state.startTime}
+                  onChange={(time) => setStartTime(time)}
+                  className="date-select"
+                />
+                <br />
+                <br />
+                <TimePicker
+                  label="End Time"
+                  value={state.endTime}
+                  onChange={(time) => setEndTime(time)}
+                  className="date-select"
+                />
+              </LocalizationProvider>
+            </div>
+          )}
           {existingData && <br />}
           {!existingData && (
             <FormGroup>
               <FormControlLabel
+                className="pad-left-10"
                 control={
                   <Checkbox
                     checked={state.isRecurring}
@@ -562,10 +587,7 @@ const CreateEvent = ({
             <button className="modal-button" onClick={() => setIsOpen()}>
               Cancel
             </button>
-            <button
-              className="modal-button"
-              onClick={() => delegateSubmission()}
-            >
+            <button className="modal-button" onClick={delegateSubmission}>
               Submit
             </button>
           </div>

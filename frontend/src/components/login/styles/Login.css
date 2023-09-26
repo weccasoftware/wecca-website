@@ -1,5 +1,5 @@
 .signup-header {
-    margin-bottom: 7.5px;
+    margin-bottom: 2.5px;
 }
 
 .signup-container {
@@ -38,4 +38,12 @@
 .verify-event-success {
     color: rgb(31, 85, 42);
     margin-top: 10px;
+}
+
+.signup-description {
+    margin-top: 0px
+}
+
+.underline-link:hover {
+    cursor: pointer;
 }

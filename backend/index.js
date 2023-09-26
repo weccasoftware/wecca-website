@@ -11,12 +11,12 @@ const { URI, SECRET_TOKEN } = require("./secret");
 const client = new MongoClient(URI);
 client.connect();
 
-const path = require('path')
-app.use('/', express.static(path.join(__dirname, '..', 'frontend', 'build')))
+const path = require("path");
+app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 const CryptoJS = require("crypto-js");
 
-const BASE_URL = "https://wecca-website.onrender.com" //"http://localhost:3001"
+const BASE_URL = "http://localhost:3001"; //"https://wecca-website.onrender.com"
 const WECCA_DB_NAME = "WECCA";
 const USERS_COLLECTION_NAME = "Users";
 const EVENTS_COLLECTION_NAME = "Events";
@@ -133,7 +133,6 @@ app.put("/api/calendar/event", (req, res) => {
 
   insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, payload)
     .then((results) => {
-      console.log(results);
       res.status(200).send(results);
     })
     .catch((e) => {
@@ -152,13 +151,11 @@ app.post("/api/calendar/event", (req, res) => {
 
   deleteOneFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, req.body.deleted)
     .then((r) => {
-      console.log(r);
       if (r.deletedCount !== 1)
         throw new Error("Failed to delete from database");
     })
     .then(() => insertOne(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, payload))
     .then((results) => {
-      console.log(results);
       res.status(200).send(results);
     })
     .catch((e) => {
@@ -171,12 +168,14 @@ app.post("/api/calendar/events", (req, res) => {
   console.log("Called into POST events");
 
   const events = req.body;
-  events.map((ev) => {
-    return { ...ev, createdAt: new Date() };
-  });
-  insertMany(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, events)
+  insertMany(
+    WECCA_DB_NAME,
+    EVENTS_COLLECTION_NAME,
+    events.map((ev) => {
+      return { ...ev, createdAt: new Date() };
+    })
+  )
     .then((results) => {
-      console.log(results);
       res.status(200).send(results);
     })
     .catch((e) => {
@@ -214,12 +213,41 @@ app.post("/api/calendar/deleteRecurringEvents", (req, res) => {
     },
   };
 
-  console.log(query);
-
   deleteManyFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, query)
     .then((r) => {
       if (r.deletedCount === 0)
         throw new Error("Failed to delete from database");
+    })
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch((e) => {
+      res.statusMessage = e;
+      return res.status(500).send();
+    });
+});
+
+app.post("/api/calendar/editRecurringEvents", (req, res) => {
+  console.log("Called into POST editRecurringEvents");
+  const date = req.body.date;
+  const payload = req.body.payload;
+  const discriminator = req.body.discriminator
+
+  const key = {
+    ...discriminator,
+    startTime: {
+      $gt: date,
+    },
+  };
+  const query = {
+    $set: payload
+  }
+
+  updateManyFrom(WECCA_DB_NAME, EVENTS_COLLECTION_NAME, key, query)
+    .then((r) => {
+      console.log(r);
+      //if (r.deletedCount === 0)
+      //throw new Error("Failed to delete from database");
     })
     .then(() => {
       res.status(200).send();
@@ -407,6 +435,11 @@ app.post("/validate", (req, res) => {
     });
 });
 
+app.get("/*", (req, res) => {
+  console.log("Hello");
+  res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
+});
+
 const generateVerificationUrl = (name) => {
   encodedName = encodeString(name);
   return `${BASE_URL}/verify?token=${encodedName}`;
@@ -560,12 +593,31 @@ const updateOneFrom = async (
   return result;
 };
 
+/**
+ * Helper function: query the MongoDB collection according to the entered query (with optional options) to update a single document
+ * @param {string} dbName: name of DB to connect to (we use "music")
+ * @param {string} collectionName: name of the collection in the DB to query
+ * @param {object} key: key for the object - uniquely identifies the object that is to be modified
+ * @param {object} query: contains changes to make to the object identified by the key
+ * @param {object} additional: optional options (ie. ordering, include only specific attributes, etc)
+ * @returns a complex DB response object
+ * I think findOneAndUpdate (with options) was wrongly deprecated
+ */
+const updateManyFrom = async (
+  dbName,
+  collectionName,
+  key,
+  query,
+  additional = {}
+) => {
+  const database = client.db(dbName);
+  const collection = database.collection(collectionName);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'build'))
-})
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'build'))
-})
+  const result = collection.updateMany(key, query, additional).catch((e) => {
+    throw new Error(e.message);
+  });
+
+  return result;
+};
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));

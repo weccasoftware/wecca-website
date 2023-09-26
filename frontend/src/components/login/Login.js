@@ -132,6 +132,9 @@ const Login = ({ overrideSubmit, verificationText }) => {
   return (
     <div className="signup-container">
       <h2 className="signup-header">Login{overrideSubmit ? " to Verify" : ""}</h2>
+      <p className="signup-description">
+      <div onClick={() => navigate('/signup')} className="inline-div underline-link"><i>Sign up here</i></div>
+      </p>
       <div className="signup-form">
         <TextField
           label="Email"

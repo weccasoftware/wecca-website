@@ -11,7 +11,7 @@ import dylan from "./assets/headshots/bg-Dylan.png"
 import lama from "./assets/headshots/bg-Lama.png";
 import placeholder from "./assets/headshots/bg-Placeholder.png"
 
-export const BASE_URL = "https://wecca-website.onrender.com"
+export const BASE_URL = 'http://localhost:3001'//"https://wecca-website.onrender.com"
 
 export const WINDOW_SIZE_THRESHOLD_PX = 768;
 export const SLACK_LINK = "https://join.slack.com/t/wecca2023-24/shared_invite/zt-21o0f5jn9-al9lZLzSOjTrxhflOeR3eQ";
@@ -44,7 +44,7 @@ const ROLES = {
   CONCRETE_CAPTAIN: "Concrete Captain",
   MOULD_EXEC: "Co-Head of Mould",
   MATERIALS_EXEC: "Co-Head of Materials",
-  TECH_COMMS_PRES_EXEC: "Co-Head of Technical Communications and Presentation",
+  TECH_COMMS_PRES_EXEC: "Co-Head of Technical Communications",
   SOFTWARE_EXEC: "Co-Head of Software Development",
   GRAPHIC_DESIGN_EXEC: "Head of Graphic Design",
   DESIGN_AND_ANALYSIS_EXEC: "Head of Design and Analysis",
@@ -55,11 +55,22 @@ export const SIGNUP_ROLES = [
   "Captain",
   "Mould",
   "Materials",
-  "Technical Communications and Presentation",
+  "Technical Communications",
   "Software",
   "Graphic Design",
   "Design and Analysis",
   "Training",
+]
+
+export const FILTER_TEAMS = [
+  "Mould",
+  "Materials",
+  "Technical Communications",
+  "Software",
+  "Graphic Design",
+  "Design and Analysis",
+  "Training",
+  "General"
 ]
 
 export const EXECUTIVES_LIST = [

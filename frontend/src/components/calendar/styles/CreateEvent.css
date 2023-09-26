@@ -126,6 +126,23 @@
     border-color: rgb(137, 27, 27);
 }
 
+.edit-container-button {
+    width: 170px;
+    font-size: 14px;
+    height: 25px;
+    background: none;
+    border: 1px solid rgb(65, 106, 65);
+    color:  rgb(65, 106, 65);
+    margin-left: 5px;
+    border-radius: 7px;
+}
+
+.edit-container-button:hover {
+    color: white;
+    background-color: rgb(65, 106, 65);
+    border-color: rgb(65, 106, 65);
+}
+
 .delete-event-error {
     color: rgb(137, 27, 27);
     margin-top: 10px;
@@ -135,7 +152,19 @@
     position: absolute;
     left: 0;
     right: 0;
-    margin-left: 45%;
+    margin-left: auto;
     margin-right: auto;
     margin-top: 20%;
+}
+
+.date-select {
+    width: 100%;
+}
+
+.pad-left-10 {
+    padding-left: 10px;
+}
+
+.pad-top {
+    padding-top: 10px;
 }

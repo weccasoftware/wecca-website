@@ -82,7 +82,7 @@
 }
 
 .calendar-header {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -101,8 +101,8 @@
 }
 
 .cal-today {
-    color: green;
-    display: inline-block;
+    color: #4f29cd;
+    text-decoration: underline;
 }
 
 .day-expand {
@@ -283,18 +283,64 @@
 }
 
 .calendar-today-button {
-    width: 85px;
-    height: 25px;
+    width: 120px;
+    font-size: 14px;
+    height: 30px;
     padding: 0 10px;
     text-align: center;
     background: none;
-    border: 1px solid #4f29cd;
-    color: #4f29cd;
+    border: 1px solid #26175a;
+    color: #26175a;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
 .calendar-today-button:hover {
-    background-color: #9c88df;
+    background-color: #4f29cd;
     color: white
+}
+
+.event-filters {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.event-filters-bottom {
+    margin-bottom: 20px;
+}
+
+.event-filter-item {
+    height: 10px;
+    width: 10px;
+    margin-top: 6px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.event-filter-container:hover {
+    color: #4f29cd;
+    cursor: pointer;
+}
+
+.event-filter-container {
+    font-size: 18px;
+    height: 22px;
+    vertical-align: middle;
+    display: inline-flex;
+    justify-content: center;
+    margin: 0 7px;
+}
+
+.event-filter-item-strike {
+    color: rgb(185, 185, 185);
+    text-decoration: line-through;
+}
+
+.event-filter-container-toggle {
+    color: rgb(67, 67, 67);
+}
+
+.event-filter-container-toggle:hover {
+    color: rgb(130, 130, 130);
 }

@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import { BASE_URL, SIGNUP_ROLES } from "../../config";
 import { useNavigate } from "react-router-dom";
-import { sendConfirmationEmail, sendMail, sendSignupEmail } from "../../util/Mail";
+import {
+  sendConfirmationEmail,
+  sendMail,
+  sendSignupEmail,
+} from "../../util/Mail";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -21,7 +25,7 @@ const Signup = () => {
     comparePassword: "",
     signupError: "",
     isLoading: false,
-    signupSuccess: false
+    signupSuccess: false,
   });
 
   useEffect(() => {
@@ -149,9 +153,13 @@ const Signup = () => {
       })
       .then((result) => {
         setIsLoading(false);
-        sendConfirmationEmail(result.email, result.name, result.verificationUrl)
-        sendSignupEmail(result.email, result.name, result.validationUrl)
-        setSignupSuccess(true)
+        sendConfirmationEmail(
+          result.email,
+          result.name,
+          result.verificationUrl
+        );
+        sendSignupEmail(result.email, result.name, result.validationUrl);
+        setSignupSuccess(true);
       })
       .catch((err) => {
         setSignupError(err.message);
@@ -163,20 +171,8 @@ const Signup = () => {
     <div className="signup-container">
       <h2 className="signup-header">Executive Signup</h2>
       <p className="signup-description">
-        <i>
-          Sign up for an account so you can create, edit, and delete calendar
-          events
-        </i>
+        <i>Please use your UWO email to sign up</i>
       </p>
-      <ul className="signup-list">
-        <li>- Please use your UWO email to sign up</li>
-        <li>
-          - Your password will be encrypted (so we will not be able to see it)
-        </li>
-        <li>
-          - Do not share this link - it is only for captains and executives
-        </li>
-      </ul>
       <div className="signup-form">
         <FormControl fullWidth>
           <InputLabel required>Subteam</InputLabel>
@@ -254,8 +250,9 @@ const Signup = () => {
         {state.signupSuccess && (
           <div className="verify-event-success centre">
             <i>
-              Thank you for signing up. Please check your junk mail for verification instructions. If you encounter any issues, 
-              reach out to Ethan or Dylan on slack.
+              Thank you for signing up. Please check your junk mail for
+              verification instructions. If you encounter any issues, reach out
+              to Ethan or Dylan on slack.
             </i>
           </div>
         )}

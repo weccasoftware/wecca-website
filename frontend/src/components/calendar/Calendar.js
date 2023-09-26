@@ -5,7 +5,7 @@ import CalendarComponent from './CalendarComponent';
 const Calendar = () => {
     return (
         <div>
-            <h1>Calendar</h1>
+            <h1 className='calendar-header'>Calendar</h1>
             <CalendarComponent />
         </div>
     )

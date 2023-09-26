@@ -18,7 +18,14 @@ import {
 import EventContainer from "./EventContainer";
 import CreateEvent from "./CreateEvent";
 import { teamClassMap } from "./teamClassMap";
-import { BASE_URL, CAPTAIN_ROLE, EMAIL_KEY, NAME_KEY, TEAM_KEY } from "../../config";
+import {
+  BASE_URL,
+  CAPTAIN_ROLE,
+  EMAIL_KEY,
+  FILTER_TEAMS,
+  NAME_KEY,
+  TEAM_KEY,
+} from "../../config";
 
 /**
  * Notes for backend:
@@ -42,7 +49,8 @@ const CalendarComponent = () => {
     currentMonth: new Date(),
     selectedDate: new Date(),
     modalOpen: false,
-    sampleEvents: [],
+    events: [],
+    appliedFilters: [],
     loadError: false,
     user: null,
   });
@@ -67,10 +75,6 @@ const CalendarComponent = () => {
     }));
   };
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   const loadAllEvents = () => {
     const viewLevel = sessionStorage.getItem(EMAIL_KEY)
       ? sessionStorage.getItem(TEAM_KEY) === CAPTAIN_ROLE
@@ -88,10 +92,9 @@ const CalendarComponent = () => {
         return a.json();
       })
       .then((result) => {
-        console.log(result);
         setState((s) => ({
           ...s,
-          sampleEvents: result.map((e) => {
+          events: result.map((e) => {
             return {
               ...e,
               startTime: new Date(e.startTime),
@@ -102,7 +105,6 @@ const CalendarComponent = () => {
       })
       .catch((err) => {
         setLoadError(true);
-        console.log(err);
       });
   };
 
@@ -110,9 +112,9 @@ const CalendarComponent = () => {
     setState((s) => ({
       ...s,
       currentMonth: new Date(),
-      selectedDate: new Date()
-    }))
-  }
+      selectedDate: new Date(),
+    }));
+  };
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
@@ -157,6 +159,8 @@ const CalendarComponent = () => {
                 ? "cal-disabled"
                 : isSameDay(day, state.selectedDate)
                 ? "cal-selected"
+                : isSameDay(day, new Date())
+                ? "cal-today"
                 : ""
             }`}
             key={day}
@@ -164,19 +168,14 @@ const CalendarComponent = () => {
               dayClick(cloneDay, !isSameMonth(cloneDay, monthStart))
             }
           >
-            <span
-              className={`date-number ${
-                isSameDay(day, new Date()) ? "cal-today" : ""
-              }`}
-            >
-              {formattedDate}
-            </span>
+            <span className={`date-number`}>{formattedDate}</span>
             <span className="icon-area">
-              {state.sampleEvents
+              {state.events
                 .filter(
                   (event) =>
-                    isSameDay(day, event.startTime) ||
-                    isSameDay(day, event.endTime)
+                    (isSameDay(day, event.startTime) ||
+                      isSameDay(day, event.endTime)) &&
+                    !state.appliedFilters.includes(event.team)
                 )
                 .map((event) => {
                   return (
@@ -205,11 +204,12 @@ const CalendarComponent = () => {
             <div className="expand-title">
               {format(state.selectedDate, "MMMM d, yyyy")}
             </div>
-            {state.sampleEvents
+            {state.events
               .filter(
                 (event) =>
-                  isSameDay(state.selectedDate, event.startTime) ||
-                  isSameDay(state.selectedDate, event.endTime)
+                  (isSameDay(state.selectedDate, event.startTime) ||
+                    isSameDay(state.selectedDate, event.endTime)) &&
+                  !state.appliedFilters.includes(event.team)
               )
               .sort((a, b) => {
                 return a.startTime - b.startTime;
@@ -220,11 +220,20 @@ const CalendarComponent = () => {
                     event={event}
                     key={`${event.title}-${event.startTime}`}
                     deleteEvent={(ti, te, st) => deleteEvent(ti, te, st)}
-                    addEvent={(e) => addEvent(e)}
                     triggerRefresh={() => loadAllEvents()}
                   />
                 );
               })}
+            {state.events.filter(
+              (event) =>
+                (isSameDay(state.selectedDate, event.startTime) ||
+                  isSameDay(state.selectedDate, event.endTime)) &&
+                !state.appliedFilters.includes(event.team)
+            ).length === 0 && (
+              <div>
+                <i>No events today</i>
+              </div>
+            )}
           </div>
           {state.user && (
             <div>
@@ -245,13 +254,13 @@ const CalendarComponent = () => {
       <table className="cal-table">
         <thead>
           <tr>
+            <th>SUN</th>
             <th>MON</th>
             <th>TUE</th>
             <th>WED</th>
             <th>THU</th>
             <th>FRI</th>
             <th>SAT</th>
-            <th>SUN</th>
           </tr>
         </thead>
         <tbody>
@@ -299,25 +308,41 @@ const CalendarComponent = () => {
     }));
   };
 
-  const addEvent = (event) => {
-    console.log("Got event");
-    console.log(event);
-    const events = [...state.sampleEvents, event];
+  const toggleFilterEvent = (ev) => {
+    const currentFilters = state.appliedFilters;
+    if (currentFilters.includes(ev)) {
+      currentFilters.splice(currentFilters.indexOf(ev), 1);
+    } else {
+      currentFilters.push(ev);
+    }
+
     setState((s) => ({
       ...s,
-      sampleEvents: events,
+      appliedFilters: currentFilters,
     }));
-    console.log(state.sampleEvents);
-    toggleModal(false);
+  };
+
+  const toggleAllFiltersOff = () => {
+    setState((s) => ({
+      ...s,
+      appliedFilters: [],
+    }));
+  };
+
+  const toggleAllFiltersOn = () => {
+    setState((s) => ({
+      ...s,
+      appliedFilters: [...FILTER_TEAMS],
+    }));
   };
 
   const deleteEvent = (title, team, start) => {
-    const filteredEvents = state.sampleEvents.filter((ev) => {
+    const filteredEvents = state.events.filter((ev) => {
       return ev.title !== title && ev.team !== team && ev.startTime !== start;
     });
     setState((s) => ({
       ...s,
-      sampleEvents: filteredEvents,
+      events: filteredEvents,
     }));
   };
 
@@ -336,11 +361,43 @@ const CalendarComponent = () => {
           <CreateEvent
             setIsOpen={(val) => toggleModal(val)}
             date={state.selectedDate}
-            addEvent={addEvent}
             triggerRefresh={() => loadAllEvents()}
           />
         </div>
       )}
+      <div className="event-filters">
+        <div
+          className="event-filter-container event-filter-container-toggle"
+          onClick={() => toggleAllFiltersOn()}
+        >
+          <div>Hide All Events</div>
+        </div>
+        <div
+          className="event-filter-container event-filter-container-toggle"
+          onClick={() => toggleAllFiltersOff()}
+        >
+          <div>Show All Events</div>
+        </div>
+      </div>
+      <div className="event-filters event-filters-bottom">
+        {FILTER_TEAMS.map((item) => {
+          return (
+            <div
+              className={`event-filter-container ${
+                state.appliedFilters.includes(item)
+                  ? "event-filter-item-strike"
+                  : ""
+              }`}
+              onClick={() => toggleFilterEvent(item)}
+            >
+              <div
+                className={`item-so event-filter-item ${teamClassMap[item]}`}
+              ></div>
+              <div>{item}</div>
+            </div>
+          );
+        })}
+      </div>
       {renderHeader()}
       <div>
         <button className="calendar-today-button" onClick={goToToday}>
