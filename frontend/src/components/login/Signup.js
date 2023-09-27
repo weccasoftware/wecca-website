@@ -119,7 +119,8 @@ const Signup = () => {
     }));
   };
 
-  const submitSignup = () => {
+  const submitSignup = (e) => {
+    e.preventDefault()
     perfomValidation();
     if (
       state.name.length === 0 ||
@@ -173,75 +174,85 @@ const Signup = () => {
       <p className="signup-description">
         <i>Please use your UWO email to sign up</i>
       </p>
-      <div className="signup-form">
-        <FormControl fullWidth>
-          <InputLabel required>Subteam</InputLabel>
-          <Select
-            label="Subteam"
-            value={state.team}
-            onChange={(team) => setTeam(team.target.value)}
-          >
-            {Object.values(SIGNUP_ROLES).map((team) => {
-              return (
-                <MenuItem value={team} key={team}>
-                  {team}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-        <br />
-        <br />
-        <TextField
-          label="Email"
-          fullWidth
-          onChange={(email) => setEmail(email.target.value)}
-          error={state.emailError}
-          required
-          value={state.email}
-        ></TextField>
-        <br />
-        <br />
-        <TextField
-          label="First and Last Name"
-          fullWidth
-          onChange={(name) => setName(name.target.value)}
-          error={state.nameError}
-          required
-          value={state.name}
-        ></TextField>
-        <br />
-        <br />
-        <TextField
-          label="Password"
-          fullWidth
-          onChange={(pwd) => setPassword(pwd.target.value)}
-          error={state.passwordError}
-          required
-          type="password"
-          value={state.password}
-        ></TextField>
-        <br />
-        <br />
-        <TextField
-          label="Confirm Password"
-          fullWidth
-          onChange={(pwd) => setComparePassword(pwd.target.value)}
-          error={state.passwordError}
-          required
-          type="password"
-          value={state.comparePassword}
-        ></TextField>
-        {state.comparePasswordError && (
-          <div className="delete-event-error">
-            <i>Passwords do not match</i>
-          </div>
-        )}
-        <div className="centre">
-          <button className="signup-button" onClick={submitSignup}>
-            {!state.isLoading ? "Sign Up" : "Loading..."}
-          </button>
+      <p className="signup-description">
+        <div
+          onClick={() => navigate("/login")}
+          className="inline-div underline-link"
+        >
+          <i>Back to login</i>
         </div>
+      </p>
+      <div className="signup-form">
+        <form onSubmit={(e) => submitSignup(e)}>
+          <FormControl fullWidth>
+            <InputLabel required>Subteam</InputLabel>
+            <Select
+              label="Subteam"
+              value={state.team}
+              onChange={(team) => setTeam(team.target.value)}
+            >
+              {Object.values(SIGNUP_ROLES).map((team) => {
+                return (
+                  <MenuItem value={team} key={team}>
+                    {team}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <br />
+          <br />
+          <TextField
+            label="Email"
+            fullWidth
+            onChange={(email) => setEmail(email.target.value)}
+            error={state.emailError}
+            required
+            value={state.email}
+          ></TextField>
+          <br />
+          <br />
+          <TextField
+            label="First and Last Name"
+            fullWidth
+            onChange={(name) => setName(name.target.value)}
+            error={state.nameError}
+            required
+            value={state.name}
+          ></TextField>
+          <br />
+          <br />
+          <TextField
+            label="Password"
+            fullWidth
+            onChange={(pwd) => setPassword(pwd.target.value)}
+            error={state.passwordError}
+            required
+            type="password"
+            value={state.password}
+          ></TextField>
+          <br />
+          <br />
+          <TextField
+            label="Confirm Password"
+            fullWidth
+            onChange={(pwd) => setComparePassword(pwd.target.value)}
+            error={state.passwordError}
+            required
+            type="password"
+            value={state.comparePassword}
+          ></TextField>
+          {state.comparePasswordError && (
+            <div className="delete-event-error">
+              <i>Passwords do not match</i>
+            </div>
+          )}
+          <div className="centre">
+            <button className="signup-button" type="submit">
+              {!state.isLoading ? "Sign Up" : "Loading..."}
+            </button>
+          </div>
+        </form>
         {state.signupError && (
           <div className="delete-event-error centre">
             <i>Error signing up: {state.signupError}</i>

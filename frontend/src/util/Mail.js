@@ -27,7 +27,7 @@ export const sendSignupEmail = (email, name, url) => {
         To : [WECCA_SOFTWARE_EMAIL],
         From : "wecca.software@gmail.com",
         Subject : `${name} has signed up under username ${email}`,
-        Body : `Please verify this user here: ${url}`
+        Body : `Please verify this user here: <a href=${url}>${url}</a>`
     })
 }
 
@@ -41,6 +41,6 @@ export const sendConfirmationEmail = (email, name, url) => {
         Subject : `You have signed up for an account on WECCA.org`,
         Body : `<p>Hi ${name}, you were signed up for an account on WECCA.org. 
             <br/><br/>If this was not you, please disregard this email or contact wecca.software@gmail.com.
-            <br/><br/>Otherwise, please verify your email by logging in here ${url}`
+            <br/><br/>Otherwise, please verify your email by logging in here: <a href=${url}>${url}</a>`
     })
 }

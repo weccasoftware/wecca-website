@@ -20,6 +20,7 @@ const Validate = () => {
     isLoadingCallback,
     errorCallback
   ) => {
+    isLoadingCallback(true)
     fetch(`${BASE_URL}/validate`, {
       method: "POST",
       headers: {

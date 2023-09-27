@@ -5,10 +5,8 @@ const functions = require('firebase-functions');
 
 const app = express();
 app.use(express.json());
-const port = process.env.PORT || 3001;
 app.use(cors());
 
-const { URI, SECRET_TOKEN } = require("./secret");
 const client = new MongoClient(URI);
 client.connect();
 
@@ -17,10 +15,10 @@ app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 const CryptoJS = require("crypto-js");
 
-const BASE_URL = "https://wecca.org"; //"https://wecca-website.onrender.com"
+const BASE_URL = "https://wecca.org";
 const WECCA_DB_NAME = "WECCA";
-const USERS_COLLECTION_NAME = "Users-Test";
-const EVENTS_COLLECTION_NAME = "Events-Test";
+const USERS_COLLECTION_NAME = "Users";
+const EVENTS_COLLECTION_NAME = "Events";
 
 const level1Access = [
   "Software",
@@ -627,5 +625,4 @@ const updateManyFrom = async (
   return result;
 };
 
-app.listen(port, () => console.log(`Listening on port ${port}...`));
-//exports.app = functions.https.onRequest(app);
+exports.app = functions.https.onRequest(app);

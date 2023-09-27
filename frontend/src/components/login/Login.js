@@ -7,7 +7,13 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { BASE_URL, EMAIL_KEY, NAME_KEY, SIGNUP_ROLES, TEAM_KEY } from "../../config";
+import {
+  BASE_URL,
+  EMAIL_KEY,
+  NAME_KEY,
+  SIGNUP_ROLES,
+  TEAM_KEY,
+} from "../../config";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ overrideSubmit, verificationText }) => {
@@ -117,6 +123,12 @@ const Login = ({ overrideSubmit, verificationText }) => {
     );
   };
 
+  const delegateSubmission = (e) => {
+    e.preventDefault()
+    if (overrideSubmit) callOverrideFunction()
+    else submitLogin()
+  }
+
   if (sessionStorage.getItem(EMAIL_KEY)) {
     return (
       <div>
@@ -131,40 +143,47 @@ const Login = ({ overrideSubmit, verificationText }) => {
   }
   return (
     <div className="signup-container">
-      <h2 className="signup-header">Login{overrideSubmit ? " to Verify" : ""}</h2>
+      <h2 className="signup-header">
+        Login{overrideSubmit ? " to Verify" : ""}
+      </h2>
       <p className="signup-description">
-      <div onClick={() => navigate('/signup')} className="inline-div underline-link"><i>Sign up here</i></div>
+        <div
+          onClick={() => navigate("/signup")}
+          className="inline-div underline-link"
+        >
+          <i>Sign up here</i>
+        </div>
       </p>
       <div className="signup-form">
-        <TextField
-          label="Email"
-          fullWidth
-          onChange={(email) => setEmail(email.target.value)}
-          error={state.emailError}
-          required
-          value={state.email}
-        ></TextField>
-        <br />
-        <br />
-        <TextField
-          label="Password"
-          fullWidth
-          onChange={(pwd) => setPassword(pwd.target.value)}
-          error={state.passwordError}
-          required
-          type="password"
-          value={state.password}
-        ></TextField>
-        <div className="centre">
-          <button
-            className="signup-button"
-            onClick={
-              overrideSubmit ? callOverrideFunction : submitLogin
-            }
-          >
-            {!state.isLoading ? "Log In" : "Loading..."}
-          </button>
-        </div>
+        <form onSubmit={(e) => delegateSubmission(e)}>
+          <TextField
+            label="Email"
+            fullWidth
+            onChange={(email) => setEmail(email.target.value)}
+            error={state.emailError}
+            required
+            value={state.email}
+          ></TextField>
+          <br />
+          <br />
+          <TextField
+            label="Password"
+            fullWidth
+            onChange={(pwd) => setPassword(pwd.target.value)}
+            error={state.passwordError}
+            required
+            type="password"
+            value={state.password}
+          ></TextField>
+          <div className="centre">
+            <button
+              className="signup-button"
+              type="submit"
+            >
+              {!state.isLoading ? "Log In" : "Loading..."}
+            </button>
+          </div>
+        </form>
         {state.loginError && (
           <div className="delete-event-error centre">
             <i>Error logging in: {state.loginError}</i>

@@ -4,15 +4,20 @@ import Login from "./Login";
 import { BASE_URL, EMAIL_KEY, NAME_KEY, TEAM_KEY } from "../../config";
 
 const Verify = () => {
-  const [params, setParams] = useSearchParams();
-  const [verificationText, setVerificationText] = useState('');
+  const VALIDATION_INCOMPLETE =
+    "Thank you for verifying your email. Please wait for Dylan or Ethan to verify your account before you may login.";
+  const VALIDATION_COMPLETE =
+    "Thank you for verifying your email - you have been logged in.";
 
-  const setVerificationTimeout = () => {
-    setVerificationText("Thank you for verifying your email. Please wait for Dylan or Ethan to verify your account before you may login.")
+  const [params, setParams] = useSearchParams();
+  const [verificationText, setVerificationText] = useState("");
+
+  const setVerificationTimeout = (text) => {
+    setVerificationText(text);
     setTimeout(() => {
-        setVerificationText('')
-    }, 5000)
-  }
+      setVerificationText("");
+    }, 5000);
+  };
 
   const submitVerification = (
     email,
@@ -20,6 +25,7 @@ const Verify = () => {
     isLoadingCallback,
     errorCallback
   ) => {
+    isLoadingCallback(true);
     fetch(`${BASE_URL}/verify`, {
       method: "POST",
       headers: {
@@ -29,7 +35,7 @@ const Verify = () => {
       body: JSON.stringify({
         password: password,
         email: email,
-        key: params.get("token").replace(/\s/g, '+'),
+        key: params.get("token").replace(/\s/g, "+"),
       }),
     })
       .then((a) => {
@@ -41,8 +47,20 @@ const Verify = () => {
       })
       .then((result) => {
         if (!result.success) throw new Error("Failed to verify");
+        console.log(result);
+        if (EMAIL_KEY in result) {
+          sessionStorage.setItem(NAME_KEY, result.name);
+          sessionStorage.setItem(TEAM_KEY, result.team);
+          sessionStorage.setItem(EMAIL_KEY, result.email);
+          dispatchEvent(new Event("login"));
+        }
+
         isLoadingCallback(false);
-        setVerificationTimeout();
+        if (EMAIL_KEY in result) {
+          setVerificationText(VALIDATION_COMPLETE);
+        } else {
+          setVerificationText(VALIDATION_INCOMPLETE);
+        }
       })
       .catch((err) => {
         errorCallback(err.message);
@@ -50,7 +68,12 @@ const Verify = () => {
       });
   };
 
-  return <Login overrideSubmit={submitVerification} verificationText={verificationText}/>;
+  return (
+    <Login
+      overrideSubmit={submitVerification}
+      verificationText={verificationText}
+    />
+  );
 };
 
 export default Verify;

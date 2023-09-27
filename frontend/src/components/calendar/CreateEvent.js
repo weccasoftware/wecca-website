@@ -342,7 +342,6 @@ const CreateEvent = ({
 
     const recurringEvents = getRecurringEvents();
 
-    console.log("Hi");
     setIsLoading(true);
     fetch(`${BASE_URL}/api/calendar/events`, {
       method: "POST",

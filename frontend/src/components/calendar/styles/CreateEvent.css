@@ -146,6 +146,7 @@
 .delete-event-error {
     color: rgb(137, 27, 27);
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .centered-spinner {
