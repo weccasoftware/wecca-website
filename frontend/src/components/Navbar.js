@@ -13,7 +13,7 @@ const Navbar = () => {
     false: HAMBURGER_DISPLAY_OFF,
     true: HAMBURGER_DISPLAY_ON,
   };
-
+  
   const [enableMenu, setEnableMenu] = useState(false);
   const [expandMenu, setExpandMenu] = useState(false);
   const [windowSize, setWindowSize] = useState([
@@ -43,7 +43,6 @@ const Navbar = () => {
   }, [windowSize]);
 
   useEffect(() => {
-    console.log(`EnableMenu=${enableMenu}, ExpandMenu=${expandMenu}`);
     if (enableMenu && expandMenu) {
       setNavbarClass(NAVBAR_CLASS_VERTICAL_SHOWN);
     } else if (enableMenu && !expandMenu) {
@@ -54,13 +53,12 @@ const Navbar = () => {
   }, [expandMenu, enableMenu]);
 
   const toggleMenuDisplay = () => {
-    console.log("CLICKED");
     setExpandMenu(!expandMenu);
   };
 
   return (
     <nav className="navbar-main">
-      <div className="wecca-logo-image"/>
+      <div className="wecca-logo-image"></div>
       <div className="nav-section" id="nav-main">
         <div
           class={HAMBURGER_MAPPING[enableMenu]}
@@ -85,14 +83,14 @@ const Navbar = () => {
               About
             </NavLink>
           </div>
-          {/*<div className="nav-subsection" onClick={() => setExpandMenu(false)}>
+          {!enableMenu && <div className="nav-subsection" onClick={() => setExpandMenu(false)}>
             <NavLink
               to="/calendar"
               className={({ isActive }) => "link" + (isActive ? " active" : "")}
             >
               Calendar
             </NavLink>
-          </div>*/}
+          </div>}
           <div className="nav-subsection" onClick={() => setExpandMenu(false)}>
             <NavLink
               to="/sponsors"

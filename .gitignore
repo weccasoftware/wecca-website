@@ -30,3 +30,5 @@ yarn-error.log*
 firebase.json
 frontend/build/
 public/
+backend/secret.js
+ui-debug.log
