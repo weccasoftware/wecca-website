@@ -5,6 +5,7 @@ import daniel from "./assets/headshots/bg-Daniel.png";
 import louie from "./assets/headshots/bg-Louie.png";
 import michael from "./assets/headshots/bg-Michael.png";
 import gaby from './assets/headshots/bg-Gaby.png'
+import hirad from './assets/headshots/bg-Hirad.png'
 import cole from "./assets/headshots/bg-Cole.png";
 import ethan from "./assets/headshots/bg-Ethan.png";
 import dylan from "./assets/headshots/bg-Dylan.png"
@@ -107,7 +108,7 @@ export const EXECUTIVES_LIST = [
   {
     title: ROLES.MATERIALS_EXEC,
     name: "Hirad Tahmaseb Pour",
-    image: placeholder,
+    image: hirad,
   },
   {
     title: ROLES.MATERIALS_EXEC,

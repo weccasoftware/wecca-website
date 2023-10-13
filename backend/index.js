@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 const CryptoJS = require("crypto-js");
 
-const BASE_URL = "https://wecca.org"; //"https://wecca-website.onrender.com"
+const BASE_URL = "http://localhost:3001"; //"https://wecca-website.onrender.com"
 const WECCA_DB_NAME = "WECCA";
 const USERS_COLLECTION_NAME = "Users-Test";
 const EVENTS_COLLECTION_NAME = "Events-Test";

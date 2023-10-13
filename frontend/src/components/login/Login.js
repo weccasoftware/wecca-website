@@ -192,8 +192,7 @@ const Login = ({ overrideSubmit, verificationText }) => {
         {verificationText && verificationText.length > 0 && (
           <div className="verify-event-success centre">
             <i>
-              Thank you for verifying your email. Please wait for Dylan or Ethan
-              to verify your account before you may login.
+              {verificationText}
             </i>
           </div>
         )}

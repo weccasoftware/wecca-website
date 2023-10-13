@@ -47,7 +47,7 @@ const Verify = () => {
       })
       .then((result) => {
         if (!result.success) throw new Error("Failed to verify");
-        console.log(result);
+
         if (EMAIL_KEY in result) {
           sessionStorage.setItem(NAME_KEY, result.name);
           sessionStorage.setItem(TEAM_KEY, result.team);
@@ -57,9 +57,9 @@ const Verify = () => {
 
         isLoadingCallback(false);
         if (EMAIL_KEY in result) {
-          setVerificationText(VALIDATION_COMPLETE);
+          setVerificationTimeout(VALIDATION_COMPLETE);
         } else {
-          setVerificationText(VALIDATION_INCOMPLETE);
+          setVerificationTimeout(VALIDATION_INCOMPLETE);
         }
       })
       .catch((err) => {
