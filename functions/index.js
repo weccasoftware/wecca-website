@@ -7,6 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const URI = "mongodb+srv://wecca:Wecca2023@cluster0.yjihcmr.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=false"
+const SECRET_TOKEN = "-KaPdSgVkYp3s6v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQfTjWnZq4t7w!z%C*F-JaNdRgUkXp2s5u8x"
 const client = new MongoClient(URI);
 client.connect();
 
