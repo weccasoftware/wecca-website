@@ -29,6 +29,7 @@ yarn-error.log*
 .firebaserc
 firebase.json
 frontend/build/
-public/
+public/build/
+public/node_modules
 backend/secret.js
 ui-debug.log
