@@ -10,7 +10,11 @@ const About = () => {
   return (
     <div className="about-page">
       <h1>Meet the Executives</h1>
-      <SubteamInfo/>
+      {teamsList.map((subteam) => {
+        return (
+          <SubteamInfo team={subteam} />
+        )
+      })}
       <ul className="exec-list">
         {execsList.map((exec) => {
           return (

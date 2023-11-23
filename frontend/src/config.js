@@ -11,6 +11,7 @@ import ethan from "./assets/headshots/bg-Ethan.png";
 import dylan from "./assets/headshots/bg-Dylan.png"
 import lama from "./assets/headshots/bg-Lama.png";
 import placeholder from "./assets/headshots/bg-Placeholder.png"
+import example from "./assets/homepage/temp-1.jpg"
 
 export const BASE_URL = 'https://us-central1-wecca-website-2ce26.cloudfunctions.net/app'
 
@@ -78,7 +79,7 @@ export const TEAM_INFO = [
   {
     name: "Software",
     description: "Blah blah blah...",
-    image: placeholder
+    image: example
   },
   {
     name: "Materials",
@@ -86,9 +87,9 @@ export const TEAM_INFO = [
     image: placeholder
   },
   {
-    name: "Materials",
-    description: "Blah blah blah 3...",
-    image: placeholder
+    name: "Mould",
+    description: "This is a descirption for mould",
+    image: example
   },
 ]
 
