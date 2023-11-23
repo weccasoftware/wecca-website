@@ -74,6 +74,24 @@ export const FILTER_TEAMS = [
   "General"
 ]
 
+export const TEAM_INFO = [
+  {
+    name: "Software",
+    description: "Blah blah blah...",
+    image: placeholder
+  },
+  {
+    name: "Materials",
+    description: "Blah blah blah 2...",
+    image: placeholder
+  },
+  {
+    name: "Materials",
+    description: "Blah blah blah 3...",
+    image: placeholder
+  },
+]
+
 export const EXECUTIVES_LIST = [
   {
     title: ROLES.LOGISTICS_CAPTAIN,

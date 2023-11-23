@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./styles/About.css";
-import { EXECUTIVES_LIST } from "../../config";
+import { EXECUTIVES_LIST, TEAM_INFO } from "../../config";
+import SubteamInfo from "./SubteamInfo";
 
 const About = () => {
   const [execsList, setExecsList] = useState(EXECUTIVES_LIST);
+  const [teamsList, setTeamsList] = useState(TEAM_INFO);
 
   return (
     <div className="about-page">
       <h1>Meet the Executives</h1>
+      <SubteamInfo/>
       <ul className="exec-list">
         {execsList.map((exec) => {
           return (
@@ -19,15 +22,6 @@ const About = () => {
           );
         })}
       </ul>
-      {/*
-      <div>
-          This page can contain information about the team, including:
-          <ul>
-            <li>Gallery of executives (photo, name, role)</li>
-            <li>Potentially add descriptions and/or photos of each team</li>
-          </ul>
-        </div>
-      */}
     </div>
   );
 };
