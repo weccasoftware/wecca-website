@@ -1,1 +1,0 @@
-# wecca-website
