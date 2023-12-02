@@ -1,0 +1,126 @@
+.home-page {
+    margin-top: -100px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.header-image {
+    height: 35vw;
+    width: 100vw;
+    background-image: url('../../../assets/homepage/homepage-header-2-titled.png');
+    background-size: 100% 100%;
+    margin: 0;
+}
+
+.home-content{
+    margin-top: 0;
+}
+
+.about-wecca-home {
+    justify-content: center;
+    align-items: center;
+}
+
+.about-wecca-home > .about-wecca-title {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.about-wecca-home > .about-wecca-body {
+    width: 80%;
+    font-size: min(20px, 3vw);
+    margin: 20px auto;
+    text-align: left;
+}
+
+.about-wecca-body > span {
+    margin-bottom: 15px;
+    display: block;
+    line-height: 26px;
+}
+
+.image-carousel {
+    /* Figure out whether to make this the full width or not */
+    margin: 20px auto;
+    width: calc(80vw - 1%);
+    overflow: hidden;
+    height: auto;
+    position: relative;
+    z-index: -1;
+}
+
+.slick-slider {
+    line-height: 0;
+}
+
+.carousel-image {
+    height: max(80vh, 600px);
+    width: 80vw;
+}
+
+.announcement-container {
+    width: 80vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 15px auto;
+    height: 150px;
+    background-color: rgb(243, 240, 246);
+    border-radius: 10px;
+}
+
+.announcement-title {
+    font-size: min(20px, 3vw);
+    margin: 5px 0px;
+}
+
+.announcement-text {
+    font-size: min(17px, 2.5vw);
+    padding: min(10px, 1vw);
+}
+
+.announcement-content {
+    width: 70%;
+    display: inline-block;
+}
+
+.announcement-image-container {
+    width: 20%;
+    height: auto;
+    max-height: 120px;
+    display: inline-block;
+    margin: 15px 0px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.announcement-image {
+    height: 100%;
+    width: 100%;
+}
+
+.social-icon {
+    color: #522584;
+    font-size: 60px;
+    margin: 5px 30px;
+}
+
+.social-icon:hover {
+    color: #9065c2;
+    cursor: pointer;
+}
+
+.social-icon-container {
+    margin: 0px;
+    margin-top: 30px;
+    padding: 6px;
+}
+
+.inline-div {
+    display: inline;
+}

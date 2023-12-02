@@ -1,0 +1,48 @@
+.date-items {
+    height: 10px;
+    width: 10px;
+    float: right;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.item-so {
+    background-color: #B118C8;
+}
+
+.item-da {
+    background-color: #3FA7D6;
+}
+
+.item-tc {
+    background-color: #EE6352;
+}
+
+.item-mo {
+    background-color: #59CD90;
+}
+
+.item-ma {
+    background-color: #FAC05E;
+}
+
+.item-tr {
+    background-color: #BFD7FF;
+}
+
+.item-gd {
+    background-color: #197BBD;
+}
+
+.item-ge {
+    background-color: #C94277;
+}
+
+.item-ex {
+    background-color: #770058;
+}
+
+.item-ca {
+    background-color: #CFB9A5;
+}

@@ -1,0 +1,57 @@
+.header-no-margin {
+    margin-bottom: 15px;
+}
+
+.contact-form {
+    width: 60%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-input-sm {
+    width: 48%;
+    padding: 1%;
+    margin: 0;
+    display: inline-block;
+}
+
+.contact-input-lg {
+    width: 98%;
+    padding: 2% 1%;
+    display: block;
+}
+
+.contact-description {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-style: italic;
+    padding: 0px 20px;
+}
+
+.contact-button {
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    border: 1px solid #522584;
+    color: #522584;
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 15px;
+}
+
+.contact-button:hover {
+    border-color: #a170d8;
+    color: #a170d8;
+}
+
+.contact-button-container {
+    text-align: center;
+    margin: 10px;
+}
+
+.slack-link:link, .slack-link:visited {
+    color: inherit;
+}

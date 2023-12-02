@@ -1,0 +1,229 @@
+.sponsors-page {
+    text-align: left;
+    height: 100%;
+    margin-top: -100px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.sponsorship-tiers-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 0;
+    width: 60%;
+}
+
+.sponsorship-tiers-list>li {
+    width: 100%;
+    display: inline-block;
+    font-size: 25px;
+    padding: 2px;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.sponsorship-tiers-list>li:last-child {
+    border: none;
+}
+
+.sponsorship-tiers-list>li:hover {
+    cursor: pointer;
+    color: rgb(142, 56, 153);
+}
+
+.selected-tier {
+    font-weight: 500;
+    color: #4f29cd;;
+}
+
+.sponsor-tier-content {
+    width: 80%;
+    height: 30%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.tier-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px solid;
+}
+
+.tier-image-mobile {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px solid;
+}
+
+.tier-image-container {
+    display: inline-block;
+    width: 23.8%;
+    height: 23.8%;
+    padding: 0px;
+    margin: 0px 5%;
+}
+
+.tier-image-container-mobile {
+    display: block;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    margin-bottom: 5%;
+}
+
+.tier-description-container {
+    display: inline-block;
+    font-size: 20px;
+    width: 50%;
+}
+
+.tier-content {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.tier-list-item {
+    margin: 7px 0;
+}
+
+.tier-subtitle {
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.tier-subtitle-mobile {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.donate-button {
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    border: 1px solid #522584;
+    color: #522584;
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 15px;
+}
+
+.donate-button:hover {
+    border-color: #a170d8;
+    color: #a170d8;
+}
+
+.donate-form {
+    text-align: center;
+}
+
+.donate-form>h1 {
+    margin-bottom: 10px;
+}
+
+.donate-subtext {
+    font-size: 18px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+.donate-input {
+    width: 70%;
+    margin: 15px auto;
+}
+
+.sponsor-response-message {
+    font-style: italic;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sponsorship-tier-company-box {
+    text-align: left;
+    margin: 5px auto;
+    display: inline-block;
+    width: fit-content;
+    width: 100%;
+}
+
+.sponsorship-tier-company-header {
+    font-size: 30px;
+    width: calc(80% + 40px);
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+.sponsorship-tier-company-content {
+    background-color: white;
+    border: 1px solid #522584;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 80%;
+    margin: 5px auto;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.sponsorship-title {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sponsorship-caption {
+    font-size: 22px;
+    text-align: center;
+}
+
+.sponsor-hr {
+    width: 90%;
+    border: 0.2px solid;
+    border-radius: 2px;
+    margin: 2% auto;
+}
+
+.sponsor-header-image {
+    height: 50vw;
+    width: 100vw;
+    background-image: url('../../../assets/sponsors/alt-sponsors-photo.png');
+    background-size: 100% 100%;
+    margin: 0;
+}
+
+.sponsor-logo-container {
+    width: 30%;
+    height: auto;
+    display: inline-block;
+    margin: 20px;
+}
+
+.sponsor-logo-container>img {
+    width: 100%;
+    height: 100%;
+}
+
+.purple-tier {
+    border-color: #522584;
+}
+
+.gold-tier {
+    border-color: gold;
+}
+
+.platinum-tier {
+    border-color: silver;
+}
