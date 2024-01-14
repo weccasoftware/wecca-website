@@ -10,6 +10,7 @@ import ellisdon from '../../assets/sponsor-logos/EllisDon.png'
 import dillon from '../../assets/sponsor-logos/Dillon.png'
 import sbm from '../../assets/sponsor-logos/SBM.png'
 import johnaarts from '../../assets/sponsor-logos/JohnAarts.png'
+import williams from '../../assets/sponsor-logos/Williams.png'
 import purpleImage from '../../assets/sponsors/sponsors-tier-photo-1.png'
 import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.png'
 import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.png'
@@ -55,7 +56,7 @@ const Sponsors = () => {
   const FAILURE_MESSAGE = `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
 
   const platinumLogos = [
-    dillon, mte, cornerstone, sbm
+    dillon, mte, cornerstone, sbm, williams
   ]
   const goldLogos = [
     autotube, ellisdon, johnaarts
