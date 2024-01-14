@@ -18,6 +18,8 @@ import {
 } from "../../config";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import casting from '../../assets/homepage/casting.jpg'
+import miniCasting from '../../assets/homepage/mini-casting.jpg'
 
 const upcomingEvents = [
   /*{
@@ -27,6 +29,20 @@ const upcomingEvents = [
                 " If you have any questions before then, feel free to contact us via our contact form.",
         image: temp1
     },*/
+    {
+      title: "Join us on Mini Casting Day",
+      text: "Come out to Mini Casting Day on Saturday, January 20th at 11:00 am. Mini Casting Day serves as a trial run for our " + 
+              " full casting day, allowing members to get experienced with the procedure, different casting roles, and have a fun time!" + 
+              " Everyone is welcome to come and help us out!",
+      image: miniCasting
+    },
+    {
+      title: "Come out to Casting Day",
+      text: "Come join us on Casting Day on Saturday, February 3rd at 11:00 am. Casting Day is the biggest and most fun day of the year for us, where we " +
+              " make a bunch of concrete and build the entire canoe. We need as many hands as possible, so feel free to come out! Pizza will be " + 
+              " available to members who have paid their team fee.",
+      image: casting
+    },
 ];
 
 const Home = () => {
