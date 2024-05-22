@@ -211,6 +211,10 @@
     margin: 20px;
 }
 
+.sponsor-logo-container:hover {
+    cursor: pointer;
+}
+
 .sponsor-logo-container>img {
     width: 100%;
     height: 100%;

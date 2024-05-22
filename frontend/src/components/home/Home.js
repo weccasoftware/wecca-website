@@ -18,30 +18,15 @@ import {
 } from "../../config";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import casting from '../../assets/homepage/casting.jpg'
-import miniCasting from '../../assets/homepage/mini-casting.jpg'
+import comp from '../../assets/homepage/competition.jpeg'
 
 const upcomingEvents = [
-  /*{
-        title: "Come to our first meeting!",
-        text: "WECCA will be having its first meeting of the year at 4:30 pm on Tuesday, September 12th (room TBD)." + 
-                " Everyone is welcome, and you will have the chance to meet the executives and learn more about the club." + 
-                " If you have any questions before then, feel free to contact us via our contact form.",
-        image: temp1
-    },*/
     {
-      title: "Join us on Mini Casting Day",
-      text: "Come out to Mini Casting Day on Saturday, January 20th at 11:00 am. Mini Casting Day serves as a trial run for our " + 
-              " full casting day, allowing members to get experienced with the procedure, different casting roles, and have a fun time!" + 
-              " Everyone is welcome to come and help us out!",
-      image: miniCasting
-    },
-    {
-      title: "Come out to Casting Day",
-      text: "Come join us on Casting Day on Saturday, February 3rd at 11:00 am. Casting Day is the biggest and most fun day of the year for us, where we " +
-              " make a bunch of concrete and build the entire canoe. We need as many hands as possible, so feel free to come out! Pizza will be " + 
-              " available to members who have paid their team fee.",
-      image: casting
+      title: "Congratulations to the team on a fifth place finish at competition!",
+      text: "WECCA had our best year in recent memory, finishing fifth overall at the 2024 CNCCC competiton. This included " + 
+                "a second place finish in the Enhanced Focus Area and a third place finish in the Project Proposal. We are so " + 
+                "proud of the team and everything that we have accomplished this year!",
+      image: comp
     },
 ];
 

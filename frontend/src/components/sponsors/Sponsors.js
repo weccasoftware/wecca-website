@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Sponsors.css";
 import { TextField } from "@mui/material";
-import { FINANCE_CAPTAIN_EMAIL, SPONSORSHIP_FORM_TYPE, WINDOW_SIZE_THRESHOLD_PX } from "../../config";
+import {
+  FINANCE_CAPTAIN_EMAIL,
+  SPONSORSHIP_FORM_TYPE,
+  WINDOW_SIZE_THRESHOLD_PX,
+} from "../../config";
 import { sendMail } from "../../util/Mail";
-import mte from '../../assets/sponsor-logos/MTE.png'
-import autotube from '../../assets/sponsor-logos/Autotube.png'
-import cornerstone from '../../assets/sponsor-logos/Cornerstone.png'
-import ellisdon from '../../assets/sponsor-logos/EllisDon.png'
-import dillon from '../../assets/sponsor-logos/Dillon.png'
-import sbm from '../../assets/sponsor-logos/SBM.png'
-import johnaarts from '../../assets/sponsor-logos/JohnAarts.png'
-import williams from '../../assets/sponsor-logos/Williams.png'
-import purpleImage from '../../assets/sponsors/sponsors-tier-photo-1.png'
-import goldImage from '../../assets/sponsors/sponsors-tier-photo-2.png'
-import platinumImage from '../../assets/sponsors/sponsors-tier-photo-3.png'
+import mte from "../../assets/sponsor-logos/MTE.png";
+import autotube from "../../assets/sponsor-logos/Autotube.png";
+import cornerstone from "../../assets/sponsor-logos/Cornerstone.png";
+import ellisdon from "../../assets/sponsor-logos/EllisDon.png";
+import dillon from "../../assets/sponsor-logos/Dillon.png";
+import sbm from "../../assets/sponsor-logos/SBM.png";
+import johnaarts from "../../assets/sponsor-logos/JohnAarts.png";
+import williams from "../../assets/sponsor-logos/Williams.png";
+import am from "../../assets/sponsor-logos/AM.png";
+import purpleImage from "../../assets/sponsors/sponsors-tier-photo-1.png";
+import goldImage from "../../assets/sponsors/sponsors-tier-photo-2.png";
+import platinumImage from "../../assets/sponsors/sponsors-tier-photo-3.png";
 
 const Sponsors = () => {
   const [windowSize, setWindowSize] = useState([
@@ -56,14 +61,43 @@ const Sponsors = () => {
   const FAILURE_MESSAGE = `Your message could not be delivered at this time. You can reach out to our finance captain directly at ${FINANCE_CAPTAIN_EMAIL}.`;
 
   const platinumLogos = [
-    dillon, mte, cornerstone, sbm, williams
-  ]
+    {
+      image: dillon,
+      name: "Dillon Consulting",
+      website: "https://www.dillon.ca",
+    },
+    { image: mte, name: "MTE", website: "https://www.mte85.com" },
+    {
+      image: cornerstone,
+      name: "Cornerstone Architecture",
+      website: "https://www.cornerstonearchitecture.ca",
+    },
+    {
+      image: sbm,
+      name: "Strik Baldinelli Moniz",
+      website: "https://www.sbmltd.ca",
+    },
+    {
+      image: williams,
+      name: "Williams Form Engineering Corp.",
+      website: "https://www.williamsform.com",
+    },
+  ];
   const goldLogos = [
-    autotube, ellisdon, johnaarts
-  ]
-  const purpleLogos = [
-
-  ]
+    { image: autotube, name: "Autotube", website: "https://www.autotube.com" },
+    { image: ellisdon, name: "EllisDon", website: "https://www.ellisdon.com" },
+    {
+      image: johnaarts,
+      name: "John Aarts Group",
+      website: "https://johnaartsgroup.com",
+    },
+    {
+      image: am,
+      name: "Architectural Millwork & Door Installations",
+      website: "https://amdiinc.com",
+    },
+  ];
+  const purpleLogos = [];
 
   const renderedPackages = {
     purple: (
@@ -135,7 +169,9 @@ const Sponsors = () => {
           <img src={goldImage} className="tier-image-mobile gold-tier" />
         </div>
         <div className="tier-description-container-mobile">
-        <div className="tier-subtitle-mobile">Gold Sponsors: $1,000-$1,499</div>
+          <div className="tier-subtitle-mobile">
+            Gold Sponsors: $1,000-$1,499
+          </div>
           <ul>
             {goldBenefits.map((item) => {
               return <li className="tier-list-item">{item}</li>;
@@ -147,10 +183,15 @@ const Sponsors = () => {
     platinum: (
       <div className="tier-content-mobile">
         <div className="tier-image-container-mobile">
-          <img src={platinumImage} className="tier-image-mobile platinum-tier" />
+          <img
+            src={platinumImage}
+            className="tier-image-mobile platinum-tier"
+          />
         </div>
         <div className="tier-description-container-mobile">
-        <div className="tier-subtitle-mobile">Platinum Sponsors: $500-$999</div>
+          <div className="tier-subtitle-mobile">
+            Platinum Sponsors: $500-$999
+          </div>
           <ul>
             {platinumBenefits.map((item) => {
               return <li className="tier-list-item">{item}</li>;
@@ -158,8 +199,8 @@ const Sponsors = () => {
           </ul>
         </div>
       </div>
-    )
-  }
+    ),
+  };
 
   const [renderedPackage, setRenderedPackage] = useState(renderedPackages.gold);
   const [selectedTier, setSelectedTier] = useState("purple");
@@ -227,54 +268,54 @@ const Sponsors = () => {
         </li>
       </ul>
       <div className="sponsor-tier-content">{renderedPackage}</div>
-      <hr className="sponsor-hr"/>
+      <hr className="sponsor-hr" />
       <h1 className="sponsorship-title">Our Sponsors</h1>
       <div className="sponsorship-caption">
-        Thank you to our current sponsors for the 2023-24 year! 
+        Thank you to our current sponsors for the 2023-24 year!
       </div>
-      {purpleLogos && purpleLogos.length > 0 && <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Purple Tier</div>
-        <div className="sponsorship-tier-company-content purple-tier">
-          {
-            purpleLogos.map((logo) => {
+      {purpleLogos && purpleLogos.length > 0 && (
+        <div className="sponsorship-tier-company-box">
+          <div className="sponsorship-tier-company-header">Purple Tier</div>
+          <div className="sponsorship-tier-company-content purple-tier">
+            {purpleLogos.map((logo) => {
               return (
-                <div className="sponsor-logo-container">
-                  <img src={logo} />
-                </div>
-              )
-            })
-          }
+                <a className="sponsor-logo-container" title={logo.name} href={logo.website} target="_blank">
+                  <img src={logo.image} />
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>}
-      {goldLogos && goldLogos.length > 0 && <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Gold Tier</div>
-        <div className="sponsorship-tier-company-content gold-tier">
-        {
-            goldLogos.map((logo) => {
+      )}
+      {goldLogos && goldLogos.length > 0 && (
+        <div className="sponsorship-tier-company-box">
+          <div className="sponsorship-tier-company-header">Gold Tier</div>
+          <div className="sponsorship-tier-company-content gold-tier">
+            {goldLogos.map((logo) => {
               return (
-                <div className="sponsor-logo-container">
-                  <img src={logo} />
-                </div>
-              )
-            })
-          }
+                <a className="sponsor-logo-container" title={logo.name} href={logo.website} target="_blank">
+                  <img src={logo.image} />
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>}
-      {platinumLogos && platinumLogos.length > 0 && <div className="sponsorship-tier-company-box">
-        <div className="sponsorship-tier-company-header">Platinum Tier</div>
-        <div className="sponsorship-tier-company-content platinum-tier">
-        {
-            platinumLogos.map((logo) => {
+      )}
+      {platinumLogos && platinumLogos.length > 0 && (
+        <div className="sponsorship-tier-company-box">
+          <div className="sponsorship-tier-company-header">Platinum Tier</div>
+          <div className="sponsorship-tier-company-content platinum-tier">
+            {platinumLogos.map((logo) => {
               return (
-                <div className="sponsor-logo-container">
-                  <img src={logo} />
-                </div>
-              )
-            })
-          }
+                <a className="sponsor-logo-container" title={logo.name} href={logo.website} target="_blank">
+                  <img src={logo.image}/>
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>}
-      <hr className="sponsor-hr"/>
+      )}
+      <hr className="sponsor-hr" />
       <div className="donate-form">
         <h1 className="centre">Become a Sponsor</h1>
         <form
