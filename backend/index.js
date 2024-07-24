@@ -628,4 +628,4 @@ const updateManyFrom = async (
 };
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-//exports.app = functions.https.onRequest(app);
+exports.app = functions.https.onRequest(app);

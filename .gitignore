@@ -26,8 +26,6 @@ yarn-error.log*
 # custom
 /frontend/src/secrets.js
 .firebase/
-.firebaserc
-firebase.json
 frontend/build/
 public/build/
 public/node_modules

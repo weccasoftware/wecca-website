@@ -31,9 +31,9 @@ const upcomingEvents = [
     },
   {
     title: "Introducing PADDL, our newest civil engineering analysis software!",
-    text: "We are thrilled to announce the initial launch of PADDL (Precision Analysis & Design for Dynamic Loading)." +
+    text: "We are thrilled to announce the initial launch of PADDL - Precision Analysis & Design for Dynamic Loading." +
             " PADDL is our in house custom software solution for engineering design and analysis problems we face during the construction" +
-            " of a concrete canoe. The software is a candidate for our 2025 Enhanced Focus Area and we are excited for further its further development" +
+            " of a concrete canoe. The Java-based desktop app is a candidate for our 2025 Enhanced Focus Area and we are excited for its further development" +
             " in the 2024-2025 school year.",
     image: paddl,
     downloadLinks: {
