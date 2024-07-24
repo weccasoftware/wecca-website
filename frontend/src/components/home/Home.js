@@ -80,14 +80,8 @@ const Home = () => {
             teamwork skills in a welcoming and inclusive environment.
           </span>
             <span>
-            The most recent national competition in May 2023 was held at Western
-            University in London, Ontario. As the host team, WECCA finished in
-            the top half of the standings, proudly earning the competition’s
-            Most Improved Team award.
-          </span>
-            <span>
-            Designing a canoe can be challenging. We decided to take it up a
-            notch. <i>Concrete floats our boat, what floats yours?</i>
+            Designing a canoe can be challenging, but that has never stopped us. We decided to take it up a
+            notch. <br/><br/> <i>Concrete floats our boat, what floats yours?</i>
           </span>
           </div>
         </div>
@@ -102,7 +96,7 @@ const Home = () => {
         <hr className="sponsor-hr"/>
         {upcomingEvents.length > 0 && (
             <div>
-              <h1>Announcements</h1>
+              <div className="announcements-section-title">Announcements</div>
               <div>
                 {upcomingEvents.map((ev, index) => {
                   return (

@@ -14,7 +14,7 @@ const AnnouncementContainer = ({ alignLeft, title, content, image, downloadLinks
         </div>
       )}
       <div className={isSmallView ? "announcement-content-mobile" : "announcement-content"}>
-        <h3 className="announcement-title">{title}</h3>
+        <b><span className="announcement-title">{title}</span></b>
         <div className="announcement-text">{content}</div>
           {downloadLinks && (
               <>
@@ -22,11 +22,16 @@ const AnnouncementContainer = ({ alignLeft, title, content, image, downloadLinks
                       <b><a href={downloadLinks.macLink.ref} target="_blank">{downloadLinks.macLink.text}</a></b>
                       <b><a href={downloadLinks.pcLink.ref} target="_blank">{downloadLinks.pcLink.text}</a></b>
                   </div>
-                  <i><span className="announcement-hint-text">
-                      A note for Mac users: After you try and open PADDL for the first time,
-                      you need to go to Settings > Privacy & Security.
-                      You’ll see a message saying the app is from a third party developer. Click “Open Anyway”.
-                  </span></i>
+                  {!isSmallView && (
+                      <i>
+                          <span className="announcement-hint-text">
+                          A note for Mac users: After you try and open PADDL for the first time,
+                          you need to go to Settings > Privacy & Security.
+                          You’ll see a message saying the app is from a third party developer. Click “Open Anyway”.
+                          </span>
+                      </i>
+                    )
+                  }
               </>
           )}
       </div>

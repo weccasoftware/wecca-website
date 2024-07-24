@@ -69,8 +69,8 @@ This needs to be redone properly with CSS media queries
 .announcement-container {
     width: 80vw;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
+    align-content: center;
     flex-direction: row;
     margin: 15px auto;
     height: auto;
@@ -79,9 +79,13 @@ This needs to be redone properly with CSS media queries
     padding: 10px;
 }
 
+.announcements-section-title {
+    font-size: min(34px, 6.5vw);
+    font-weight: bold;
+}
+
 .announcement-title {
-    font-size: min(20px, 3vw);
-    margin: 5px 0px;
+    font-size: min(24px, 4vw);
 }
 
 .announcement-text {
@@ -92,32 +96,33 @@ This needs to be redone properly with CSS media queries
 .announcement-hint-text {
     color: #522584;
     font-size: min(11px, 1.75vw);
-    padding: min(10px, 1vw);
 }
 
 .announcement-content {
     width: 55%;
-    display: inline-block;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 .announcement-content-small {
     width: 95%;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 15px auto;
 }
 
 .announcement-image-container {
     width: 40%;
     height: auto;
     display: inline-block;
-    overflow: hidden;
-    border-radius: 2px;
 }
 
 .announcement-image-container-small {
     width: 95%;
     height: auto;
     display: inline-block;
-    overflow: hidden;
     border-radius: 2px;
 }
 
