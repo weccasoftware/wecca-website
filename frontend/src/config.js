@@ -17,8 +17,8 @@ import tyler from "./assets/headshots/bg-Tyler.png";
 import placeholder from "./assets/headshots/bg-Placeholder.png"
 
 export const BASE_URL = 'https://us-central1-wecca-website-c5892.cloudfunctions.net/app'
-
-export const WINDOW_SIZE_THRESHOLD_PX = 768;
+export const WINDOW_WIDTH_THRESHOLD_PX = 1050;
+export const MOBILE_WIDTH_THRESHOLD_PX = 600;
 export const SLACK_LINK = "https://join.slack.com/t/wecca2023-24/shared_invite/zt-21o0f5jn9-al9lZLzSOjTrxhflOeR3eQ";
 export const INSTAGRAM_LINK = "https://www.instagram.com/wecca.uwo/";
 export const LINKEDIN_LINK = "https://www.linkedin.com/company/western-engineering-concrete-canoe-association/";

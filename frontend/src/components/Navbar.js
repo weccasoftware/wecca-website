@@ -1,7 +1,7 @@
 import "./styles/Navbar.css";
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { WINDOW_SIZE_THRESHOLD_PX } from "../config";
+import { WINDOW_WIDTH_THRESHOLD_PX } from "../config";
 
 const Navbar = () => {
   const NAVBAR_CLASS_HORIZONTAL = "nav-menu";
@@ -35,9 +35,9 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (windowSize[0] <= WINDOW_SIZE_THRESHOLD_PX && !enableMenu) {
+    if (windowSize[0] <= WINDOW_WIDTH_THRESHOLD_PX && !enableMenu) {
       setEnableMenu(true);
-    } else if (windowSize[0] >= WINDOW_SIZE_THRESHOLD_PX && enableMenu) {
+    } else if (windowSize[0] >= WINDOW_WIDTH_THRESHOLD_PX && enableMenu) {
       setEnableMenu(false);
     }
   }, [windowSize]);

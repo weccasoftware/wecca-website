@@ -12,13 +12,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   INSTAGRAM_LINK,
-  LINKEDIN_LINK,
+  LINKEDIN_LINK, MOBILE_WIDTH_THRESHOLD_PX,
   SLACK_LINK,
-  WINDOW_SIZE_THRESHOLD_PX,
+  WINDOW_WIDTH_THRESHOLD_PX,
 } from "../../config";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import comp from '../../assets/homepage/competition.jpeg'
+import paddl from '../../assets/homepage/paddl.png'
 
 const upcomingEvents = [
     {
@@ -26,8 +27,20 @@ const upcomingEvents = [
       text: "WECCA had our best year in recent memory, finishing fifth overall at the 2024 CNCCC competiton. This included " + 
                 "a second place finish in the Enhanced Focus Area and a third place finish in the Project Proposal. We are so " + 
                 "proud of the team and everything that we have accomplished this year!",
-      image: comp
+      image: comp,
     },
+  {
+    title: "Introducing PADDL, our newest civil engineering analysis software!",
+    text: "We are thrilled to announce the initial launch of PADDL (Precision Analysis & Design for Dynamic Loading)." +
+            " PADDL is our in house custom software solution for engineering design and analysis problems we face during the construction" +
+            " of a concrete canoe. The software is a candidate for our 2025 Enhanced Focus Area and we are excited for further its further development" +
+            " in the 2024-2025 school year.",
+    image: paddl,
+    downloadLinks: {
+      macLink: { text: "Download PADDL Mac", ref: "TODO" },
+      pcLink: { text: "Download PADDL PC", ref: "TODO" }
+    }
+  }
 ];
 
 const Home = () => {
@@ -50,10 +63,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-page">
-      <div className="header-image" />
-      <div className="about-wecca-home">
-        <div className="about-wecca-body">
+      <div className="home-page">
+        <div className="header-image"/>
+        <div className="about-wecca-home">
+          <div className="about-wecca-body">
           <span>
             The Western Engineering Concrete Canoe Association (WECCA) is a team
             of dedicated and innovative students who come together to design,
@@ -66,59 +79,62 @@ const Home = () => {
             provides an excellent opportunity for students to gain technical and
             teamwork skills in a welcoming and inclusive environment.
           </span>
-          <span>
+            <span>
             The most recent national competition in May 2023 was held at Western
             University in London, Ontario. As the host team, WECCA finished in
             the top half of the standings, proudly earning the competition’s
             Most Improved Team award.
           </span>
-          <span>
+            <span>
             Designing a canoe can be challenging. We decided to take it up a
             notch. <i>Concrete floats our boat, what floats yours?</i>
           </span>
-        </div>
-      </div>
-      {windowSize[0] > WINDOW_SIZE_THRESHOLD_PX && (
-        <div>
-          <hr className="sponsor-hr" />
-          <div className="carousel-container">
-            <ImageCarousel />
-          </div>
-          <hr className="sponsor-hr" />
-        </div>
-      )}
-      {upcomingEvents.length > 0 && (
-        <div>
-          <h1>Announcements</h1>
-          <div>
-            {upcomingEvents.map((ev, index) => {
-              return (
-                <AnnouncementContainer
-                  alignLeft={index % 2 === 1}
-                  title={ev.title}
-                  content={ev.text}
-                  image={ev.image}
-                />
-              );
-            })}
           </div>
         </div>
-      )}
-      <div className="social-icon-container">
-        <a href={INSTAGRAM_LINK} target="_blank">
-          <FontAwesomeIcon icon={faInstagram} className="social-icon" />
-        </a>
-        <a href={LINKEDIN_LINK} target="_blank">
-          <FontAwesomeIcon icon={faLinkedin} className="social-icon" />
-        </a>
-        <a href={SLACK_LINK} target="_blank">
-          <FontAwesomeIcon icon={faSlack} className="social-icon" />
-        </a>
-        <div className="inline-div" onClick={() => navigate('/login')}>
-          <FontAwesomeIcon icon={faUser} className="social-icon" />
+        {windowSize[0] > WINDOW_WIDTH_THRESHOLD_PX && (
+            <div>
+              <hr className="sponsor-hr"/>
+              <div className="carousel-container">
+                <ImageCarousel/>
+              </div>
+            </div>
+        )}
+        <hr className="sponsor-hr"/>
+        {upcomingEvents.length > 0 && (
+            <div>
+              <h1>Announcements</h1>
+              <div>
+                {upcomingEvents.map((ev, index) => {
+                  return (
+                      <AnnouncementContainer
+                          alignLeft={index % 2 === 1}
+                          title={ev.title}
+                          content={ev.text}
+                          image={ev.image}
+                          downloadLinks={ev.downloadLinks}
+                          isSmallView={windowSize[0] < WINDOW_WIDTH_THRESHOLD_PX}
+                      />
+                  );
+                })}
+              </div>
+            </div>
+        )}
+        <div
+            className={windowSize[0] > MOBILE_WIDTH_THRESHOLD_PX ? "social-icon-container" : "social-icon-container-mobile"}>
+          <a href={INSTAGRAM_LINK} target="_blank">
+            <FontAwesomeIcon icon={faInstagram} className="social-icon"/>
+          </a>
+          <a href={LINKEDIN_LINK} target="_blank">
+            <FontAwesomeIcon icon={faLinkedin} className="social-icon"/>
+          </a>
+          <a href={SLACK_LINK} target="_blank">
+            <FontAwesomeIcon icon={faSlack} className="social-icon"/>
+          </a>
+          <div className="inline-div" onClick={() => navigate('/login')}>
+            <FontAwesomeIcon icon={faUser} className="social-icon"/>
+          </div>
         </div>
-      </div>
-      {/* <hr className="sponsor-hr" />
+        {/* <hr className="sponsor-hr" />
       <div className="home-content">
         Other things this page can include:
         <ul>
@@ -126,7 +142,7 @@ const Home = () => {
           <li>Contact Form/Link to Contact Page</li>
         </ul>
     </div>*/}
-    </div>
+      </div>
   );
 };
 

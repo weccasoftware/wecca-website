@@ -1,7 +1,7 @@
 import "./styles/Calendar.css";
 import React, { useEffect, useState } from "react";
 import CalendarComponent from "./CalendarComponent";
-import { WINDOW_SIZE_THRESHOLD_PX } from "../../config";
+import { WINDOW_WIDTH_THRESHOLD_PX } from "../../config";
 
 const Calendar = () => {
   const [windowSize, setWindowSize] = useState([
@@ -21,7 +21,7 @@ const Calendar = () => {
     };
   }, []);
 
-  if (windowSize[0] <= WINDOW_SIZE_THRESHOLD_PX) {
+  if (windowSize[0] <= WINDOW_WIDTH_THRESHOLD_PX) {
     return (
       <div>
         <h2>Calendar Unavailable</h2>

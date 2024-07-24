@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import {
   FINANCE_CAPTAIN_EMAIL,
   SPONSORSHIP_FORM_TYPE,
-  WINDOW_SIZE_THRESHOLD_PX,
+  WINDOW_WIDTH_THRESHOLD_PX,
 } from "../../config";
 import { sendMail } from "../../util/Mail";
 import mte from "../../assets/sponsor-logos/MTE.png";
@@ -209,7 +209,7 @@ const Sponsors = () => {
   const [submitMessage, setSubmitMessage] = useState("");
 
   useEffect(() => {
-    if (windowSize[0] > WINDOW_SIZE_THRESHOLD_PX) {
+    if (windowSize[0] > WINDOW_WIDTH_THRESHOLD_PX) {
       setRenderedPackage(renderedPackages[selectedTier]);
     } else {
       setRenderedPackage(mobilePackages[selectedTier]);
