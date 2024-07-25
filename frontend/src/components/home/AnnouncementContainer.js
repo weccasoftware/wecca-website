@@ -25,9 +25,12 @@ const AnnouncementContainer = ({ alignLeft, title, content, image, downloadLinks
                   {!isSmallView && (
                       <i>
                           <span className="announcement-hint-text">
-                          A note for Mac users: After you try and open PADDL for the first time,
-                          you need to go to Settings > Privacy & Security.
-                          You’ll see a message saying the app is from a third party developer. Click “Open Anyway”.
+                            To run PADDL, you’ll need to give your computer permission to run a third party app.
+                              <br/>
+                            On macOS: After you try and open PADDL for the first time, you'll need to go to Settings > Privacy & Security.
+                            Scroll down and click “Open Anyway”.
+                              <br/>
+                            On PC: When opening the PADDL installer, you’ll see the “Windows protected your PC” dialog. Click “More info”, and then “Run anyway”.
                           </span>
                       </i>
                     )

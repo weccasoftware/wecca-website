@@ -95,7 +95,7 @@ This needs to be redone properly with CSS media queries
 
 .announcement-hint-text {
     color: #522584;
-    font-size: min(11px, 1.75vw);
+    font-size: min(10px, 1.5vw);
 }
 
 .announcement-content {
