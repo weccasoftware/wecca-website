@@ -37,8 +37,8 @@ const upcomingEvents = [
             " in the 2024-2025 school year.",
     image: paddl,
     downloadLinks: {
-      macLink: { text: "Download PADDL Mac", ref: "TODO" },
-      pcLink: { text: "Download PADDL PC", ref: "TODO" }
+      macLink: { text: "Download PADDL Mac", ref: "https://github.com/Tyler-Liquornik/canoe-analysis/releases/download/v1.0.0-MAC/PADDL-1.0.0.dmg" },
+      pcLink: { text: "Download PADDL PC", ref: "https://github.com/Tyler-Liquornik/canoe-analysis/releases/download/v1.0.0-PC/PADDL-1.0.0.msi" }
     }
   }
 ];
