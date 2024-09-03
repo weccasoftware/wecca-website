@@ -149,12 +149,14 @@ This needs to be redone properly with CSS media queries
 
 .social-icon {
     color: #522584;
+    fill: #522584;
     font-size: 60px;
     margin: 0 3vw 0;
 }
 
 .social-icon:hover {
     color: #9065c2;
+    fill: #9065c2;
     cursor: pointer;
 }
 

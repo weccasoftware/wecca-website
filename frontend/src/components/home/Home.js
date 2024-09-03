@@ -7,19 +7,19 @@ import ImageCarousel from "./ImageCarousel";
 import AnnouncementContainer from "./AnnouncementContainer";
 import {
   faInstagram,
-  faSlack,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   INSTAGRAM_LINK,
   LINKEDIN_LINK, MOBILE_WIDTH_THRESHOLD_PX,
-  SLACK_LINK,
+  TEAMS_LINK,
   WINDOW_WIDTH_THRESHOLD_PX,
 } from "../../config";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import comp from '../../assets/homepage/competition.jpeg'
 import paddl from '../../assets/homepage/paddl.png'
+import MicrosoftTeamsIcon from "./TeamsSVG";
 
 const upcomingEvents = [
     {
@@ -121,8 +121,8 @@ const Home = () => {
           <a href={LINKEDIN_LINK} target="_blank">
             <FontAwesomeIcon icon={faLinkedin} className="social-icon"/>
           </a>
-          <a href={SLACK_LINK} target="_blank">
-            <FontAwesomeIcon icon={faSlack} className="social-icon"/>
+          <a href={TEAMS_LINK} target="_blank">
+            <MicrosoftTeamsIcon className="social-icon"/>
           </a>
           <div className="inline-div" onClick={() => navigate('/login')}>
             <FontAwesomeIcon icon={faUser} className="social-icon"/>

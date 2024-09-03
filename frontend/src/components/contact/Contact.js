@@ -12,7 +12,7 @@ import {
   FINANCE_CAPTAIN_EMAIL,
   LOGISTICS_CAPTAIN_EMAIL,
   LOGISTICS_CAPTAIN_NAME,
-  SLACK_LINK,
+  TEAMS_LINK,
 } from "../../config";
 import { sendMail } from "../../util/Mail";
 
@@ -74,8 +74,8 @@ const Contact = () => {
       <h1 className="header-no-margin">Contact Us</h1>
       <div className="contact-footer contact-description">
         <div>
-          Want to stay in the loop? Join our slack{" "}
-          <a href={SLACK_LINK} target="_blank" className="slack-link">
+          Want to stay in the loop? Join Microsoft Teams{" "}
+          <a href={TEAMS_LINK} target="_blank" className="slack-link">
             here
           </a>
           .
