@@ -1,4 +1,4 @@
-# wecca-website
+# wecca-website (wecca.org)
 ## Local Repo Setup (assuming you have NodeJS and NPM installed already):
 - `git clone https://github.com/weccasoftware/wecca-website`
 - `cd frontend`
