@@ -1,32 +1,37 @@
-import sam from "./assets/headshots/bg-Sam.png";
-import anthony from "./assets/headshots/bg-Anthony.png";
-import liam from "./assets/headshots/bg-Liam.png";
-import daniel from "./assets/headshots/bg-Daniel.png";
-import louie from "./assets/headshots/bg-Louie.png";
-import michael from "./assets/headshots/bg-Michael.png";
-import gaby from './assets/headshots/bg-Gaby.png'
-import hirad from './assets/headshots/bg-Hirad.png'
-import cole from "./assets/headshots/bg-Cole.png";
-import ethan from "./assets/headshots/bg-Ethan.png";
-import dylan from "./assets/headshots/bg-Dylan.png"
-import lama from "./assets/headshots/bg-Lama.png";
-import david from "./assets/headshots/bg-David.png";
-import sarah from "./assets/headshots/bg-Sarah.png";
-import keston from "./assets/headshots/bg-Keston.png";
-import tyler from "./assets/headshots/bg-Tyler.png";
-import placeholder from "./assets/headshots/bg-Placeholder.png"
+import louis from "./assets/headshots/2025-2026/Louis.png";
+import daniel from "./assets/headshots/2025-2026/Daniel.png";
+import annabelle from "./assets/headshots/2025-2026/Annabelle.png";
+import siya from "./assets/headshots/2025-2026/Siya.png";
+import elijah from "./assets/headshots/2025-2026/Elijah.png";
+import evelyne from "./assets/headshots/2025-2026/Evelyne.png";
+import brandon from "./assets/headshots/2025-2026/Brandon.png";
+import mia from "./assets/headshots/2025-2026/Mia.png";
+import rida from "./assets/headshots/2025-2026/Rida.png";
+import hannah from "./assets/headshots/2025-2026/Hannah.png";
+import dylan from "./assets/headshots/2025-2026/Dylan.png";
+import danny from "./assets/headshots/2025-2026/Danny.png";
+import jared from "./assets/headshots/2025-2026/Jared.png";
+import devon from "./assets/headshots/2025-2026/Devon.png";
+import adriana from "./assets/headshots/2025-2026/Adriana.png";
+import myles from "./assets/headshots/2025-2026/Myles.png";
+import abdel from "./assets/headshots/2025-2026/Abdel.png";
+import serah from "./assets/headshots/2025-2026/Serah.png";
+import cole from "./assets/headshots/2025-2026/Cole.png";
+import aishat from "./assets/headshots/2025-2026/Aishat.png";
+import placeholder from "./assets/headshots/2023-2024/bg-Placeholder.png"
 
-export const BASE_URL = 'https://us-central1-wecca-website-c5892.cloudfunctions.net/app'
+export const BASE_URL = 'https://us-cent' +
+    'ral1-wecca-website-c5892.cloudfunctions.net/app'
 export const WINDOW_WIDTH_THRESHOLD_PX = 1050;
 export const MOBILE_WIDTH_THRESHOLD_PX = 600;
 export const TEAMS_LINK = "https://teams.microsoft.com/l/team/19%3AvfRfR6E2XpvnDjj6zwB2EWBLmWGiIgudXlPWWi-kVo81%40thread.tacv2/conversations?groupId=9637f304-676d-48fb-88eb-56b19f4f0e11&tenantId=ad93a64d-ad0d-4ecd-b2fd-e53ce15965be";
 export const INSTAGRAM_LINK = "https://www.instagram.com/wecca.uwo/";
 export const LINKEDIN_LINK = "https://www.linkedin.com/company/western-engineering-concrete-canoe-association/";
 
-export const FINANCE_CAPTAIN_NAME = "Liam Reeves";
-export const LOGISTICS_CAPTAIN_NAME = "Samantha Goertz";
-export const CONSTRUCTION_CAPTAIN_NAME = "Anthony De Rango";
-export const CONCRETE_CAPTAIN_NAME = "Daniel Hanna";
+export const FINANCE_CAPTAIN_NAME = "Annabelle Kobzar";
+export const LOGISTICS_CAPTAIN_NAME = "Louis Struzik";
+export const CONSTRUCTION_CAPTAIN_NAME = "Daniel Hanna";
+export const CONCRETE_CAPTAIN_NAME = "Siya Dalal";
 
 export const FINANCE_CAPTAIN_EMAIL = "lreeves8@uwo.ca";
 export const LOGISTICS_CAPTAIN_EMAIL = "sgoertz3@uwo.ca";
@@ -51,9 +56,11 @@ const ROLES = {
   MATERIALS_EXEC: "Co-Head of Materials",
   TECH_COMMS_PRES_EXEC: "Co-Head of Technical Communications",
   SOFTWARE_EXEC: "Co-Head of Software Development",
-  GRAPHIC_DESIGN_EXEC: "Head of Graphic Design",
-  DESIGN_AND_ANALYSIS_EXEC: "Head of Design and Analysis",
-  TRAINING_EXEC: "Head of Training",
+  GRAPHIC_DESIGN_EXEC: "Head of Theme",
+  DESIGN_AND_ANALYSIS_EXEC: "Co-Head of Design and Analysis",
+  TRAINING_EXEC: "Co-Head of Training",
+  SPONSORSHIPS_EXEC: "Head of Sponsorships",
+  CONSTRUCTION_EXEC: "Construction Executive",
 };
 
 export const SIGNUP_ROLES = [
@@ -82,81 +89,101 @@ export const EXECUTIVES_LIST = [
   {
     title: ROLES.LOGISTICS_CAPTAIN,
     name: LOGISTICS_CAPTAIN_NAME,
-    image: sam,
+    image: louis,
   },
   {
     title: ROLES.CONSTRUCTION_CAPTAIN,
     name: CONSTRUCTION_CAPTAIN_NAME,
-    image: anthony,
+    image: daniel,
   },
   {
     title: ROLES.FINANCE_CAPTAIN,
     name: FINANCE_CAPTAIN_NAME,
-    image: liam,
+    image: annabelle,
   },
   {
     title: ROLES.CONCRETE_CAPTAIN,
     name: CONCRETE_CAPTAIN_NAME,
-    image: daniel,
+    image: siya,
   },
   {
     title: ROLES.MOULD_EXEC,
-    name: "Keston Anderson",
-    image: keston,
+    name: "Elijah Moffett",
+    image: elijah,
   },
   {
     title: ROLES.MOULD_EXEC,
-    name: "Louis Struzik",
-    image: louie,
+    name: "Evelyne Champagne",
+    image: evelyne,
   },
   {
     title: ROLES.MATERIALS_EXEC,
-    name: "Hirad Tahmaseb Pour",
-    image: hirad,
+    name: "Brandon Clowes",
+    image: brandon,
   },
   {
     title: ROLES.MATERIALS_EXEC,
-    name: "Gaby Guisandes Bueno",
-    image: gaby,
+    name: "Mia Koto",
+    image: mia,
   },
   {
     title: ROLES.MATERIALS_EXEC,
-    name: "Michael Prtenjaca",
-    image: michael,
+    name: "Rida Mahmood",
+    image: rida,
+  },
+  {
+    title: ROLES.CONSTRUCTION_EXEC,
+    name: "Hannah VanderPloeg",
+    image: hannah,
   },
   {
     title: ROLES.TECH_COMMS_PRES_EXEC,
-    name: "Tyler Liquornik",
-    image: tyler,
-  },
-  {
-    title: ROLES.TECH_COMMS_PRES_EXEC,
-    name: "Cole Polewski",
-    image: cole,
-  },
-  {
-    title: ROLES.SOFTWARE_EXEC,
-    name: "Ethan Bodnar",
-    image: ethan,
-  },
-  {
-    title: ROLES.SOFTWARE_EXEC,
     name: "Dylan MacPhail",
     image: dylan,
   },
   {
+    title: ROLES.TECH_COMMS_PRES_EXEC,
+    name: "Danny Lee",
+    image: danny,
+  },
+  {
+    title: ROLES.SOFTWARE_EXEC,
+    name: "Jared Segal",
+    image: jared,
+  },
+  {
+    title: ROLES.SOFTWARE_EXEC,
+    name: "Devon Rayner",
+    image: devon,
+  },
+  {
+    title: ROLES.SPONSORSHIPS_EXEC,
+    name: "Adriana Mazzocco",
+    image: adriana,
+  },
+  {
     title: ROLES.DESIGN_AND_ANALYSIS_EXEC,
-    name: "Lama Abdulal",
-    image: lama,
+    name: "Myles Seward",
+    image: myles,
+  },
+  {
+    title: ROLES.DESIGN_AND_ANALYSIS_EXEC,
+    name: "Abdelrahman Amin",
+    image: abdel,
   },
   {
     title: ROLES.GRAPHIC_DESIGN_EXEC,
-    name: "Sarah Johnston",
-    image: sarah,
+    name: "Serah Quinn",
+    image: serah,
   },
   {
     title: ROLES.TRAINING_EXEC,
-    name: "David Gibb",
-    image: david,
+    name: "Cole Polewski",
+    image: cole,
+  },
+  {
+    title: ROLES.TRAINING_EXEC,
+    name: "Aishat Raifu",
+    image: aishat,
   },
 ];
