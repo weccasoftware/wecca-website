@@ -102,7 +102,7 @@ const Sponsors = () => {
     {
       image: gananoqueinn,
       name: "Gananoque Inn & Spa",
-      website: "https://www.hotelsone.com/gananoque-hotels-ca/the-gananoque-inn.html/"
+      website: "https://www.gananoqueinn.com/"
     },
   ];
   const silverLogos = [
