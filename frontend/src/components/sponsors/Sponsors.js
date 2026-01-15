@@ -50,10 +50,14 @@ const Sponsors = () => {
 
   const goldBenefits = [
     "Invitation to End-of-Year Canoe Unveiling + Sponsor Appreciation Event",
-    "EXTRA Large Logo On:" +
-    " - Team T-Shirts" +
-    " - Sponsorship Banner Displayed at Competition" +
-    " - WECCA Website LinkedIn and Instagram",
+    {
+      title: "EXTRA Large Logo On:",
+      list: [
+        "Team T-Shirts",
+        "Sponsorship Banner Displayed at Competition",
+        "WECCA Website, LinkedIn and Instagram",
+      ],
+    },
     "Dedicated Thank you post on social media",
     "Custom 'Thank You' package",
     "Priority speaking opportunity at End-Of-Year Unveiling",
@@ -62,10 +66,14 @@ const Sponsors = () => {
   ];
   const silverBenefits = [
     "Invitation to End-of-Year Canoe Unveiling + Sponsor Appreciation Event",
-    "Large Logo On:" +
-    " - Team T-Shirts" +
-    " - Sponsorship Banner Displayed at Competition" +
-    " - WECCA Website LinkedIn and Instagram",
+    {
+      title: "Large Logo On:",
+      list: [
+        "Team T-Shirts",
+        "Sponsorship Banner Displayed at Competition",
+        "WECCA Website, LinkedIn and Instagram",
+      ],
+    },
     "Dedicated Thank you post on social media",
     "Custom 'Thank You' package",
     "Priority speaking opportunity at End-Of-Year Unveiling",
@@ -73,19 +81,27 @@ const Sponsors = () => {
   ];
   const bronzeBenefits = [
     "Invitation to End-of-Year Canoe Unveiling + Sponsor Appreciation Event",
-    "Medium Logo On:" +
-    " - Team T-Shirts" +
-    " - Sponsorship Banner Displayed at Competition" +
-    " - WECCA Website LinkedIn and Instagram",
+    {
+      title: "Medium Logo On:",
+      list: [
+        "Team T-Shirts",
+        "Sponsorship Banner Displayed at Competition",
+        "WECCA Website, LinkedIn and Instagram",
+      ],
+    },
     "Dedicated Thank you post on social media",
     'Custom "Thank You" package',
   ];
   const purpleBenefits = [
     "Invitation to End-of-Year Canoe Unveiling + Sponsor Appreciation Event",
-    "Small Logo On:" +
-    " - Team T-Shirts" +
-    " - Sponsorship Banner Displayed at Competition" +
-    " - WECCA Website LinkedIn and Instagram",
+    {
+      title: "Small Logo On:",
+      list: [
+        "Team T-Shirts",
+        "Sponsorship Banner Displayed at Competition",
+        "WECCA Website, LinkedIn and Instagram",
+      ],
+    },
     "Dedicated Thank you post on social media",
     'Custom "Thank You" package',
   ];
@@ -202,8 +218,21 @@ const Sponsors = () => {
         <div className="tier-description-container">
           <div className="tier-subtitle">Gold Sponsors: $1,500+</div>
           <ul>
-            {goldBenefits.map((item) => {
-              return <li className="tier-list-item">{item}</li>;
+            {goldBenefits.map((benefit, index) => {
+              if (typeof benefit === "string") {
+                return <li key={index}>{benefit}</li>;
+              }
+
+              return (
+                  <li key={index}>
+                    {benefit.title}
+                    <ul>
+                      {benefit.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </li>
+              );
             })}
           </ul>
         </div>
@@ -217,8 +246,21 @@ const Sponsors = () => {
         <div className="tier-description-container">
           <div className="tier-subtitle">Silver Sponsors: $1,000-$1,499</div>
           <ul>
-            {silverBenefits.map((item) => {
-              return <li className="tier-list-item">{item}</li>;
+            {silverBenefits.map((benefit, index) => {
+              if (typeof benefit === "string") {
+                return <li key={index}>{benefit}</li>;
+              }
+
+              return (
+                  <li key={index}>
+                    {benefit.title}
+                    <ul>
+                      {benefit.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </li>
+              );
             })}
           </ul>
         </div>
@@ -232,8 +274,20 @@ const Sponsors = () => {
         <div className="tier-description-container">
           <div className="tier-subtitle">Bronze Sponsors: $500-$999</div>
           <ul>
-            {bronzeBenefits.map((item) => {
-              return <li className="tier-list-item">{item}</li>;
+            {bronzeBenefits.map((benefit, index) => {
+              if (typeof benefit === "string") {
+                return <li key={index}>{benefit}</li>;
+              }
+              return (
+                  <li key={index}>
+                    {benefit.title}
+                    <ul>
+                      {benefit.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </li>
+              );
             })}
           </ul>
         </div>
@@ -247,8 +301,21 @@ const Sponsors = () => {
           <div className="tier-description-container">
             <div className="tier-subtitle">Purple Sponsors: &lt;$500</div>
             <ul>
-              {purpleBenefits.map((item) => {
-                return <li className="tier-list-item">{item}</li>;
+              {purpleBenefits.map((benefit, index) => {
+                if (typeof benefit === "string") {
+                  return <li key={index}>{benefit}</li>;
+                }
+
+                return (
+                    <li key={index}>
+                      {benefit.title}
+                      <ul>
+                        {benefit.list.map((item, i) => (
+                            <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </li>
+                );
               })}
             </ul>
           </div>
