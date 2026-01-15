@@ -223,11 +223,15 @@
 .purple-tier {
     border-color: #522584;
 }
-
+.bronze-tier {
+    border-color: #b08d57;
+}
+.silver-tier {
+    border-color: silver;
+}
 .gold-tier {
     border-color: gold;
 }
-
-.platinum-tier {
-    border-color: silver;
+.other-tier {
+    border-color: #000000;
 }
