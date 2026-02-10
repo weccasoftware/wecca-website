@@ -8,7 +8,7 @@ import {
 } from "../../config";
 import { sendMail } from "../../util/Mail";
 
-import mte from "../../assets/sponsor-logos/MTE Sponsorship Logo.png";
+import mte from "../../assets/sponsor-logos/MTE Sponsorship.png";
 import autotube from "../../assets/sponsor-logos/Autotube.png";
 import cornerstone from "../../assets/sponsor-logos/Cornerstone Architecture.png";
 import ellisdon from "../../assets/sponsor-logos/EllisDon.png";
@@ -17,13 +17,19 @@ import sbm from "../../assets/sponsor-logos/SBM.png";
 import johnaarts from "../../assets/sponsor-logos/JohnAarts.png";
 import williams from "../../assets/sponsor-logos/Williams.png";
 import am from "../../assets/sponsor-logos/AM.png";
-import dassault from "../../assets/sponsor-logos/Dassault_Systèmes Logo.png";
+import dassault from "../../assets/sponsor-logos/Dassault Systèmes.png";
 import dufferin from "../../assets/sponsor-logos/Dufferin Construction.png";
 import federalwhite from "../../assets/sponsor-logos/Federal White Cement.png";
 import gananoqueinn from "../../assets/sponsor-logos/Gananoque Inn and Spa.jpg";
-import chandos from "../../assets/sponsor-logos/Chandos Logo.jpg";
-import optagroup from "../../assets/sponsor-logos/Opta Group Logo.png";
-import solidworks from "../../assets/sponsor-logos/SolidWorks Logo.png";
+import chandos from "../../assets/sponsor-logos/Chandos.jpg";
+import optagroup from "../../assets/sponsor-logos/Opta Group.png";
+import solidworks from "../../assets/sponsor-logos/SolidWorks.png";
+import ansysengineering from "../../assets/sponsor-logos/Ansys Engineering Software.jpg";
+import mapei from "../../assets/sponsor-logos/Mapei.jpg";
+import masterbuilder from "../../assets/sponsor-logos/Master Builder Solutions.png";
+import sika from "../../assets/sponsor-logos/Sika.jpg";
+import solomancolors from "../../assets/sponsor-logos/Soloman Colors.png";
+import stmaryscement from "../../assets/sponsor-logos/St Marys Cement.png";
 
 import goldImage from "../../assets/sponsors/sponsors-tier-photo-1.png";
 import silverImage from "../../assets/sponsors/sponsors-tier-photo-2.png";
@@ -153,6 +159,11 @@ const Sponsors = () => {
       name: "Solidworks",
       website: "https://www.solidworks.com/"
     },
+    {
+      image: ansysengineering,
+      name: "Ansys Engineering Software",
+      website: "https://www.ansys.com/"
+    },
   ];
   const materialLogos = [
     {
@@ -164,6 +175,31 @@ const Sponsors = () => {
       image: optagroup,
       name: "Opta Group",
       website: "https://opta-group.com/"
+    },
+    {
+      image: solomancolors,
+      name: "Soloman Colors",
+      website: "https://www.solomoncolors.com/"
+    },
+    {
+      image: stmaryscement,
+      name: "St Mary Cement",
+      website: "https://www.stmaryscement.com/"
+    },
+    {
+      image: sika,
+      name: "Sika",
+      website: "https://can.sika.com/"
+    },
+    {
+      image: mapei,
+      name: "Mapei",
+      website: "https://www.mapei.com/ca/en-ca/home"
+    },
+    {
+      image: masterbuilder,
+      name: "Master Builder Solutions",
+      website: "https://master-builders-solutions.com/en-ca/"
     },
   ];
   const pastSponsors = [
